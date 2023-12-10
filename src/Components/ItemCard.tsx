@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 
 export const ItemCard = ({ item }) => {
   return (
-    <Link>
+    <Link to={`/${item.id}`}>
       <div className="border-solid border-2 border-black w-[max(220px,15vw)]">
-        <img src="" alt="" className="w-auto h-auto" />
+        <img src={item.image} alt="" className="w-auto h-auto" />
         <div className="flex flex-row gap-2 text-2xl font-bold">
-          <p className="w-full text-center">4.5/5</p>
-          <p className="w-full text-center">300$</p>
+          <p className="w-full text-center">{item.rating.rate}</p>
+          <p className="w-full text-center">{item.price}</p>
         </div>
       </div>
-      <h3>prod name</h3>
+      <h3>{item.title}</h3>
     </Link>
   );
 };

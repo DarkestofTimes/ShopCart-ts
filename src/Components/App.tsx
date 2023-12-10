@@ -1,5 +1,11 @@
-import { Context } from "./Context";
+import { ContextProvider } from "./ContextProvider";
+import { FetchData } from "./FetchData";
 
 export const App = ({ children }) => {
-  return <Context>{children}</Context>;
+  return (
+    <ContextProvider>
+      <FetchData />
+      {children}
+    </ContextProvider>
+  );
 };

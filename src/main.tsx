@@ -5,6 +5,7 @@ import { App } from "./Components/App";
 import { Home } from "./Components/Home";
 import { Shop } from "./Components/Shop";
 import { Cart } from "./Components/Cart";
+import { ItemPage } from "./Components/ItemPage";
 import { Layout, NoSideLayout } from "./Components/Layout";
 import { ErrorPage } from "./Components/ErrorPage";
 import "./index.css";
@@ -33,6 +34,14 @@ const router = createBrowserRouter([
       <Layout>
         <Cart />
       </Layout>
+    ),
+  },
+  {
+    path: "/:id",
+    element: (
+      <NoSideLayout>
+        <ItemPage />
+      </NoSideLayout>
     ),
   },
 ]);

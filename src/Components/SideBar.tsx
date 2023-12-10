@@ -10,6 +10,7 @@ const Searchbar = () => {
   return (
     <div className="h-10 flex border-solid border-2 border-black ">
       <input
+        id="search"
         type="text"
         placeholder="Search"
         className="p-2 w-full focus:outline-none focus:ring"
