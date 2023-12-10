@@ -5,7 +5,7 @@ import { App } from "./Components/App";
 import { Home } from "./Components/Home";
 import { Shop } from "./Components/Shop";
 import { Cart } from "./Components/Cart";
-import { Layout } from "./Components/Layout";
+import { Layout, NoSideLayout } from "./Components/Layout";
 import { ErrorPage } from "./Components/ErrorPage";
 import "./index.css";
 
@@ -13,9 +13,9 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Layout>
+      <NoSideLayout>
         <Home />{" "}
-      </Layout>
+      </NoSideLayout>
     ),
     errorElement: <ErrorPage />,
   },
