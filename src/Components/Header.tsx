@@ -12,12 +12,12 @@ export const Header = () => {
             <Link to="/">Home</Link>
           </li>
           <li className="mx-auto">
-            <Link to="/shop">Shop</Link>
+            <Link to="/shop/1">Shop</Link>
           </li>
           <li className="grid grid-cols-3">
             <div className="itemsTotal">0</div>
             <div className="sumTotal">0$</div>
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart/1">Cart</Link>
           </li>
         </ul>
       </nav>

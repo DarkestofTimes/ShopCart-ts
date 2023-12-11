@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "shop",
+    path: "shop/:sort?/:search?/:pageIndex",
     element: (
       <Layout>
         <Shop />
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "cart",
+    path: "cart/:sort?/:search?:pageIndex",
     element: (
       <Layout>
         <Cart />
