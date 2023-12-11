@@ -10,7 +10,7 @@ export const Shop = () => {
   const routeValue = "shop";
   return (
     <Grid>
-      <ItemList data={data} pageIndex={pageIndex} sort={sort} search={search} />
+      <ItemList data={data} pageIndex={pageIndex} />
       <Paginator
         data={data}
         pageIndex={pageIndex}

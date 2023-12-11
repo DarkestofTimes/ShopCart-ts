@@ -15,8 +15,7 @@ export const FetchData = () => {
           throw new Error("Network response was not ok");
         }
         const retrievedData = await response.json();
-        // eslint-disable-next-line no-unused-vars
-        setData((prevData) => [...retrievedData]);
+        setData(() => [...retrievedData]);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -25,5 +24,8 @@ export const FetchData = () => {
     if (data.length === 0) {
       fetchData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
+
+  return null;
 };

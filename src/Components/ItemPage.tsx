@@ -1,5 +1,9 @@
 import { useParams } from "react-router-dom";
-import { useDataContext } from "./ContextProvider";
+import { useDataContext, DataItem } from "./ContextProvider";
+
+interface ImgContainerProps {
+  item: DataItem | undefined;
+}
 
 export const ItemPage = () => {
   const { data } = useDataContext();
@@ -12,7 +16,10 @@ export const ItemPage = () => {
   );
 };
 
-const ImgContainer = ({ item }) => {
+const ImgContainer = ({ item }: ImgContainerProps) => {
+  if (!item) {
+    return;
+  }
   return (
     <figure className="border-2 border-black border-solid grid grid-cols-4 col-span-2 row-span-3">
       <img src={item.image} alt="" className="w-full h-full col-span-3" />

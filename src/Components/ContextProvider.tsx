@@ -1,9 +1,36 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
-const DataContext = createContext({});
+interface ContextProps {
+  children: ReactNode;
+}
 
-const DataContextProvider = ({ children }) => {
-  const [data, setData] = useState([]);
+export interface DataItem {
+  category: string;
+  description: string;
+  id: number;
+  image: string;
+  price: number;
+  rating: {
+    count: number;
+    rate: number;
+  };
+  title: string;
+}
+
+interface DataProps {
+  data: DataItem[];
+  setData: React.Dispatch<React.SetStateAction<DataItem[]>>;
+}
+
+const defaultContextValue: DataProps = {
+  data: [],
+  setData: () => {},
+};
+
+const DataContext = createContext<DataProps>(defaultContextValue);
+
+const DataContextProvider: React.FC<ContextProps> = ({ children }) => {
+  const [data, setData] = useState<DataItem[]>([]);
 
   const contextItems = {
     data,
@@ -15,8 +42,9 @@ const DataContextProvider = ({ children }) => {
   );
 };
 
-export const ContextProvider = ({ children }) => {
+export const ContextProvider: React.FC<ContextProps> = ({ children }) => {
   return <DataContextProvider>{children}</DataContextProvider>;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useDataContext = () => useContext(DataContext);
