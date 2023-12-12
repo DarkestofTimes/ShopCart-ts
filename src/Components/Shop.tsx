@@ -1,23 +1,10 @@
 import { Grid } from "./Grid";
-import { ItemList } from "./ItemList";
-import { Paginator } from "./Paginator";
-import { useDataContext } from "./ContextProvider";
-import { useParams } from "react-router-dom";
+import { useShopItemsContext } from "./ContextProvider";
 
 export const Shop = () => {
-  const { sort, search, pageIndex } = useParams();
-  const { data } = useDataContext();
+  const { shopItems, setShopItems } = useShopItemsContext();
   const routeValue = "shop";
   return (
-    <Grid>
-      <ItemList data={data} pageIndex={pageIndex} />
-      <Paginator
-        data={data}
-        pageIndex={pageIndex}
-        routeValue={routeValue}
-        sort={sort}
-        search={search}
-      />
-    </Grid>
+    <Grid data={shopItems} setData={setShopItems} routeValue={routeValue} />
   );
 };

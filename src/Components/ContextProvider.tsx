@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 interface ContextProps {
   children: ReactNode;
@@ -42,9 +48,47 @@ const DataContextProvider: React.FC<ContextProps> = ({ children }) => {
   );
 };
 
-export const ContextProvider: React.FC<ContextProps> = ({ children }) => {
-  return <DataContextProvider>{children}</DataContextProvider>;
+interface ShopProps {
+  shopItems: DataItem[];
+  setShopItems: React.Dispatch<React.SetStateAction<DataItem[]>>;
+}
+
+const shopContextValue: ShopProps = {
+  shopItems: [],
+  setShopItems: () => {},
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
+const ShopItemsContext = createContext<ShopProps>(shopContextValue);
+
+const ShopItemsContextProvider: React.FC<ContextProps> = ({ children }) => {
+  const { data } = useDataContext();
+  const [shopItems, setShopItems] = useState<DataItem[]>([]);
+  useEffect(() => {
+    const tempItems = [...data];
+    const sorted = tempItems.sort((a, b) => {
+      return b.rating.count - a.rating.count;
+    });
+    setShopItems(sorted);
+  }, [data]);
+  const contextItems = {
+    shopItems,
+    setShopItems,
+  };
+
+  return (
+    <ShopItemsContext.Provider value={contextItems}>
+      {children}
+    </ShopItemsContext.Provider>
+  );
+};
+
+export const ContextProvider: React.FC<ContextProps> = ({ children }) => {
+  return (
+    <DataContextProvider>
+      <ShopItemsContextProvider>{children}</ShopItemsContextProvider>
+    </DataContextProvider>
+  );
+};
+
 export const useDataContext = () => useContext(DataContext);
+export const useShopItemsContext = () => useContext(ShopItemsContext);
