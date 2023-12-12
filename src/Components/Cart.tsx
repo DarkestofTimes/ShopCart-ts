@@ -1,5 +1,13 @@
+import { Grid } from "./Grid";
+import { Layout } from "./Layout";
+import { useShopItemsContext } from "./ContextProvider";
+
 export const Cart = () => {
+  const { shopItems, setShopItems } = useShopItemsContext();
+  const routeValue = "cart";
   return (
-    <section className="grid grid-cols-4 grid-rows-5 gap-4 p-4 col-span-3"></section>
+    <Layout>
+      <Grid data={shopItems} setData={setShopItems} routeValue={routeValue} />
+    </Layout>
   );
 };

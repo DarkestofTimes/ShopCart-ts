@@ -6,43 +6,26 @@ import { Home } from "./Components/Home";
 import { Shop } from "./Components/Shop";
 import { Cart } from "./Components/Cart";
 import { ItemPage } from "./Components/ItemPage";
-import { Layout, NoSideLayout } from "./Components/Layout";
 import { ErrorPage } from "./Components/ErrorPage";
 import "./index.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <NoSideLayout>
-        <Home />{" "}
-      </NoSideLayout>
-    ),
+    element: <Home />,
     errorElement: <ErrorPage />,
   },
   {
     path: "shop/:sort?/:search?/:pageIndex",
-    element: (
-      <Layout>
-        <Shop />
-      </Layout>
-    ),
+    element: <Shop />,
   },
   {
-    path: "cart/:filter?/:search?:pageIndex",
-    element: (
-      <Layout>
-        <Cart />
-      </Layout>
-    ),
+    path: "cart/:filter?/:search?/:pageIndex",
+    element: <Cart />,
   },
   {
-    path: "/items/:page/:id",
-    element: (
-      <NoSideLayout>
-        <ItemPage />
-      </NoSideLayout>
-    ),
+    path: "items/:page/:id",
+    element: <ItemPage />,
   },
 ]);
 

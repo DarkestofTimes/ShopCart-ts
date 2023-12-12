@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useDataContext, DataItem } from "./ContextProvider";
+import { NoSideLayout } from "./Layout";
 
 interface ImgContainerProps {
   item: DataItem | undefined;
@@ -10,9 +11,11 @@ export const ItemPage = () => {
   const { page, id } = useParams();
   const item = data.find((item) => item.id === Number(id));
   return (
-    <section className="min-h-[93vh] grid grid-cols-3 grid-rows-4 p-4">
-      <ImgContainer item={item} />
-    </section>
+    <NoSideLayout>
+      <section className="min-h-[93vh] grid grid-cols-3 grid-rows-4 p-4">
+        <ImgContainer item={item} />
+      </section>
+    </NoSideLayout>
   );
 };
 
