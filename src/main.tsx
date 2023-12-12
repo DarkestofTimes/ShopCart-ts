@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "cart/:sort?/:search?:pageIndex",
+    path: "cart/:filter?/:search?:pageIndex",
     element: (
       <Layout>
         <Cart />

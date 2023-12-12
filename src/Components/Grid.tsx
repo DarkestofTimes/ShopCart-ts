@@ -11,7 +11,7 @@ interface GridProps {
 }
 
 export const Grid = ({ data, setData, routeValue }: GridProps) => {
-  const { sort, search, pageIndex } = useParams();
+  const { filter, search, pageIndex } = useParams();
 
   return (
     <div className="grid grid-cols-[repeat(auto-fill,max(220px,17vw))] grid-rows-auto gap-4 p-4 col-span-3">
@@ -21,7 +21,7 @@ export const Grid = ({ data, setData, routeValue }: GridProps) => {
         data={data}
         pageIndex={pageIndex}
         routeValue={routeValue}
-        sort={sort}
+        filter={filter}
         search={search}
       />
     </div>

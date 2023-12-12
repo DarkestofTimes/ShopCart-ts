@@ -5,14 +5,14 @@ interface PaginatorProps {
   data: DataItem[];
   pageIndex: string | undefined;
   routeValue: string;
-  sort: string | undefined;
+  filter: string | undefined;
   search: string | undefined;
 }
 interface ButtonProps {
   num: number;
   bool: boolean;
   routeValue: string;
-  sort: string | undefined;
+  filter: string | undefined;
   search: string | undefined;
 }
 
@@ -20,7 +20,7 @@ export const Paginator = ({
   data,
   pageIndex,
   routeValue,
-  sort,
+  filter,
   search,
 }: PaginatorProps) => {
   const pageNumber = Number(pageIndex);
@@ -36,7 +36,7 @@ export const Paginator = ({
     <div className="flex col-span-full justify-center">
       {pageNumber > 3 && (
         <Link
-          to={`/${routeValue}${sort ? `/${sort}` : ""}${
+          to={`/${routeValue}${filter ? `/${filter}` : ""}${
             search ? `/${search}` : ""
           }/1`}>
           ...
@@ -48,13 +48,13 @@ export const Paginator = ({
           num={item}
           bool={item === pageNumber ? true : false}
           routeValue={routeValue}
-          sort={sort}
+          filter={filter}
           search={search}
         />
       ))}
       {pageNumber < pageNumbersArray.length - 2 && (
         <Link
-          to={`/${routeValue}${sort ? `/${sort}` : ""}${
+          to={`/${routeValue}${filter ? `/${filter}` : ""}${
             search ? `/${search}` : ""
           }/${numberOfPages}`}>
           ...
@@ -64,8 +64,8 @@ export const Paginator = ({
   );
 };
 
-const Button = ({ num, bool, routeValue, sort, search }: ButtonProps) => {
-  const toPath = `/${routeValue}${sort ? `/${sort}` : ""}${
+const Button = ({ num, bool, routeValue, filter, search }: ButtonProps) => {
+  const toPath = `/${routeValue}${filter ? `/${filter}` : ""}${
     search ? `/${search}` : ""
   }/${num}`;
   return (
