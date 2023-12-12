@@ -2,7 +2,13 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Sidebar } from "./Sidebar";
 
-export const Layout = ({ children }) => {
+import { ReactNode } from "react";
+
+interface layoutProps {
+  children: ReactNode;
+}
+
+export const Layout = ({ children }: layoutProps) => {
   return (
     <main className="grid grid-cols-4">
       <Header />
@@ -13,7 +19,7 @@ export const Layout = ({ children }) => {
   );
 };
 
-export const NoSideLayout = ({ children }) => {
+export const NoSideLayout = ({ children }: layoutProps) => {
   return (
     <main>
       <Header />

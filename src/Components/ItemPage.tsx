@@ -7,7 +7,7 @@ interface ImgContainerProps {
 
 export const ItemPage = () => {
   const { data } = useDataContext();
-  const { id } = useParams();
+  const { page, id } = useParams();
   const item = data.find((item) => item.id === Number(id));
   return (
     <section className="min-h-[93vh] grid grid-cols-3 grid-rows-4 p-4">

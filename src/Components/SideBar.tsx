@@ -1,12 +1,12 @@
 export const Sidebar = () => {
   return (
     <section className="min-h-[93vh] border-solid border-2 border-black col-span-1 p-4">
-      <Searchbar />
+      <Searchbox />
     </section>
   );
 };
 
-const Searchbar = () => {
+const Searchbox = () => {
   return (
     <div className="h-10 flex border-solid border-2 border-black ">
       <input

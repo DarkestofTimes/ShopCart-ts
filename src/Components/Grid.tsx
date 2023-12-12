@@ -16,7 +16,7 @@ export const Grid = ({ data, setData, routeValue }: GridProps) => {
   return (
     <div className="grid grid-cols-[repeat(auto-fill,max(220px,17vw))] grid-rows-auto gap-4 p-4 col-span-3">
       <SortSelector items={data} setItems={setData} />
-      <ItemList data={data} pageIndex={pageIndex} />
+      <ItemList data={data} pageIndex={pageIndex} routeValue={routeValue} />
       <Paginator
         data={data}
         pageIndex={pageIndex}
