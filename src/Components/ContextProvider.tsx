@@ -37,7 +37,7 @@ const DataContext = createContext<DataProps>(defaultContextValue);
 
 const DataContextProvider: React.FC<ContextProps> = ({ children }) => {
   const [data, setData] = useState<DataItem[]>([]);
-
+  console.log(data); //remove
   const contextItems = {
     data,
     setData,
@@ -45,6 +45,23 @@ const DataContextProvider: React.FC<ContextProps> = ({ children }) => {
 
   return (
     <DataContext.Provider value={contextItems}>{children}</DataContext.Provider>
+  );
+};
+
+const LoadingContext = createContext<DataProps>(defaultContextValue);
+
+const LoadingContextProvider: React.FC<ContextProps> = ({ children }) => {
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const contextItems = {
+    loading,
+    setLoading,
+  };
+
+  return (
+    <LoadingContext.Provider value={contextItems}>
+      {children}
+    </LoadingContext.Provider>
   );
 };
 
@@ -64,12 +81,16 @@ const ShopItemsContextProvider: React.FC<ContextProps> = ({ children }) => {
   const { data } = useDataContext();
   const [shopItems, setShopItems] = useState<DataItem[]>([]);
   useEffect(() => {
-    const tempItems = [...data];
-    const sorted = tempItems.sort((a, b) => {
-      return b.rating.count - a.rating.count;
-    });
-    setShopItems(sorted);
+    if (data.results) {
+      const dataResults = data.results;
+      const tempItems = [...dataResults];
+      const sorted = tempItems.sort((a, b) => {
+        return b.rating.count - a.rating.count;
+      });
+      setShopItems(sorted);
+    }
   }, [data]);
+
   const contextItems = {
     shopItems,
     setShopItems,
@@ -85,10 +106,13 @@ const ShopItemsContextProvider: React.FC<ContextProps> = ({ children }) => {
 export const ContextProvider: React.FC<ContextProps> = ({ children }) => {
   return (
     <DataContextProvider>
-      <ShopItemsContextProvider>{children}</ShopItemsContextProvider>
+      <LoadingContextProvider>
+        <ShopItemsContextProvider>{children}</ShopItemsContextProvider>
+      </LoadingContextProvider>
     </DataContextProvider>
   );
 };
 
 export const useDataContext = () => useContext(DataContext);
 export const useShopItemsContext = () => useContext(ShopItemsContext);
+export const useLoadingContext = () => useContext(LoadingContext);

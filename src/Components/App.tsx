@@ -1,5 +1,5 @@
 import { ContextProvider } from "./ContextProvider";
-import { FetchData } from "./FetchData";
+import { InitialFetch } from "./FetchData";
 import { ReactNode } from "react";
 
 interface AppProps {
@@ -9,7 +9,7 @@ interface AppProps {
 export const App: React.FC<AppProps> = ({ children }) => {
   return (
     <ContextProvider>
-      <FetchData />
+      <InitialFetch />
       {children}
     </ContextProvider>
   );

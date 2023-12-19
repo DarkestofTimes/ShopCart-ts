@@ -24,7 +24,7 @@ export const Paginator = ({
   search,
 }: PaginatorProps) => {
   const pageNumber = Number(pageIndex);
-  const numberOfPages = Math.ceil(data.length / 10);
+  const numberOfPages = Math.ceil(data.count / 20);
   const pageNumbersArray = Array.from(
     { length: numberOfPages },
     (_, index) => index + 1

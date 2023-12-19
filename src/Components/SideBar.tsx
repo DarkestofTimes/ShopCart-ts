@@ -17,18 +17,10 @@ export const Sidebar = ({ data, setItems }: sidebarProps) => {
 const Searchbox = ({ data, setItems }: sidebarProps) => {
   const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
     const regexPattern = new RegExp(ev.target.value, "i");
-    if (ev.target.value === "") {
-      const temp = [...data];
-      const sorted = temp.sort((a, b) => {
-        return b.rating.count - a.rating.count;
-      });
-      setItems(sorted);
-    } else {
-      const filteredItems = data.filter((item) => {
-        return regexPattern.test(item.title);
-      });
-      setItems(filteredItems);
-    }
+    const filteredItems = data.filter((item) => {
+      return regexPattern.test(item.title);
+    });
+    setItems(filteredItems);
   };
   return (
     <div className="h-10 flex border-solid border-2 border-black ">

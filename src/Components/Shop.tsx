@@ -9,7 +9,12 @@ export const Shop = () => {
   const routeValue = "shop";
   return (
     <Layout Items={shopItems} data={data} setItems={setShopItems}>
-      <Grid data={shopItems} setData={setShopItems} routeValue={routeValue} />
+      <Grid
+        data={data}
+        items={shopItems}
+        setItems={setShopItems}
+        routeValue={routeValue}
+      />
     </Layout>
   );
 };

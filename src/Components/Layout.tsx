@@ -19,7 +19,7 @@ export const Layout = ({ children, data, setItems }: layoutProps) => {
   return (
     <main className="grid grid-cols-4">
       <Header />
-      <Sidebar data={data} setItems={setItems} />
+      <Sidebar data={data.results} setItems={setItems} />
       {children}
       <Footer />
     </main>
