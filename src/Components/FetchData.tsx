@@ -55,7 +55,7 @@ import { key } from "../key.ts";
 }; */
 
 export const fetchData = async ({
-  page,
+  pageIndex,
   searchQ,
   tags,
   genres,
@@ -65,7 +65,6 @@ export const fetchData = async ({
   publisher,
   ordering,
 }) => {
-
   const tag = tags && tags.length > 0 ? `&tags=${tags.join(",")}` : "";
   const genre =
     genres && genres.length > 0 ? `&genres=${genres.join(",")}` : "";
@@ -75,7 +74,7 @@ export const fetchData = async ({
     publisher && publisher.length > 0
       ? `&publishers=${publisher.join(",")}`
       : "";
-  const pageNum = page ? `&page=${page}` : "";
+  const pageNum = pageIndex ? `&page=${pageIndex}` : "";
   const searchQuery = searchQ ? `&search=${searchQ}` : "";
   const relDate =
     releaseDate && releaseDate.length > 1
@@ -84,7 +83,8 @@ export const fetchData = async ({
   const metacritic = metacrit ? `&metacritic=${metacrit}` : "";
   const order = ordering ? `&ordering=${ordering}` : "";
 
-  const url = `https://api.rawg.io/api/games?key=${key}`;
+  const url = `https://api.rawg.io/api/games?key=${key}${tag}${genre}${platforms}${publishers}${pageNum}${searchQuery}${relDate}${metacritic}${order}`;
+  console.log(url);
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -93,9 +93,11 @@ export const fetchData = async ({
       throw new Error("Network response was not ok");
     }
     const retrievedData = await response.json();
-    return retrievedData
+    console.log(retrievedData);
+    return retrievedData;
   } catch (error) {
     console.error("Error:", error);
+  }
 };
 
 /* export const InitialFetch = () => {

@@ -1,10 +1,10 @@
-/* import { InitialFetch } from "./FetchData"; */
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home } from "./Home";
 import { Shop } from "./Shop";
 import { Cart } from "./Cart";
 import { ItemPage } from "./ItemPage";
 import { ErrorPage } from "./ErrorPage";
+import { dataLoader } from "./DataLoader";
 
 export const App = () => {
   const router = createBrowserRouter([
@@ -14,8 +14,9 @@ export const App = () => {
       errorElement: <ErrorPage />,
     },
     {
-      path: "shop/:sort?/:search?/:pageIndex",
+      path: "shop/:publisher?:platform?:metacrit?:releaseDate?:genres?:tags?:ordering?/:searchQ?/:pageIndex",
       element: <Shop />,
+      loader: dataLoader,
     },
     {
       path: "cart/:filter?/:search?/:pageIndex",
