@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { DataItem } from "./ContextProvider";
-import { useFetchData } from "./FetchData";
 
 interface PaginatorProps {
-  data: DataItem[];
+  data: DataItem;
   pageIndex: string | undefined;
   routeValue: string;
   filter: string | undefined;

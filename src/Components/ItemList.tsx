@@ -1,13 +1,12 @@
 import { ItemCard } from "./ItemCard";
-import { DataItem } from "./ContextProvider";
+import { Items } from "./ContextProvider";
 
 interface ItemListProps {
-  data: DataItem[];
-  pageIndex: string | undefined;
+  items: Items[];
   routeValue: string;
 }
 
-export const ItemList = ({ items, pageIndex, routeValue }: ItemListProps) => {
+export const ItemList = ({ items, routeValue }: ItemListProps) => {
   return items.map((item) => (
     <ItemCard key={item.id} item={item} routeValue={routeValue} />
   ));

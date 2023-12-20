@@ -1,13 +1,17 @@
 import { Grid } from "./Grid";
-import { useShopItemsContext, useDataContext } from "./ContextProvider";
+import { useShopItemsContext, DataItem } from "./ContextProvider";
 import { useLoaderData } from "react-router-dom";
-
+import { useEffect } from "react";
 import { Layout } from "./Layout";
 
 export const Shop = () => {
-  const { data } = useLoaderData();
+  const { data } = useLoaderData() as { data: DataItem };
   const { shopItems, setShopItems } = useShopItemsContext();
-  setShopItems(data.results);
+  useEffect(() => {
+    if (data.results) {
+      setShopItems([...data.results]);
+    }
+  }, [data]);
   const routeValue = "shop";
   return (
     <Layout Items={shopItems} data={data} setItems={setShopItems}>

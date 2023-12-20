@@ -1,29 +1,26 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
 interface ContextProps {
   children: ReactNode;
 }
 
 export interface DataItem {
-  category: string;
+  count: number;
   description: string;
-  id: number;
-  image: string;
+  filters: object;
   price: number;
-  rating: {
-    count: number;
-    rate: number;
-  };
-  title: string;
+  results: Items[];
 }
 
-interface DataProps {
+export interface Items {
+  id: number;
+  background_image: string;
+  genres: object[];
+  rating: number;
+  ratings_count: number;
+  title: string;
+}
+/* interface DataProps {
   data: DataItem[];
   setData: React.Dispatch<React.SetStateAction<DataItem[]>>;
 }
@@ -47,8 +44,18 @@ const DataContextProvider: React.FC<ContextProps> = ({ children }) => {
     <DataContext.Provider value={contextItems}>{children}</DataContext.Provider>
   );
 };
+ */
 
-const LoadingContext = createContext<DataProps>(defaultContextValue);
+interface LoadingProps {
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const defaultContextValue: LoadingProps = {
+  loading: true,
+  setLoading: () => {},
+};
+const LoadingContext = createContext<LoadingProps>(defaultContextValue);
 
 const LoadingContextProvider: React.FC<ContextProps> = ({ children }) => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -66,8 +73,8 @@ const LoadingContextProvider: React.FC<ContextProps> = ({ children }) => {
 };
 
 interface ShopProps {
-  shopItems: DataItem[];
-  setShopItems: React.Dispatch<React.SetStateAction<DataItem[]>>;
+  shopItems: Items[];
+  setShopItems: React.Dispatch<React.SetStateAction<Items[]>>;
 }
 
 const shopContextValue: ShopProps = {
@@ -78,18 +85,7 @@ const shopContextValue: ShopProps = {
 const ShopItemsContext = createContext<ShopProps>(shopContextValue);
 
 const ShopItemsContextProvider: React.FC<ContextProps> = ({ children }) => {
-  const { data } = useDataContext();
-  const [shopItems, setShopItems] = useState<DataItem[]>([]);
-  useEffect(() => {
-    if (data.results) {
-      const dataResults = data.results;
-      const tempItems = [...dataResults];
-      const sorted = tempItems.sort((a, b) => {
-        return b.rating.count - a.rating.count;
-      });
-      setShopItems(sorted);
-    }
-  }, [data]);
+  const [shopItems, setShopItems] = useState<Items[]>([]);
 
   const contextItems = {
     shopItems,
@@ -105,14 +101,14 @@ const ShopItemsContextProvider: React.FC<ContextProps> = ({ children }) => {
 
 export const ContextProvider: React.FC<ContextProps> = ({ children }) => {
   return (
-    <DataContextProvider>
-      <LoadingContextProvider>
-        <ShopItemsContextProvider>{children}</ShopItemsContextProvider>
-      </LoadingContextProvider>
-    </DataContextProvider>
+    /*     <DataContextProvider> */
+    <LoadingContextProvider>
+      <ShopItemsContextProvider>{children}</ShopItemsContextProvider>
+    </LoadingContextProvider>
+    /*  </DataContextProvider> */
   );
 };
 
-export const useDataContext = () => useContext(DataContext);
+/* export const useDataContext = () => useContext(DataContext); */
 export const useShopItemsContext = () => useContext(ShopItemsContext);
 export const useLoadingContext = () => useContext(LoadingContext);

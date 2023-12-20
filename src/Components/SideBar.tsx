@@ -1,9 +1,9 @@
-import { DataItem } from "./ContextProvider";
+import { DataItem, Items } from "./ContextProvider";
 import { ChangeEvent } from "react";
 
 interface sidebarProps {
-  data: DataItem[];
-  setItems: React.Dispatch<React.SetStateAction<DataItem[]>>;
+  data: DataItem;
+  setItems: React.Dispatch<React.SetStateAction<Items[]>>;
 }
 
 export const Sidebar = ({ data, setItems }: sidebarProps) => {
@@ -17,7 +17,7 @@ export const Sidebar = ({ data, setItems }: sidebarProps) => {
 const Searchbox = ({ data, setItems }: sidebarProps) => {
   const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
     const regexPattern = new RegExp(ev.target.value, "i");
-    const filteredItems = data.filter((item) => {
+    const filteredItems = data.results.filter((item) => {
       return regexPattern.test(item.title);
     });
     setItems(filteredItems);

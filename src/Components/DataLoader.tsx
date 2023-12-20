@@ -1,6 +1,13 @@
 import { fetchData } from "./FetchData";
+import { LoaderFunctionArgs, LoaderFunction, Params } from "react-router-dom";
 
-export const dataLoader = async (request) => {
-  const data = await fetchData(request.params);
+interface Request {
+  params: Params;
+}
+
+export const dataLoader: LoaderFunction = async ({
+  params,
+}: LoaderFunctionArgs<Request>) => {
+  const data = await fetchData(params);
   return { data };
 };

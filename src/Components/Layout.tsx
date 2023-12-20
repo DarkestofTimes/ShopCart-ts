@@ -2,13 +2,13 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Sidebar } from "./Sidebar";
 import { ReactNode } from "react";
-import { DataItem } from "./ContextProvider";
+import { DataItem, Items } from "./ContextProvider";
 
 interface layoutProps {
   children: ReactNode;
-  Items: DataItem[];
-  setItems: React.Dispatch<React.SetStateAction<DataItem[]>>;
-  data: DataItem[];
+  Items: Items[];
+  setItems: React.Dispatch<React.SetStateAction<Items[]>>;
+  data: DataItem;
 }
 
 interface noSideLayoutProps {
@@ -19,7 +19,7 @@ export const Layout = ({ children, data, setItems }: layoutProps) => {
   return (
     <main className="grid grid-cols-4">
       <Header />
-      <Sidebar data={data.results} setItems={setItems} />
+      <Sidebar data={data} setItems={setItems} />
       {children}
       <Footer />
     </main>
