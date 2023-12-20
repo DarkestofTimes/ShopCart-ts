@@ -5,6 +5,7 @@ import { Cart } from "./Cart";
 import { ItemPage } from "./ItemPage";
 import { ErrorPage } from "./ErrorPage";
 import { dataLoader } from "./DataLoader";
+import { itemLoader } from "./ItemLoader";
 
 export const App = () => {
   const router = createBrowserRouter([
@@ -23,8 +24,9 @@ export const App = () => {
       element: <Cart />,
     },
     {
-      path: "items/:page/:id",
+      path: "items/:page/:itemId",
       element: <ItemPage />,
+      loader: itemLoader,
     },
   ]);
 

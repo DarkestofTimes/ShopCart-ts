@@ -26,7 +26,6 @@ export const fetchData = async ({
   const order = ordering ? `&ordering=${ordering}` : "";
 
   const url = `https://api.rawg.io/api/games?key=${key}${tag}${genre}${platforms}${publishers}${pageNum}${searchQuery}${relDate}${metacritic}${order}`;
-  console.log(url);
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -35,7 +34,6 @@ export const fetchData = async ({
       throw new Error("Network response was not ok");
     }
     const retrievedData = await response.json();
-    console.log(retrievedData);
     return retrievedData;
   } catch (error) {
     console.error("Error:", error);

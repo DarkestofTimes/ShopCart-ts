@@ -18,33 +18,8 @@ export interface Items {
   genres: object[];
   rating: number;
   ratings_count: number;
-  title: string;
+  name: string;
 }
-/* interface DataProps {
-  data: DataItem[];
-  setData: React.Dispatch<React.SetStateAction<DataItem[]>>;
-}
-
-const defaultContextValue: DataProps = {
-  data: [],
-  setData: () => {},
-};
-
-const DataContext = createContext<DataProps>(defaultContextValue);
-
-const DataContextProvider: React.FC<ContextProps> = ({ children }) => {
-  const [data, setData] = useState<DataItem[]>([]);
-  console.log(data); //remove
-  const contextItems = {
-    data,
-    setData,
-  };
-
-  return (
-    <DataContext.Provider value={contextItems}>{children}</DataContext.Provider>
-  );
-};
- */
 
 interface LoadingProps {
   loading: boolean;

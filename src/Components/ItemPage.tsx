@@ -1,19 +1,21 @@
 import { useParams } from "react-router-dom";
 import { Items } from "./ContextProvider";
 import { NoSideLayout } from "./Layout";
+import { useLoaderData } from "react-router-dom";
+
+interface item {}
 
 interface ImgContainerProps {
   item: Items | undefined;
 }
 
 export const ItemPage = () => {
-  /*   const { data } = useDataContext(); */
-  const { page, id } = useParams();
-  /*   const item = data.find((item) => item.id === Number(id)); */
+  const { page, itemId } = useParams();
+  const { item } = useLoaderData();
   return (
     <NoSideLayout>
       <section className="min-h-[93vh] grid grid-cols-3 grid-rows-4 p-4">
-        {/*  <ImgContainer item={item} /> */}
+        <ImgContainer item={item} />
       </section>
     </NoSideLayout>
   );

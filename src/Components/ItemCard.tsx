@@ -21,7 +21,7 @@ export const ItemCard = ({ item, routeValue }: ItemCardProps) => {
           <p className="w-full text-center">50$</p>
         </div>
       </div>
-      <h3>{item.title}</h3>
+      <h3>{item.name}</h3>
     </Link>
   );
 };
