@@ -11,7 +11,6 @@ export const fetchScreens = async ({ itemId }: Params) => {
       throw new Error("Network response was not ok");
     }
     const retrievedData = await response.json();
-    console.log(retrievedData);
     return retrievedData;
   } catch (error) {
     console.error("Error:", error);
