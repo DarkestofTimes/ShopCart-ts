@@ -5,7 +5,7 @@ interface Request {
   params: Params;
 }
 
-export const dataLoader: LoaderFunction = async ({
+export const DataLoader: LoaderFunction = async ({
   params,
 }: LoaderFunctionArgs<Request>) => {
   const data = await fetchData(params);

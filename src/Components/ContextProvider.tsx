@@ -76,14 +76,11 @@ const ShopItemsContextProvider: React.FC<ContextProps> = ({ children }) => {
 
 export const ContextProvider: React.FC<ContextProps> = ({ children }) => {
   return (
-    /*     <DataContextProvider> */
     <LoadingContextProvider>
       <ShopItemsContextProvider>{children}</ShopItemsContextProvider>
     </LoadingContextProvider>
-    /*  </DataContextProvider> */
   );
 };
 
-/* export const useDataContext = () => useContext(DataContext); */
 export const useShopItemsContext = () => useContext(ShopItemsContext);
 export const useLoadingContext = () => useContext(LoadingContext);

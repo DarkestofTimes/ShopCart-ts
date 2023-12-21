@@ -4,8 +4,8 @@ import { Shop } from "./Shop";
 import { Cart } from "./Cart";
 import { ItemPage } from "./ItemPage";
 import { ErrorPage } from "./ErrorPage";
-import { dataLoader } from "./DataLoader";
-import { itemLoader } from "./ItemLoader";
+import { DataLoader } from "./DataLoader";
+import { ItemLoader } from "./ItemLoader";
 
 export const App = () => {
   const router = createBrowserRouter([
@@ -17,7 +17,7 @@ export const App = () => {
     {
       path: "shop/:publisher?:platform?:metacrit?:releaseDate?:genres?:tags?:ordering?/:searchQ?/:pageIndex",
       element: <Shop />,
-      loader: dataLoader,
+      loader: DataLoader,
     },
     {
       path: "cart/:filter?/:search?/:pageIndex",
@@ -26,7 +26,7 @@ export const App = () => {
     {
       path: "items/:page/:itemId",
       element: <ItemPage />,
-      loader: itemLoader,
+      loader: ItemLoader,
     },
   ]);
 
