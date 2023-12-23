@@ -1,8 +1,5 @@
-import { key } from "../key.ts";
-import { Params } from "react-router-dom";
-
-export const fetchItem = async ({ itemId }: Params) => {
-  const url = `https://api.rawg.io/api/games/${itemId}?key=${key}`;
+export const fetchItem = async (url: string) => {
+  console.log(url);
   try {
     const response = await fetch(url, {
       method: "GET",

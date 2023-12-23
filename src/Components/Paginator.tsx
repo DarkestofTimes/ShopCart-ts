@@ -1,29 +1,23 @@
 import { Link } from "react-router-dom";
 import { DataItem } from "./ContextProvider";
+import { useParams } from "react-router-dom";
+import { splitParams } from "./splitParams.ts";
 
 interface PaginatorProps {
   data: DataItem;
-  pageIndex: string | undefined;
   routeValue: string;
-  filter: string | undefined;
-  search: string | undefined;
 }
 interface ButtonProps {
   num: number;
   bool: boolean;
   routeValue: string;
-  filter: string | undefined;
-  search: string | undefined;
 }
 
-export const Paginator = ({
-  data,
-  pageIndex,
-  routeValue,
-  filter,
-  search,
-}: PaginatorProps) => {
-  const pageNumber = Number(pageIndex);
+export const Paginator = ({ data, routeValue }: PaginatorProps) => {
+  const { page } = useParams();
+  const politeParams = splitParams(page!);
+
+  const pageNumber = Number(politeParams.pageIndex.slice(6));
   const numberOfPages = Math.ceil(data.count / 20);
   const pageNumbersArray = Array.from(
     { length: numberOfPages },
@@ -34,40 +28,24 @@ export const Paginator = ({
 
   return (
     <div className="flex col-span-full justify-center">
-      {pageNumber > 3 && (
-        <Link
-          to={`/${routeValue}${filter ? `/${filter}` : ""}${
-            search ? `/${search}` : ""
-          }/1`}>
-          ...
-        </Link>
-      )}
+      {pageNumber > 3 && <Link to={`/${routeValue}/1`}>...</Link>}
       {onlyFive.map((item) => (
         <Button
           key={item}
           num={item}
           bool={item === pageNumber ? true : false}
           routeValue={routeValue}
-          filter={filter}
-          search={search}
         />
       ))}
       {pageNumber < pageNumbersArray.length - 2 && (
-        <Link
-          to={`/${routeValue}${filter ? `/${filter}` : ""}${
-            search ? `/${search}` : ""
-          }/${numberOfPages}`}>
-          ...
-        </Link>
+        <Link to={`/${routeValue}/${numberOfPages}`}>...</Link>
       )}
     </div>
   );
 };
 
-const Button = ({ num, bool, routeValue, filter, search }: ButtonProps) => {
-  const toPath = `/${routeValue}${filter ? `/${filter}` : ""}${
-    search ? `/${search}` : ""
-  }/${num}`;
+const Button = ({ num, bool, routeValue }: ButtonProps) => {
+  const toPath = `/${routeValue}/${num}`;
   return (
     <Link to={toPath} className={`w-4 h-4 ${bool ? "bg-gray-500" : ""}`}>
       {num}

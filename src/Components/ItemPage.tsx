@@ -56,7 +56,7 @@ interface imgs {
 [];
 
 export const ItemPage = () => {
-  const { page, itemId }: Params<string> = useParams();
+  const { page }: Params<string> = useParams();
   const { item, screens, additions, trailers, series } =
     useLoaderData() as LoaderData;
   const temp = [

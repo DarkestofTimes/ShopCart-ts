@@ -15,10 +15,11 @@ export const App = () => {
       errorElement: <ErrorPage />,
     },
     {
-      path: "shop/:publisher?:platform?:metacrit?:releaseDate?:genres?:tags?:ordering?/:searchQ?/:pageIndex",
+      path: "shop/:page/*?",
       element: <Shop />,
       loader: DataLoader,
     },
+    /* path: "shop/:publisher?/:platform?/:metacrit?/:releaseDate?/:genres?/:tags?/:ordering?/:searchQ?/:pageIndex", */
     {
       path: "cart/:filter?/:search?/:pageIndex",
       element: <Cart />,

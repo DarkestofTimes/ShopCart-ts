@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 interface ItemProp {
   item: {
@@ -13,6 +14,7 @@ interface ItemProp {
     publishers?: {
       id: number;
       name: string;
+      slug: string;
     }[];
     rating?: number;
     ratings_count?: number;
@@ -32,6 +34,7 @@ interface ItemProp {
     genres?: {
       id: number;
       name: string;
+      slug: string;
     }[];
     description?: string;
     released?: string;
@@ -89,9 +92,9 @@ const PublishersContainer = ({ item }: ItemProp) => {
   return (
     <section>
       {item.publishers.map((pub) => (
-        <h3 key={pub.id} className="font-bold">
+        <Link to={`/shop/${pub.slug}/1`} key={pub.id} className="font-bold">
           {pub.name}
-        </h3>
+        </Link>
       ))}
     </section>
   );
@@ -164,11 +167,12 @@ const GenreContainer = ({ item }: ItemProp) => {
   return (
     <section className="flex gap-2">
       {item.genres.map((genre) => (
-        <div
+        <Link
+          to={`/shop/1&genres=${genre.slug}`}
           key={genre.id}
           className="rounded font-bold border-black border-2 p-1">
           {genre.name}
-        </div>
+        </Link>
       ))}
     </section>
   );
