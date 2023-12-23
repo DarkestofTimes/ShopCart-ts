@@ -47,33 +47,30 @@ interface ItemProp {
 export const ItemInfoContainer = ({ item, page }: ItemProp) => {
   return (
     <section className="col-span-3 grid grid-rows-[min-content] grid-cols-3  w-full">
-      <MetaContainer item={item} />
-      <div className="grid row-span-2 grid-rows-2 justify-start grid-cols-1  h-full">
-        <PlatformsContainer item={item} />
-        <div className="grid grid-cols-2 w-full">
-          <section className="text-[5rem] font-bold w-full flex place-items-center justify-center">
-            50$
-          </section>
-          {page === "shop" ? (
-            <AddToBtnContainer item={item} />
-          ) : (
-            <RemoveFromBtnContainer item={item} />
-          )}
-        </div>
+      <MetaContainer item={item} page={page} />
+      <div className="row-span-2  col-start-3 grid h-full pl-3">
+        <DevelopersContainer item={item} />
+        <GenreContainer item={item} />
       </div>
       <DescContainer item={item} />
     </section>
   );
 };
 
-const MetaContainer = ({ item }: ItemProp) => {
+const MetaContainer = ({ item, page }: ItemProp) => {
   return (
     <section className="col-span-2 row-span-2  grid  grid-cols-3 grid-rows-3 items-center gap-3 max-h-[35vh]">
       <ReleasedContainer item={item} />
       <ESRBContainer item={item} />
-      <div className="row-span-full col-start-3 grid h-full ">
-        <DevelopersContainer item={item} />
-        <GenreContainer item={item} />
+      <div className="grid row-span-3 grid-rows-2 justify-start grid-cols-1  h-full pl-3">
+        <PlatformsContainer item={item} />
+        <div className=" w-full">
+          {page === "shop" ? (
+            <AddToBtnContainer item={item} />
+          ) : (
+            <RemoveFromBtnContainer item={item} />
+          )}
+        </div>
       </div>
       <MetacritContainer item={item} />
       <RatingContainer item={item} />
@@ -98,7 +95,7 @@ const ESRBContainer = ({ item }: ItemProp) => {
       : "text-black";
 
   return (
-    <section>
+    <section className="flex justify-center">
       {item.esrb_rating ? (
         <h2 className={`text-3xl font-bold `}>
           ESRB:{" "}
@@ -106,7 +103,7 @@ const ESRBContainer = ({ item }: ItemProp) => {
             href="https://www.esrb.org/ratings-guide/"
             target="_blank"
             rel="noreferrer"
-            className={`${colorCode} rounded border-black border-2 p-1`}>
+            className={`${colorCode} rounded border-purple-800 border-2 p-1`}>
             {item.esrb_rating.name}
           </a>
         </h2>
@@ -129,7 +126,7 @@ const DevelopersContainer = ({ item }: ItemProp) => {
           <Link
             to={`/shop/1&developers=${dev.slug}`}
             key={dev.id}
-            className="font-bold rounded border-black border-2 p-1 h-min">
+            className="font-bold rounded border-purple-800 border-2 p-1 h-min bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110">
             {dev.name}
           </Link>
         ))}
@@ -151,8 +148,8 @@ const RatingContainer = ({ item }: ItemProp) => {
       ? "text-black"
       : "text-[#00a562]";
   return (
-    <section className="grid grid-rows-2 row-start-2">
-      <h3 className="text-3xl  p-1 whitespace-nowrap">
+    <section className="grid grid-rows-2 row-start-2 justify-items-center">
+      <h3 className="text-3xl  p-1 whitespace-nowrap ">
         Score: <span className={`font-bold ${colorCode}`}>{item.rating}</span>
       </h3>
       <h4 className="text-2xl  p-1 whitespace-nowrap">
@@ -169,7 +166,7 @@ const RatingBar = ({ item }: ItemProp) => {
   return (
     <section className="grid grid-rows-2 col-span-2 h-full w-full items-end">
       <h3 className="h-min pb-3 font-bold">Score break down:</h3>
-      <div className="flex flex-row-reverse rounded border-black border-2 overflow-hidden h-min w-full">
+      <div className="flex flex-row-reverse rounded border-purple-800 border-2 overflow-hidden h-min w-full">
         {item.ratings.map((rating) => (
           <span
             key={rating.id}
@@ -216,9 +213,12 @@ const MetacritContainer = ({ item }: ItemProp) => {
     <section className=" place-content-center flex justify-start col-start-1 row-start-2">
       <Link
         to={`/shop/1&metacritic=${item.metacritic},100`}
-        className="text-2xl font-bold rounded border-black border-2 p-2 whitespace-nowrap">
+        className="text-2xl w-full flex items-center justify-center font-bold rounded border-purple-800 border-2 p-2 whitespace-nowrap bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110">
         Metacritic:{" "}
-        <span className={`text-5xl ${colorCode}`}>{item.metacritic}</span>
+        <span
+          className={`text-5xl ${colorCode} [text-shadow:_2px_0_0_var(--tw-shadow-color)] transition-colors duration-200`}>
+          {item.metacritic}
+        </span>
       </Link>
     </section>
   );
@@ -226,8 +226,9 @@ const MetacritContainer = ({ item }: ItemProp) => {
 
 const AddToBtnContainer = ({ item }: ItemProp) => {
   return (
-    <section className="">
-      <button className="text-4xl font-bold rounded border-black border-2 p-4 h-full w-full bg-green-600 text-white">
+    <section className="h-full w-full">
+      <button className="text-4xl grid h-full grid-cols-2 font-bold rounded border-purple-800 border-2 p-4  bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 place-items-center">
+        <section className="text-[5rem] font-bold w-full ">50$</section>
         Add to Cart
       </button>
     </section>
@@ -237,7 +238,7 @@ const AddToBtnContainer = ({ item }: ItemProp) => {
 const RemoveFromBtnContainer = ({ item }: ItemProp) => {
   return (
     <section className="">
-      <button className="text-4xl font-bold rounded border-black border-2 p-4 h-full w-1/2 bg-green-600 text-white">
+      <button className="text-4xl font-bold rounded border-purple-800 border-2 p-4 h-full w-1/2 bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110">
         Add to Cart
       </button>
     </section>
@@ -256,7 +257,7 @@ const GenreContainer = ({ item }: ItemProp) => {
           <Link
             to={`/shop/1&genres=${genre.slug}`}
             key={genre.id}
-            className=" font-bold rounded border-black border-2 p-1 h-min whitespace-nowrap">
+            className=" font-bold rounded border-purple-800 border-2 p-1 h-min whitespace-nowrap bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110">
             {genre.name}
           </Link>
         ))}
@@ -270,14 +271,14 @@ const ReleasedContainer = ({ item }: ItemProp) => {
   const formatted = formatDate(currentDate);
 
   return (
-    <section>
+    <section className="h-full w-full">
       <h3 className="font-bold pb-2"> Release Date: </h3>
       {item.tba ? (
         "TBA"
       ) : (
         <Link
           to={`/shop/1&dates=${item.released},${formatted}`}
-          className="text-xl font-bold rounded border-black border-2 p-1 whitespace-nowrap">
+          className="text-xl flex w-full font-bold rounded border-purple-800 border-2 p-1 whitespace-nowrap bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 justify-center">
           {item.released}
         </Link>
       )}
@@ -375,7 +376,7 @@ const PlatformsContainer = ({ item }: ItemProp) => {
     ),
     "nintendo-switch": (
       <svg
-        fill="#000000"
+        fill="white"
         viewBox="0 0 32 32"
         xmlns="http://www.w3.org/2000/svg"
         data-darkreader-inline-fill="">
@@ -385,7 +386,7 @@ const PlatformsContainer = ({ item }: ItemProp) => {
     ),
     android: (
       <svg
-        fill="#000000"
+        fill="rgb(21 128 61)"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 512 512"
@@ -440,7 +441,7 @@ const PlatformsContainer = ({ item }: ItemProp) => {
           <Link
             to={`/shop/1&platforms=${plat.platform.id}`}
             key={plat.platform.id}
-            className="border-black border-2 p-1 rounded min-w-[3rem]">
+            className="border-purple-800 border-2 p-1 rounded min-w-[3rem] transition-all duration-200 hover:scale-125">
             {svgPaths[plat.platform.slug]}
           </Link>
         ))}

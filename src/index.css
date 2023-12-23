@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: rgba(0, 0, 0, 0.934);
+  color: #f0f8ff;
+}
+
+body::-webkit-scrollbar {
+  width: 11px;
+}
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: rebeccapurple grey;
+}
+
+body::-webkit-scrollbar-track {
+  background: rgb(19, 19, 19);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rebeccapurple;
+  border-radius: 6px;
+  border: 3px solid black;
+}

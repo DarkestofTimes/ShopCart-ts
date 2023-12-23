@@ -94,17 +94,19 @@ export const ImgContainer = ({ imgs, children }: ImgContainerProps) => {
   };
 
   return (
-    <figure className="border-2 border-black border-solid flex overflow-hidden relative max-h-[80vh]  ">
-      {children && children}
-      {imgs.map((screen, index: number) =>
-        screen.linkId ? (
-          <DLCLink key={index} screen={screen} currentImg={currentImg} />
-        ) : screen.data ? (
-          <Iframe key={index} vid={screen} currentImg={currentImg} />
-        ) : (
-          <Img key={index} screen={screen} currentImg={currentImg} />
-        )
-      )}
+    <div className="flex relative overflow-hidden border-2 border-purple-800 border-solid rounded">
+      <figure className=" flex  relative max-h-[80vh] ">
+        {children && children}
+        {imgs.map((screen, index: number) =>
+          screen.linkId ? (
+            <DLCLink key={index} screen={screen} currentImg={currentImg} />
+          ) : screen.data ? (
+            <Iframe key={index} vid={screen} currentImg={currentImg} />
+          ) : (
+            <Img key={index} screen={screen} currentImg={currentImg} />
+          )
+        )}
+      </figure>
       <ImgSlider
         imgs={imgs}
         currentImg={currentImg}
@@ -112,7 +114,7 @@ export const ImgContainer = ({ imgs, children }: ImgContainerProps) => {
         slideRight={slideRight}
         setCurrentImg={setCurrentImg}
       />
-    </figure>
+    </div>
   );
 };
 
@@ -156,6 +158,9 @@ const DLCLink = ({ screen, currentImg }: ImgProps) => {
         loading="lazy"
         title={screen.name ? screen.name : ""}
       />
+      <h2 className=" w-full h-6 flex justify-center absolute bottom-0 hover:scale-105  transition duration-200 bg-gradient-to-t from-purple-800/75 from-30% text-[#f0f8ff]">
+        {screen.name}
+      </h2>
     </Link>
   );
 };
@@ -168,13 +173,13 @@ const ImgSlider = ({
   setCurrentImg,
 }: ImgSliderProps) => {
   return (
-    <section className="absolute h-full w-full pointer-events-none">
+    <section className="absolute h-full w-full flex flex-shrink-0 flex-grow-0 pointer-events-none">
       <button
-        className="left-20 top-1/2 absolute -translate-y-1/2 bold text-3xl text-white bg-blue-500 pointer-events-auto"
+        className="left-0  h-full w-[5%] absolute  bold text-3xl text-[#f0f8ff] bg-gradient-to-r from-purple-800/50 pointer-events-auto hover:scale-125 transition-all duration-200"
         onClick={slideRight}>
         &lt;
       </button>
-      <div className="w-min h-[4vh] flex relative top-[77%] translate-y-1/2 left-1/2 -translate-x-1/2 gap-2 bg-blue-950 place-items-center justify-center p-6 rounded">
+      <div className="w-min h-2rem flex absolute bottom-6 left-1/2 -translate-x-1/2 gap-2 bg-purple-800/50 place-items-center justify-center p-1 rounded  ">
         {imgs.map((_: object, index: number) => (
           <SlideBtn
             key={index}
@@ -186,7 +191,7 @@ const ImgSlider = ({
         ))}
       </div>
       <button
-        className="right-20 top-1/2 absolute -translate-y-1/2 bold text-3xl text-white bg-blue-500 pointer-events-auto"
+        className="right-0  h-full w-[5%] absolute  bold text-3xl text-[#f0f8ff] bg-gradient-to-l from-purple-800/50  pointer-events-auto hover:scale-125 transition-all duration-200"
         onClick={slideLeft}>
         &gt;
       </button>
@@ -200,7 +205,7 @@ const SlideBtn = ({
   currentImg,
   imgs,
 }: SlideBtnProps) => {
-  const current = currentImg === index ? "bg-blue-500" : "bg-white";
+  const current = currentImg === index ? "bg-purple-800" : "bg-[#f0f8ff]";
   const edges =
     (index > Math.max(3, currentImg) + 2 ||
       index < Math.min(imgs.length - 4, currentImg) - 2) &&
@@ -211,11 +216,11 @@ const SlideBtn = ({
   const hidden =
     index > Math.max(3, currentImg) + 3 ||
     index < Math.min(imgs.length - 4, currentImg) - 3
-      ? " scale-0 absolute"
+      ? "scale-50 hidden"
       : "";
   return (
     <button
       onClick={() => setCurrentImg(index)}
-      className={`w-6 h-6 rounded-full flex place-content-center ${current} ${edges} ${hidden} transition-all duration-200 pointer-events-auto`}></button>
+      className={`w-5 h-5  rounded-full flex place-content-center ${current} ${edges} ${hidden}  pointer-events-auto hover:scale-125 transition-all duration-200`}></button>
   );
 };
