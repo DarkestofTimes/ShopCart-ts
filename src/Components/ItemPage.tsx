@@ -79,7 +79,9 @@ export const ItemPage = () => {
   return (
     <NoSideLayout>
       <section className="min-h-[93vh] grid grid-cols-3 grid-rows-[80vh] p-8 gap-4">
-        <ImgContainer imgs={imgs} />
+        <div className="col-span-2 h-full flex">
+          <ImgContainer imgs={imgs} />
+        </div>
         <div className="grid grid-rows-2">
           <SeriesContainer series={series} page={page} />
           <DLCContainer additions={additions} page={page} />
@@ -109,7 +111,19 @@ const DLCContainer = ({ additions, page }: DLCProps) => {
     linkId: add.id,
     routeValue: page,
   }));
-  return <>{imgs.length !== 0 && <ImgContainer imgs={imgs} />}</>;
+  return (
+    <>
+      {imgs.length > 0 && (
+        <div className="relative flex h-full w-full">
+          <ImgContainer imgs={imgs}>
+            <h2 className="absolute top-0 left-0 z-10 bg-blue-500 text-white p-1 text-xl font-bold">
+              DLC and Editions
+            </h2>
+          </ImgContainer>
+        </div>
+      )}
+    </>
+  );
 };
 
 interface SeriesProps {
@@ -131,5 +145,17 @@ const SeriesContainer = ({ series, page }: SeriesProps) => {
     linkId: add.id,
     routeValue: page,
   }));
-  return <>{imgs.length !== 0 && <ImgContainer imgs={imgs} />}</>;
+  return (
+    <>
+      {imgs.length > 0 && (
+        <div className="relative flex h-full w-full">
+          <ImgContainer imgs={imgs}>
+            <h2 className="absolute top-0 left-0 z-10 bg-blue-500 text-white p-1 text-xl font-bold">
+              Games in the Series
+            </h2>
+          </ImgContainer>
+        </div>
+      )}
+    </>
+  );
 };

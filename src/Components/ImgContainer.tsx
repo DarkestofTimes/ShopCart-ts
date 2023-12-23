@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import { Link } from "react-router-dom";
 
 interface ImgContainerProps {
@@ -12,6 +12,7 @@ interface ImgContainerProps {
       max: string;
     };
   }[];
+  children?: ReactNode;
 }
 
 interface ImgProps {
@@ -76,7 +77,7 @@ interface IframeProps {
   currentImg: number;
 }
 
-export const ImgContainer = ({ imgs }: ImgContainerProps) => {
+export const ImgContainer = ({ imgs, children }: ImgContainerProps) => {
   const [currentImg, setCurrentImg] = useState(0);
   const slideLeft = () => {
     setCurrentImg((index) => {
@@ -93,7 +94,8 @@ export const ImgContainer = ({ imgs }: ImgContainerProps) => {
   };
 
   return (
-    <figure className="border-2 border-black border-solid col-span-2 row-span-1 flex overflow-hidden relative max-h-[80vh]">
+    <figure className="border-2 border-black border-solid flex overflow-hidden relative max-h-[80vh]  ">
+      {children && children}
       {imgs.map((screen, index: number) =>
         screen.linkId ? (
           <DLCLink key={index} screen={screen} currentImg={currentImg} />
