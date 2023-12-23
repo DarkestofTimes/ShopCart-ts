@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { formatDate } from "./formatDate.ts";
 
 interface ItemProp {
   item: {
@@ -11,7 +12,7 @@ interface ItemProp {
       name: string;
       slug: string;
     };
-    publishers?: {
+    developers?: {
       id: number;
       name: string;
       slug: string;
@@ -40,15 +41,25 @@ interface ItemProp {
     released?: string;
     tba?: boolean;
   };
+  page?: string;
 }
 
-export const ItemInfoContainer = ({ item }: ItemProp) => {
+export const ItemInfoContainer = ({ item, page }: ItemProp) => {
   return (
-    <section className="col-span-3 grid grid-rows-[min-content] grid-cols-3 gap-3 w-full max-h-min">
+    <section className="col-span-3 grid grid-rows-[min-content] grid-cols-3  w-full">
       <MetaContainer item={item} />
-      <div className="grid row-span-2 grid-rows-2 justify-center items-center h-full">
-        <MetacritContainer item={item} />
-        <PriceContainer item={item} />
+      <div className="grid row-span-2 grid-rows-2 justify-start grid-cols-1  h-full">
+        <PlatformsContainer item={item} />
+        <div className="grid grid-cols-2 w-full">
+          <section className="text-[5rem] font-bold w-full flex place-items-center justify-center">
+            50$
+          </section>
+          {page === "shop" ? (
+            <AddToBtnContainer item={item} />
+          ) : (
+            <RemoveFromBtnContainer item={item} />
+          )}
+        </div>
       </div>
       <DescContainer item={item} />
     </section>
@@ -57,14 +68,14 @@ export const ItemInfoContainer = ({ item }: ItemProp) => {
 
 const MetaContainer = ({ item }: ItemProp) => {
   return (
-    <section className="col-span-2 row-span-2  grid  grid-cols-3 grid-rows-3 max-h-[30vh] items-center gap-3">
-      <PlatformsContainer item={item} />
+    <section className="col-span-2 row-span-2  grid  grid-cols-3 grid-rows-3 items-center gap-3 max-h-[35vh]">
       <ReleasedContainer item={item} />
-      <div className="row-span-full col-start-3 grid h-full place-items-center">
-        <ESRBContainer item={item} />
-        <PublishersContainer item={item} />
+      <ESRBContainer item={item} />
+      <div className="row-span-full col-start-3 grid h-full ">
+        <DevelopersContainer item={item} />
+        <GenreContainer item={item} />
       </div>
-      <GenreContainer item={item} />
+      <MetacritContainer item={item} />
       <RatingContainer item={item} />
       <RatingBar item={item} />
     </section>
@@ -72,30 +83,81 @@ const MetaContainer = ({ item }: ItemProp) => {
 };
 
 const ESRBContainer = ({ item }: ItemProp) => {
+  if (!item.esrb_rating) {
+    return;
+  }
+  const colorCode =
+    item.esrb_rating.id == 4
+      ? "text-[#8e000b]"
+      : item.esrb_rating.id == 3
+      ? "text-blue-800"
+      : item.esrb_rating.id == 2
+      ? "text-[#a66d00]"
+      : item.esrb_rating.id == 1
+      ? "text-[#00a562]"
+      : "text-black";
+
   return (
     <section>
-      <h2 className="text-3xl font-bold">
-        {item.esrb_rating ? (
-          <span>For {item.esrb_rating.name} audience</span>
-        ) : (
-          ""
-        )}
-      </h2>
+      {item.esrb_rating ? (
+        <h2 className={`text-3xl font-bold `}>
+          ESRB:{" "}
+          <a
+            href="https://www.esrb.org/ratings-guide/"
+            target="_blank"
+            rel="noreferrer"
+            className={`${colorCode} rounded border-black border-2 p-1`}>
+            {item.esrb_rating.name}
+          </a>
+        </h2>
+      ) : (
+        ""
+      )}
     </section>
   );
 };
 
-const PublishersContainer = ({ item }: ItemProp) => {
-  if (!item.publishers) {
+const DevelopersContainer = ({ item }: ItemProp) => {
+  if (!item.developers) {
     return;
   }
   return (
-    <section>
-      {item.publishers.map((pub) => (
-        <Link to={`/shop/${pub.slug}/1`} key={pub.id} className="font-bold">
-          {pub.name}
-        </Link>
-      ))}
+    <section className=" h-min">
+      <h3 className="font-bold pb-2">By:</h3>
+      <div className="flex gap-2 flex-wrap">
+        {item.developers.map((dev) => (
+          <Link
+            to={`/shop/1&developers=${dev.slug}`}
+            key={dev.id}
+            className="font-bold rounded border-black border-2 p-1 h-min">
+            {dev.name}
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const RatingContainer = ({ item }: ItemProp) => {
+  if (!item.rating) {
+    return;
+  }
+  const colorCode =
+    item.rating < 4
+      ? "text-[#a66d00]"
+      : item.rating < 3
+      ? "text-[#8e000b]"
+      : item.rating < 1
+      ? "text-black"
+      : "text-[#00a562]";
+  return (
+    <section className="grid grid-rows-2 row-start-2">
+      <h3 className="text-3xl  p-1 whitespace-nowrap">
+        Score: <span className={`font-bold ${colorCode}`}>{item.rating}</span>
+      </h3>
+      <h4 className="text-2xl  p-1 whitespace-nowrap">
+        Votes: <span className="font-bold">{item.ratings_count}</span>
+      </h4>
     </section>
   );
 };
@@ -105,57 +167,79 @@ const RatingBar = ({ item }: ItemProp) => {
     return;
   }
   return (
-    <section className="col-span-2 flex flex-row-reverse">
-      {item.ratings.map((rating) => (
-        <span
-          key={rating.id}
-          className="h-12 flex items-center justify-center
-            "
-          style={{
-            width: `${rating.percent}%`,
-            backgroundColor: `${
-              rating.id == 1
-                ? "black"
-                : rating.id == 2
-                ? "red"
-                : rating.id == 3
-                ? "yellow"
-                : rating.id == 4
-                ? "green"
-                : rating.id == 5
-                ? "blue"
-                : ""
-            }`,
-          }}
-          title={rating.title}>
-          {rating.count}
-        </span>
-      ))}
+    <section className="grid grid-rows-2 col-span-2 h-full w-full items-end">
+      <h3 className="h-min pb-3 font-bold">Score break down:</h3>
+      <div className="flex flex-row-reverse rounded border-black border-2 overflow-hidden h-min w-full">
+        {item.ratings.map((rating) => (
+          <span
+            key={rating.id}
+            className="h-12 flex items-center justify-center
+            text-white"
+            style={{
+              width: `${rating.percent}%`,
+              backgroundColor: `${
+                rating.id == 1
+                  ? "black"
+                  : rating.id == 2
+                  ? "#8e000b"
+                  : rating.id == 3
+                  ? "#a66d00"
+                  : rating.id == 4
+                  ? "#00a562"
+                  : rating.id == 5
+                  ? "#1e3a8a"
+                  : ""
+              }`,
+            }}
+            title={rating.title}>
+            {rating.percent > 10 ? rating.percent + "%" : ""}
+          </span>
+        ))}
+      </div>
     </section>
   );
 };
 
 const MetacritContainer = ({ item }: ItemProp) => {
+  if (!item.metacritic) {
+    return;
+  }
+  const colorCode =
+    item.metacritic < 75
+      ? "text-[#a66d00]"
+      : item.metacritic < 50
+      ? "text-[#8e000b]"
+      : item.metacritic < 20
+      ? "text-black"
+      : "text-[#00a562]";
   return (
-    <section className=" place-content-center flex">
-      <h2 className="text-5xl font-bold">Metacritic: {item.metacritic}</h2>
+    <section className=" place-content-center flex justify-start col-start-1 row-start-2">
+      <Link
+        to={`/shop/1&metacritic=${item.metacritic},100`}
+        className="text-2xl font-bold rounded border-black border-2 p-2 whitespace-nowrap">
+        Metacritic:{" "}
+        <span className={`text-5xl ${colorCode}`}>{item.metacritic}</span>
+      </Link>
     </section>
   );
 };
 
-const PriceContainer = ({ item }: ItemProp) => {
+const AddToBtnContainer = ({ item }: ItemProp) => {
   return (
-    <section>
-      <h2 className="text-4xl font-bold">50$</h2>
+    <section className="">
+      <button className="text-4xl font-bold rounded border-black border-2 p-4 h-full w-full bg-green-600 text-white">
+        Add to Cart
+      </button>
     </section>
   );
 };
 
-const RatingContainer = ({ item }: ItemProp) => {
+const RemoveFromBtnContainer = ({ item }: ItemProp) => {
   return (
-    <section>
-      <h3 className="text-3xl">{item.rating}</h3>
-      <h4 className="text-2xl">{item.ratings_count}</h4>
+    <section className="">
+      <button className="text-4xl font-bold rounded border-black border-2 p-4 h-full w-1/2 bg-green-600 text-white">
+        Add to Cart
+      </button>
     </section>
   );
 };
@@ -165,25 +249,38 @@ const GenreContainer = ({ item }: ItemProp) => {
     return;
   }
   return (
-    <section className="flex gap-2">
-      {item.genres.map((genre) => (
-        <Link
-          to={`/shop/1&genres=${genre.slug}`}
-          key={genre.id}
-          className="rounded font-bold border-black border-2 p-1">
-          {genre.name}
-        </Link>
-      ))}
+    <section className=" justify-start ">
+      <h3 className="font-bold pb-2">Genres: </h3>
+      <div className="flex gap-2 flex-wrap">
+        {item.genres.map((genre) => (
+          <Link
+            to={`/shop/1&genres=${genre.slug}`}
+            key={genre.id}
+            className=" font-bold rounded border-black border-2 p-1 h-min whitespace-nowrap">
+            {genre.name}
+          </Link>
+        ))}
+      </div>
     </section>
   );
 };
 
 const ReleasedContainer = ({ item }: ItemProp) => {
+  const currentDate = new Date();
+  const formatted = formatDate(currentDate);
+
   return (
     <section>
-      <h3 className="text-xl font-bold ">
-        Release Date: {item.tba ? "TBA" : item.released}
-      </h3>
+      <h3 className="font-bold pb-2"> Release Date: </h3>
+      {item.tba ? (
+        "TBA"
+      ) : (
+        <Link
+          to={`/shop/1&dates=${item.released},${formatted}`}
+          className="text-xl font-bold rounded border-black border-2 p-1 whitespace-nowrap">
+          {item.released}
+        </Link>
+      )}
     </section>
   );
 };
@@ -240,7 +337,7 @@ const PlatformsContainer = ({ item }: ItemProp) => {
     ),
     "xbox-one": (
       <svg
-        fill="#000000"
+        fill="green"
         viewBox="0 0 32 32"
         xmlns="http://www.w3.org/2000/svg"
         data-darkreader-inline-fill="">
@@ -250,7 +347,7 @@ const PlatformsContainer = ({ item }: ItemProp) => {
     ),
     "xbox-series-x": (
       <svg
-        fill="#000000"
+        fill="green"
         viewBox="0 0 32 32"
         xmlns="http://www.w3.org/2000/svg"
         data-darkreader-inline-fill="">
@@ -313,7 +410,7 @@ const PlatformsContainer = ({ item }: ItemProp) => {
     ),
     xbox360: (
       <svg
-        fill="#000000"
+        fill="green"
         viewBox="0 0 32 32"
         xmlns="http://www.w3.org/2000/svg"
         data-darkreader-inline-fill="">
@@ -336,15 +433,16 @@ const PlatformsContainer = ({ item }: ItemProp) => {
   }
 
   return (
-    <section className="grid grid-rows-[min-content] h-full ">
-      <h3>Available on: </h3>
-      <div className="grid grid-flow-col gap-1 justify-start">
+    <section className="grid grid-rows-[min-content] h-full justify-start">
+      <h3 className="font-bold pb-2">Available on: </h3>
+      <div className="flex flex-wrap gap-1 justify-start h-min">
         {item.platforms.map((plat) => (
-          <div
+          <Link
+            to={`/shop/1&platforms=${plat.platform.id}`}
             key={plat.platform.id}
             className="border-black border-2 p-1 rounded min-w-[3rem]">
             {svgPaths[plat.platform.slug]}
-          </div>
+          </Link>
         ))}
       </div>
     </section>

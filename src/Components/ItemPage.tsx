@@ -53,7 +53,6 @@ interface imgs {
     max: string;
   };
 }
-[];
 
 export const ItemPage = () => {
   const { page }: Params<string> = useParams();
@@ -85,30 +84,9 @@ export const ItemPage = () => {
           <SeriesContainer series={series} page={page} />
           <DLCContainer additions={additions} page={page} />
         </div>
-        <ItemInfoContainer item={item} />
-        {page === "shop" ? (
-          <AddToCartBtn item={item} />
-        ) : (
-          <RemoveFromCartBtn item={item} />
-        )}
+        <ItemInfoContainer item={item} page={page} />
       </section>
     </NoSideLayout>
-  );
-};
-
-const AddToCartBtn = ({ item }) => {
-  return (
-    <button className="rounded col-span-3 m-auto border-2 border-black w-3/4 bg-green-600">
-      Add to cart
-    </button>
-  );
-};
-
-const RemoveFromCartBtn = ({ item }) => {
-  return (
-    <button className="rounded col-span-3 m-auto border-2 border-black w-3/4 bg-yellow-600">
-      Remove from cart
-    </button>
   );
 };
 
