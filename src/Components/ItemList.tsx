@@ -1,8 +1,8 @@
 import { ItemCard } from "./ItemCard";
-import { ShopItems } from "./ContextProvider";
+import { ShopItem } from "./ContextProvider";
 
 interface ItemListProps {
-  items: ShopItems[];
+  items: ShopItem[];
   routeValue: string;
 }
 

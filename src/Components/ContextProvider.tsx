@@ -9,16 +9,28 @@ export interface DataItem {
   description: string;
   filters: object;
   price: number;
-  results: ShopItems[];
+  results: ShopItem[];
 }
 
-export interface ShopItems {
+export interface ShopItem {
   id: number;
   background_image: string;
   genres: object[];
   rating: number;
   ratings_count: number;
   name: string;
+  metacritic: number;
+  pricing: {
+    price: number;
+    onSale: boolean;
+    salePrice: number;
+    salePercent: string;
+  };
+  platforms: {
+    platform: {
+      slug: string;
+    };
+  }[];
 }
 
 export interface Item {
