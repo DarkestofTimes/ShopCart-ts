@@ -8,26 +8,36 @@ interface Request {
   params: Params;
 }
 
-export const DataLoader: LoaderFunction = async ({
-  params,
-}: LoaderFunctionArgs<Request>) => {
-  const data = JSON.parse(localStorage.getItem("data")) || null; //
-  if (data === null) {
-    //
+export const DataLoader: LoaderFunction =
+  (ItemsContext) =>
+  async ({ params }: LoaderFunctionArgs<Request>) => {
     const { page } = params;
+    const { shopItems, setShopItems } = ItemsContext;
+    const localStored = JSON.parse(localStorage.getItem("shopItems")) || null;
+    const data = localStored
+      ? localStored[page!]
+      : shopItems
+      ? shopItems[page!]
+      : null; //
 
-    const politeParams = splitParams(page!);
+    if (!data) {
+      //
 
-    const url = `https://api.rawg.io/api/games?key=${key}${Object.values(
-      politeParams
-    ).join("")}`;
+      const politeParams = splitParams(page!);
 
-    const result = await fetchItem(url);
-    const data = fakePricing(result);
+      const url = `https://api.rawg.io/api/games?key=${key}${Object.values(
+        politeParams
+      ).join("")}`;
 
-    localStorage.setItem("data", JSON.stringify(data)); //
+      const result = await fetchItem(url);
+      const data = fakePricing(result);
+      setShopItems({
+        ...shopItems,
+        [page!]: data,
+      });
+      localStorage.setItem("shopItems", JSON.stringify(shopItems)); //
+      return { data };
+    } //
+
     return { data };
-  } //
-
-  return { data };
-};
+  };

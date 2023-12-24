@@ -1,28 +1,20 @@
-import { DataItem, Items } from "./ContextProvider";
-import { ChangeEvent } from "react";
+import { DataItem } from "./ContextProvider";
 import { Form } from "react-router-dom";
 
 interface sidebarProps {
   data: DataItem;
-  setItems: React.Dispatch<React.SetStateAction<Items[]>>;
 }
 
-export const Sidebar = ({ data, setItems }: sidebarProps) => {
+export const Sidebar = ({ data }: sidebarProps) => {
   return (
     <section className="min-h-[93vh] border-solid border-2 border-black col-span-1 p-4">
-      <Searchbox data={data} setItems={setItems} />
+      <Searchbox data={data} />
     </section>
   );
 };
 
-const Searchbox = ({ data, setItems }: sidebarProps) => {
-  const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
-    const regexPattern = new RegExp(ev.target.value, "i");
-    const filteredItems = data.results.filter((item) => {
-      return regexPattern.test(item.name);
-    });
-    setItems(filteredItems);
-  };
+const Searchbox = ({ data }: sidebarProps) => {
+  const handleChange = () => {};
   return (
     <Form
       method="post"

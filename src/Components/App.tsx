@@ -6,8 +6,10 @@ import { ItemPage } from "./ItemPage";
 import { ErrorPage } from "./ErrorPage";
 import { DataLoader } from "./DataLoader";
 import { ItemLoader } from "./ItemLoader";
+import { useShopItemsContext } from "./ContextProvider";
 
 export const App = () => {
+  const ItemsContext = useShopItemsContext();
   const router = createBrowserRouter([
     {
       path: "/",
@@ -17,7 +19,7 @@ export const App = () => {
     {
       path: "shop/:page/*?",
       element: <Shop />,
-      loader: DataLoader,
+      loader: DataLoader(ItemsContext),
     },
 
     {
