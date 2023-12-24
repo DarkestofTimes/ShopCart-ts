@@ -3,41 +3,25 @@ import { fetchItem } from "./FetchItem";
 import { splitParams } from "./splitParams.ts";
 import { fakePricing } from "./fakePricing.ts";
 import { Params } from "react-router-dom";
+import { ShopProps } from "./ContextProvider";
 
 interface Request {
   params: Params;
-  ItemsContext: {
-    shopItems: Items[];
-    setShopItems: React.Dispatch<React.SetStateAction<Items[]>>;
-  };
-}
-
-export interface Items {
-  results: {
-    id: number;
-    background_image: string;
-    genres: object[];
-    rating: number;
-    ratings_count: number;
-    name: string;
-  }[];
-}
-
-interface ShopProps {
-  shopItems: Items[];
-  setShopItems: React.Dispatch<React.SetStateAction<Items[]>>;
 }
 
 export const DataLoader =
-  (shopItemsContext: ShopProps) =>
+  (shopDataContext: ShopProps) =>
   async ({ params }: Request) => {
     const { page } = params;
-    const { shopItems, setShopItems } = shopItemsContext;
-    const localStored = JSON.parse(localStorage.getItem("shopItems")) || null;
+    if (!page) {
+      return;
+    }
+    const { shopData, setShopData } = shopDataContext;
+    const localStored = JSON.parse(localStorage.getItem("shopData")) || null;
     const data = localStored
-      ? localStored[page!]
-      : shopItems[page!]
-      ? shopItems[page!]
+      ? localStored[page]
+      : shopData[page]
+      ? shopData[page]
       : null; //
 
     if (!data) {
@@ -51,11 +35,11 @@ export const DataLoader =
 
       const result = await fetchItem(url);
       const data = fakePricing(result);
-      setShopItems({
-        ...shopItems,
-        [page!]: data,
+      setShopData({
+        ...shopData,
+        [page]: data,
       });
-      localStorage.setItem("shopItems", JSON.stringify(shopItems)); //
+      localStorage.setItem("shopData", JSON.stringify(shopData)); //
       return { data };
     } //
 

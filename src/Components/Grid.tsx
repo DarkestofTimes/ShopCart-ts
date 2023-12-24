@@ -1,10 +1,10 @@
-import { DataItem, Items } from "./ContextProvider";
+import { DataItem, ShopItems } from "./ContextProvider";
 import { ItemList } from "./ItemList";
 import { Paginator } from "./Paginator";
 /* import { SortSelector } from "./SortSelector"; */
 
 interface GridProps {
-  items: Items[];
+  items: ShopItems[];
   data: DataItem;
   routeValue: string;
 }

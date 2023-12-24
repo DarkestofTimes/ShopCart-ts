@@ -1,13 +1,13 @@
 import { Grid } from "./Grid";
 import { Layout } from "./Layout";
-import { useShopItemsContext } from "./ContextProvider";
+import { useShopDataContext } from "./ContextProvider";
 
 export const Cart = () => {
-  const { shopItems, setShopItems } = useShopItemsContext();
+  const { shopData, setShopData } = useShopDataContext();
   const routeValue = "cart";
   return (
     <Layout>
-      <Grid data={shopItems} setData={setShopItems} routeValue={routeValue} />
+      <Grid data={shopData} setData={setShopData} routeValue={routeValue} />
     </Layout>
   );
 };

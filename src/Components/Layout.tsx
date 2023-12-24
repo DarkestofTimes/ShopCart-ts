@@ -2,11 +2,11 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Sidebar } from "./Sidebar";
 import { ReactNode } from "react";
-import { DataItem, Items } from "./ContextProvider";
+import { DataItem, ShopItems } from "./ContextProvider";
 
 interface layoutProps {
   children: ReactNode;
-  Items: Items[];
+  Items: ShopItems[];
   data: DataItem;
 }
 

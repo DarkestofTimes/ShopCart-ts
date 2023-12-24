@@ -6,10 +6,10 @@ import { ItemPage } from "./ItemPage";
 import { ErrorPage } from "./ErrorPage";
 import { DataLoader } from "./DataLoader";
 import { ItemLoader } from "./ItemLoader";
-import { useShopItemsContext, useItemContext } from "./ContextProvider";
+import { useShopDataContext, useItemContext } from "./ContextProvider";
 
 export const App = () => {
-  const shopItemsContext = useShopItemsContext();
+  const shopDataContext = useShopDataContext();
   const ItemContext = useItemContext();
   const router = createBrowserRouter([
     {
@@ -20,7 +20,7 @@ export const App = () => {
     {
       path: "shop/:page/*?",
       element: <Shop />,
-      loader: DataLoader(shopItemsContext),
+      loader: DataLoader(shopDataContext),
     },
 
     {

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { Items } from "./ContextProvider";
+import { ShopItems } from "./ContextProvider";
 
 interface ItemCardProps {
-  item: Items | undefined;
+  item: ShopItems | undefined;
   routeValue: string;
 }
 

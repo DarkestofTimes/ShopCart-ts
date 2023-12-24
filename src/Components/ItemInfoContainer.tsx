@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { formatDate } from "./formatDate.ts";
 
-interface ItemProp {
+export interface ItemProp {
   item: {
     id: number;
     background_image: string;

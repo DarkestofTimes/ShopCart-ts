@@ -1,15 +1,19 @@
 import { fetchItem } from "./FetchItem";
+import { ItemsContext } from "./ContextProvider";
 import { key } from "../key.ts";
-import { LoaderFunctionArgs, LoaderFunction, Params } from "react-router-dom";
+import { Params } from "react-router-dom";
 
 interface Request {
   params: Params;
 }
 
 export const ItemLoader =
-  (ItemContext) =>
-  async ({ params }: LoaderFunctionArgs<Request>) => {
+  (ItemContext: ItemsContext) =>
+  async ({ params }: Request) => {
     const { itemId } = params;
+    if (!itemId) {
+      return;
+    }
     const { Items, setItems } = ItemContext;
     const localStored = JSON.parse(localStorage.getItem("ItemsObj"));
     const item = localStored
@@ -54,6 +58,6 @@ export const ItemLoader =
       localStorage.setItem("ItemsObj", JSON.stringify(Items));
 
       return { details, screens, additions, trailers, series };
-    } //remove when finish with ItemPage
+    }
     return { details, screens, additions, trailers, series };
   };

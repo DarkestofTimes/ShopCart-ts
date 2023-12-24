@@ -9,18 +9,25 @@ export interface DataItem {
   description: string;
   filters: object;
   price: number;
-  results: Items[];
+  results: ShopItems[];
 }
 
-export interface Items {
-  results: {
-    id: number;
-    background_image: string;
-    genres: object[];
-    rating: number;
-    ratings_count: number;
-    name: string;
-  };
+export interface ShopItems {
+  id: number;
+  background_image: string;
+  genres: object[];
+  rating: number;
+  ratings_count: number;
+  name: string;
+}
+
+export interface Item {
+  [key: string]: object | undefined;
+}
+
+export interface ItemsContext {
+  Items: Item;
+  setItems: React.Dispatch<React.SetStateAction<Item>>;
 }
 
 interface LoadingProps {
@@ -49,37 +56,42 @@ const LoadingContextProvider: React.FC<ContextProps> = ({ children }) => {
   );
 };
 
-interface ShopProps {
-  shopItems: Items[];
-  setShopItems: React.Dispatch<React.SetStateAction<Items[]>>;
+export interface ShopProps {
+  shopData: Item;
+  setShopData: React.Dispatch<React.SetStateAction<Item>>;
 }
 
 const shopContextValue: ShopProps = {
-  shopItems: [],
-  setShopItems: () => {},
+  shopData: {},
+  setShopData: () => {},
 };
 
-const ShopItemsContext = createContext<ShopProps>(shopContextValue);
+const ShopDataContext = createContext<ShopProps>(shopContextValue);
 
-const ShopItemsContextProvider: React.FC<ContextProps> = ({ children }) => {
-  const [shopItems, setShopItems] = useState<Items[]>([]);
+const ShopDataContextProvider: React.FC<ContextProps> = ({ children }) => {
+  const [shopData, setShopData] = useState<Item>({});
 
   const contextItems = {
-    shopItems,
-    setShopItems,
+    shopData,
+    setShopData,
   };
 
   return (
-    <ShopItemsContext.Provider value={contextItems}>
+    <ShopDataContext.Provider value={contextItems}>
       {children}
-    </ShopItemsContext.Provider>
+    </ShopDataContext.Provider>
   );
 };
 
-const ItemContext = createContext<ShopProps>(shopContextValue);
+const ItemsContextValue: ItemsContext = {
+  Items: {},
+  setItems: () => {},
+};
+
+const ItemContext = createContext<ItemsContext>(ItemsContextValue);
 
 const ItemContextProvider: React.FC<ContextProps> = ({ children }) => {
-  const [Items, setItems] = useState<Items[]>([]);
+  const [Items, setItems] = useState<Item>({});
 
   const contextItems = {
     Items,
@@ -94,13 +106,13 @@ const ItemContextProvider: React.FC<ContextProps> = ({ children }) => {
 export const ContextProvider: React.FC<ContextProps> = ({ children }) => {
   return (
     <LoadingContextProvider>
-      <ShopItemsContextProvider>
+      <ShopDataContextProvider>
         <ItemContextProvider>{children}</ItemContextProvider>
-      </ShopItemsContextProvider>
+      </ShopDataContextProvider>
     </LoadingContextProvider>
   );
 };
 
-export const useShopItemsContext = () => useContext(ShopItemsContext);
+export const useShopDataContext = () => useContext(ShopDataContext);
 export const useItemContext = () => useContext(ItemContext);
 export const useLoadingContext = () => useContext(LoadingContext);
