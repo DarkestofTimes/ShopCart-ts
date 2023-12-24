@@ -2,21 +2,41 @@ import { key } from "../key.ts";
 import { fetchItem } from "./FetchItem";
 import { splitParams } from "./splitParams.ts";
 import { fakePricing } from "./fakePricing.ts";
-import { LoaderFunctionArgs, LoaderFunction, Params } from "react-router-dom";
+import { Params } from "react-router-dom";
 
 interface Request {
   params: Params;
+  ItemsContext: {
+    shopItems: Items[];
+    setShopItems: React.Dispatch<React.SetStateAction<Items[]>>;
+  };
 }
 
-export const DataLoader: LoaderFunction =
-  (ItemsContext) =>
-  async ({ params }: LoaderFunctionArgs<Request>) => {
+export interface Items {
+  results: {
+    id: number;
+    background_image: string;
+    genres: object[];
+    rating: number;
+    ratings_count: number;
+    name: string;
+  }[];
+}
+
+interface ShopProps {
+  shopItems: Items[];
+  setShopItems: React.Dispatch<React.SetStateAction<Items[]>>;
+}
+
+export const DataLoader =
+  (shopItemsContext: ShopProps) =>
+  async ({ params }: Request) => {
     const { page } = params;
-    const { shopItems, setShopItems } = ItemsContext;
+    const { shopItems, setShopItems } = shopItemsContext;
     const localStored = JSON.parse(localStorage.getItem("shopItems")) || null;
     const data = localStored
       ? localStored[page!]
-      : shopItems
+      : shopItems[page!]
       ? shopItems[page!]
       : null; //
 

@@ -4,7 +4,7 @@ import { ImgContainer } from "./ImgContainer";
 import { ItemInfoContainer } from "./ItemInfoContainer";
 
 interface LoaderData {
-  item: {
+  details: {
     id: number;
     background_image: string;
     name: string;
@@ -56,10 +56,10 @@ interface imgs {
 
 export const ItemPage = () => {
   const { page }: Params<string> = useParams();
-  const { item, screens, additions, trailers, series } =
+  const { details, screens, additions, trailers, series } =
     useLoaderData() as LoaderData;
   const temp = [
-    { id: 1, image: item.background_image },
+    { id: 1, image: details.background_image },
     ...screens.results,
     ...trailers.results,
   ];
@@ -86,7 +86,7 @@ export const ItemPage = () => {
           <SeriesContainer series={series} page={page} />
           <DLCContainer additions={additions} page={page} />
         </div>
-        <ItemInfoContainer item={item} page={page} />
+        <ItemInfoContainer item={details} page={page} />
       </section>
     </NoSideLayout>
   );
@@ -145,7 +145,6 @@ const SeriesContainer = ({ series, page }: SeriesProps) => {
     linkId: add.id,
     routeValue: page,
   }));
-  console.log(imgs);
   return (
     <>
       {imgs.length > 0 && (

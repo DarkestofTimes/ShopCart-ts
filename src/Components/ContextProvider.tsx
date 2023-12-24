@@ -13,12 +13,14 @@ export interface DataItem {
 }
 
 export interface Items {
-  id: number;
-  background_image: string;
-  genres: object[];
-  rating: number;
-  ratings_count: number;
-  name: string;
+  results: {
+    id: number;
+    background_image: string;
+    genres: object[];
+    rating: number;
+    ratings_count: number;
+    name: string;
+  };
 }
 
 interface LoadingProps {
@@ -74,13 +76,31 @@ const ShopItemsContextProvider: React.FC<ContextProps> = ({ children }) => {
   );
 };
 
+const ItemContext = createContext<ShopProps>(shopContextValue);
+
+const ItemContextProvider: React.FC<ContextProps> = ({ children }) => {
+  const [Items, setItems] = useState<Items[]>([]);
+
+  const contextItems = {
+    Items,
+    setItems,
+  };
+
+  return (
+    <ItemContext.Provider value={contextItems}>{children}</ItemContext.Provider>
+  );
+};
+
 export const ContextProvider: React.FC<ContextProps> = ({ children }) => {
   return (
     <LoadingContextProvider>
-      <ShopItemsContextProvider>{children}</ShopItemsContextProvider>
+      <ShopItemsContextProvider>
+        <ItemContextProvider>{children}</ItemContextProvider>
+      </ShopItemsContextProvider>
     </LoadingContextProvider>
   );
 };
 
 export const useShopItemsContext = () => useContext(ShopItemsContext);
+export const useItemContext = () => useContext(ItemContext);
 export const useLoadingContext = () => useContext(LoadingContext);
