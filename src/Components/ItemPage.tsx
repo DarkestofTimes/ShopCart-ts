@@ -82,7 +82,7 @@ export const ItemPage = () => {
         <div className="col-span-2 h-full flex">
           <ImgContainer imgs={imgs} />
         </div>
-        <div className="grid grid-rows-2">
+        <div className="grid grid-rows-2 gap-2">
           <SeriesContainer series={series} page={page} />
           <DLCContainer additions={additions} page={page} />
         </div>

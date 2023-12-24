@@ -175,7 +175,7 @@ const ImgSlider = ({
   return (
     <section className="absolute h-full w-full flex flex-shrink-0 flex-grow-0 pointer-events-none">
       <button
-        className="left-0  h-full w-[5%] absolute  bold text-3xl text-[#f0f8ff] bg-gradient-to-r from-purple-800/50 pointer-events-auto hover:scale-125 transition-all duration-200"
+        className="left-0  h-full w-[5%] absolute  bold text-3xl text-[#f0f8ff] bg-gradient-to-r from-purple-800/50 pointer-events-auto hover:scale-125 transition-all duration-200 focus:scale-110"
         onClick={slideRight}>
         &lt;
       </button>
@@ -191,7 +191,7 @@ const ImgSlider = ({
         ))}
       </div>
       <button
-        className="right-0  h-full w-[5%] absolute  bold text-3xl text-[#f0f8ff] bg-gradient-to-l from-purple-800/50  pointer-events-auto hover:scale-125 transition-all duration-200"
+        className="right-0  h-full w-[5%] absolute  bold text-3xl text-[#f0f8ff] bg-gradient-to-l from-purple-800/50  pointer-events-auto hover:scale-125 transition-all duration-200 focus:scale-110"
         onClick={slideLeft}>
         &gt;
       </button>
@@ -221,6 +221,6 @@ const SlideBtn = ({
   return (
     <button
       onClick={() => setCurrentImg(index)}
-      className={`w-5 h-5  rounded-full flex place-content-center ${current} ${edges} ${hidden}  pointer-events-auto hover:scale-125 transition-all duration-200`}></button>
+      className={`w-5 h-5  rounded-full flex place-content-center ${current} ${edges} ${hidden}  pointer-events-auto hover:scale-125 transition-all duration-200  focus:scale-110`}></button>
   );
 };

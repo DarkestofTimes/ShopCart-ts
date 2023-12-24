@@ -126,7 +126,7 @@ const DevelopersContainer = ({ item }: ItemProp) => {
           <Link
             to={`/shop/1&developers=${dev.slug}`}
             key={dev.id}
-            className="font-bold rounded border-purple-800 border-2 p-1 h-min bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110">
+            className="font-bold rounded border-purple-800 border-2 p-1 h-min bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 ">
             {dev.name}
           </Link>
         ))}
@@ -213,10 +213,10 @@ const MetacritContainer = ({ item }: ItemProp) => {
     <section className=" place-content-center flex justify-start col-start-1 row-start-2">
       <Link
         to={`/shop/1&metacritic=${item.metacritic},100`}
-        className="text-2xl w-full flex items-center justify-center font-bold rounded border-purple-800 border-2 p-2 whitespace-nowrap bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110">
+        className="text-2xl w-full flex items-center justify-center font-bold rounded border-purple-800 border-2 p-2 whitespace-nowrap bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110">
         Metacritic:{" "}
         <span
-          className={`text-5xl ${colorCode} [text-shadow:_2px_0_0_var(--tw-shadow-color)] transition-colors duration-200`}>
+          className={`text-5xl ${colorCode} [text-shadow:_2px_0_0_var(--tw-shadow-color)] transition-colors duration-200 -translate-y-1`}>
           {item.metacritic}
         </span>
       </Link>
@@ -227,7 +227,7 @@ const MetacritContainer = ({ item }: ItemProp) => {
 const AddToBtnContainer = ({ item }: ItemProp) => {
   return (
     <section className="h-full w-full">
-      <button className="text-4xl grid h-full grid-cols-2 font-bold rounded border-purple-800 border-2 p-4  bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 place-items-center">
+      <button className="text-4xl grid h-full grid-cols-2 font-bold rounded border-purple-800 border-2 p-4  bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 place-items-center">
         <section className="text-[5rem] font-bold w-full ">50$</section>
         Add to Cart
       </button>
@@ -238,7 +238,7 @@ const AddToBtnContainer = ({ item }: ItemProp) => {
 const RemoveFromBtnContainer = ({ item }: ItemProp) => {
   return (
     <section className="">
-      <button className="text-4xl font-bold rounded border-purple-800 border-2 p-4 h-full w-1/2 bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110">
+      <button className="text-4xl font-bold rounded border-purple-800 border-2 p-4 h-full w-1/2 bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110">
         Add to Cart
       </button>
     </section>
@@ -257,7 +257,7 @@ const GenreContainer = ({ item }: ItemProp) => {
           <Link
             to={`/shop/1&genres=${genre.slug}`}
             key={genre.id}
-            className=" font-bold rounded border-purple-800 border-2 p-1 h-min whitespace-nowrap bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110">
+            className=" font-bold rounded border-purple-800 border-2 p-1 h-min whitespace-nowrap bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110">
             {genre.name}
           </Link>
         ))}
@@ -278,7 +278,7 @@ const ReleasedContainer = ({ item }: ItemProp) => {
       ) : (
         <Link
           to={`/shop/1&dates=${item.released},${formatted}`}
-          className="text-xl flex w-full font-bold rounded border-purple-800 border-2 p-1 whitespace-nowrap bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 justify-center">
+          className="text-xl flex w-full font-bold rounded border-purple-800 border-2 p-1 whitespace-nowrap bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 justify-center">
           {item.released}
         </Link>
       )}
@@ -441,7 +441,7 @@ const PlatformsContainer = ({ item }: ItemProp) => {
           <Link
             to={`/shop/1&platforms=${plat.platform.id}`}
             key={plat.platform.id}
-            className="border-purple-800 border-2 p-1 rounded min-w-[3rem] transition-all duration-200 hover:scale-125">
+            className="border-purple-800 border-2 p-1 rounded min-w-[3rem] transition-all duration-200 hover:scale-125 focus:scale-125">
             {svgPaths[plat.platform.slug]}
           </Link>
         ))}
