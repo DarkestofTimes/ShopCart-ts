@@ -1,5 +1,5 @@
 import { ItemCard } from "./ItemCard";
-import { ShopItem } from "./ContextProvider";
+import { ShopItem } from "./Context/ContextProvider";
 
 interface ItemListProps {
   items: ShopItem[];

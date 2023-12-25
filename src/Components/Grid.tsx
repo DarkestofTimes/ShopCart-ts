@@ -1,4 +1,4 @@
-import { DataItem, ShopItem } from "./ContextProvider";
+import { DataItem, ShopItem } from "./Context/ContextProvider";
 import { ItemList } from "./ItemList";
 import { Paginator } from "./Paginator";
 /* import { SortSelector } from "./SortSelector"; */

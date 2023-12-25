@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { DataItem } from "./ContextProvider";
+import { DataItem } from "./Context/ContextProvider.tsx";
 import { useParams } from "react-router-dom";
 import { splitParams } from "../Functions/splitParams.ts";
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, ChangeEvent } from "react";
-import { DataItem } from "./ContextProvider";
+import { DataItem } from "./Context/ContextProvider";
 
 interface SortProps {
   data: DataItem[];

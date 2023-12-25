@@ -1,6 +1,6 @@
 import { Grid } from "./Grid";
 import { Layout } from "./Layout";
-import { useShopDataContext } from "./ContextProvider";
+import { useShopDataContext } from "./Context/ContextProvider";
 
 export const Cart = () => {
   const { shopData, setShopData } = useShopDataContext();

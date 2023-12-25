@@ -9,9 +9,9 @@ import { Shop } from "./Shop";
 import { Cart } from "./Cart";
 import { ItemPage } from "./ItemPage";
 import { ErrorPage } from "./ErrorPage";
-import { DataLoader } from "../Functions/DataLoader";
-import { ItemLoader } from "../Functions/ItemLoader";
-import { useShopDataContext, useItemContext } from "./ContextProvider";
+import { DataLoader } from "../Functions/Loaders/DataLoader";
+import { ItemLoader } from "../Functions/Loaders/ItemLoader";
+import { useShopDataContext, useItemContext } from "./Context/ContextProvider";
 
 const AppLayout = () => (
   <>

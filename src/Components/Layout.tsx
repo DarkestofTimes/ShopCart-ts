@@ -2,7 +2,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Sidebar } from "./Sidebar";
 import { ReactNode } from "react";
-import { DataItem, ShopItem } from "./ContextProvider";
+import { DataItem, ShopItem } from "./Context/ContextProvider";
 
 interface layoutProps {
   children: ReactNode;

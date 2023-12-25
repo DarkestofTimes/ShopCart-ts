@@ -1,7 +1,7 @@
 import { platformsSVG } from "./platformsSVG.tsx";
 import { Link } from "react-router-dom";
 import { formatDate } from "../Functions/formatDate.ts";
-import { usePricingContext } from "./ContextProvider";
+import { usePricingContext } from "./Context/ContextProvider.tsx";
 
 export interface ItemProp {
   details: {

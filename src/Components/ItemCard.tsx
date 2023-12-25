@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ShopItem, usePricingContext } from "./ContextProvider";
+import { ShopItem, usePricingContext } from "./Context/ContextProvider.tsx";
 import { platformsSVG } from "./platformsSVG.tsx";
 
 interface ItemCardProps {
