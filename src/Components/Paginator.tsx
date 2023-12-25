@@ -22,7 +22,6 @@ export const Paginator = ({ data, routeValue }: PaginatorProps) => {
   );
   const path = otherParams.map((key) => politeParams[key]).join("");
 
-  console.log(data);
   const pageNumber = Number(politeParams.pageIndex.slice(6));
   const numberOfPages = Math.ceil(data.count / 20);
   const pageNumbersArray = Array.from(
