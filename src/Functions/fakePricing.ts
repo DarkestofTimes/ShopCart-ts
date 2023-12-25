@@ -4,7 +4,7 @@ interface item {
     price: number;
     onSale: boolean;
     salePrice: number | null;
-    SalePercent: string | null;
+    salePercent: string | null;
   };
 }
 
@@ -53,7 +53,7 @@ export const fakePricing = (data: data) => {
     const price = makePrice(item.released);
     const onSale = makeOnSale();
     const salePrice = makeSalePrice(price, onSale);
-    const SalePercent = calcPercent(price, salePrice);
+    const salePercent = calcPercent(price, salePrice);
 
     return {
       ...item,
@@ -61,7 +61,7 @@ export const fakePricing = (data: data) => {
         price,
         onSale,
         salePrice,
-        SalePercent,
+        salePercent,
       },
     };
   });

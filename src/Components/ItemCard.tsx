@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ShopItem } from "./ContextProvider";
+import { ShopItem, usePricingContext } from "./ContextProvider";
 import { platformsSVG } from "./platformsSVG.tsx";
 
 interface ItemCardProps {
@@ -12,15 +12,26 @@ interface ItemProp {
 }
 
 export const ItemCard = ({ item, routeValue }: ItemCardProps) => {
+  const { setPricing } = usePricingContext();
   if (!item) {
     return;
   }
-
+  const handleClick = () => {
+    setPricing({
+      id: item.id,
+      price: item.pricing.price,
+      salePrice: item.pricing.salePrice,
+      onSale: item.pricing.onSale,
+      salePercent: item.pricing.salePercent,
+    });
+  };
   return (
     <Link
       to={`/items/${routeValue}/${item.id}`}
-      className="overflow-hidden h-min w-min hover:scale-110 focus:scale-110 transition-all duration-200 ">
-      <div className="border-solid border-2 border-purple-600 w-[max(220px,15vw)]  aspect-square ">
+      className=" h-min w-min hover:scale-110 focus:scale-110 transition-all duration-200 ">
+      <div
+        className="border-solid border-2 border-purple-600 rounded w-[max(220px,15vw)]  aspect-square hover:border-[#f0f8ff] focus:border-[#f0f8ff]"
+        onClick={handleClick}>
         <img
           src={item.background_image}
           alt={item.name}
@@ -70,7 +81,9 @@ const PlatformContainer = ({ item }: ItemProp) => {
   return (
     <div className="flex flex-wrap gap-1 justify-start h-min pt-1">
       {item.platforms.map((plat) => (
-        <span className="border-purple-800 border-2 p-1 rounded min-w-[2rem]">
+        <span
+          key={plat.platform.id}
+          className="border-purple-800 border-2 p-1 rounded min-w-[2rem]">
           {platformsSVG[plat.platform.slug]}
         </span>
       ))}

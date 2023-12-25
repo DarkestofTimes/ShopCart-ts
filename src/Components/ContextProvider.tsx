@@ -29,6 +29,7 @@ export interface ShopItem {
   platforms: {
     platform: {
       slug: string;
+      id: number;
     };
   }[];
 }
@@ -95,6 +96,53 @@ const ShopDataContextProvider: React.FC<ContextProps> = ({ children }) => {
   );
 };
 
+interface pricing {
+  id: number;
+  price: number;
+  onSale: boolean;
+  salePrice: number;
+  salePercent: string;
+}
+
+export interface PricingContext {
+  pricing: pricing;
+  setPricing: React.Dispatch<React.SetStateAction<pricing>>;
+}
+
+const PricingContextValue: PricingContext = {
+  pricing: {
+    id: 0,
+    price: 0,
+    onSale: false,
+    salePrice: 0,
+    salePercent: "",
+  },
+  setPricing: () => {},
+};
+
+const PricingContext = createContext<PricingContext>(PricingContextValue);
+
+const PricingContextProvider: React.FC<ContextProps> = ({ children }) => {
+  const [pricing, setPricing] = useState<pricing>({
+    id: 0,
+    price: 0,
+    onSale: false,
+    salePrice: 0,
+    salePercent: "",
+  });
+
+  const contextItems = {
+    pricing,
+    setPricing,
+  };
+
+  return (
+    <PricingContext.Provider value={contextItems}>
+      {children}
+    </PricingContext.Provider>
+  );
+};
+
 const ItemsContextValue: ItemsContext = {
   Items: {},
   setItems: () => {},
@@ -119,12 +167,15 @@ export const ContextProvider: React.FC<ContextProps> = ({ children }) => {
   return (
     <LoadingContextProvider>
       <ShopDataContextProvider>
-        <ItemContextProvider>{children}</ItemContextProvider>
+        <PricingContextProvider>
+          <ItemContextProvider>{children}</ItemContextProvider>
+        </PricingContextProvider>
       </ShopDataContextProvider>
     </LoadingContextProvider>
   );
 };
 
 export const useShopDataContext = () => useContext(ShopDataContext);
+export const usePricingContext = () => useContext(PricingContext);
 export const useItemContext = () => useContext(ItemContext);
 export const useLoadingContext = () => useContext(LoadingContext);

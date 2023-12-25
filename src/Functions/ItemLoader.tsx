@@ -1,5 +1,5 @@
-import { fetchItem } from "./FetchItem";
-import { ItemsContext } from "./ContextProvider";
+import { fetchItem } from "./FetchItem.tsx";
+import { ItemsContext } from "../Components/ContextProvider.tsx";
 import { key } from "../key.ts";
 import { Params } from "react-router-dom";
 

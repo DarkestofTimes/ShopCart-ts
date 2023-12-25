@@ -54,6 +54,28 @@ interface imgs {
   };
 }
 
+interface DLCProps {
+  additions: {
+    results: {
+      id: number;
+      background_image: string;
+      name: string;
+    }[];
+  };
+  page?: string;
+}
+
+interface SeriesProps {
+  series: {
+    results: {
+      id: number;
+      background_image: string;
+      name: string;
+    }[];
+  };
+  page?: string;
+}
+
 export const ItemPage = () => {
   const { page }: Params<string> = useParams();
   const { details, screens, additions, trailers, series } =
@@ -63,6 +85,7 @@ export const ItemPage = () => {
     ...screens.results,
     ...trailers.results,
   ];
+
   const imgs: imgs[] = temp.map((t) => ({
     id: t.id,
     image: t.image ? t.image : undefined,
@@ -86,22 +109,11 @@ export const ItemPage = () => {
           <SeriesContainer series={series} page={page} />
           <DLCContainer additions={additions} page={page} />
         </div>
-        <ItemInfoContainer item={details} page={page} />
+        <ItemInfoContainer details={details} page={page} />
       </section>
     </NoSideLayout>
   );
 };
-
-interface DLCProps {
-  additions: {
-    results: {
-      id: number;
-      background_image: string;
-      name: string;
-    }[];
-  };
-  page?: string;
-}
 
 const DLCContainer = ({ additions, page }: DLCProps) => {
   const imgs = additions.results.map((add) => ({
@@ -125,17 +137,6 @@ const DLCContainer = ({ additions, page }: DLCProps) => {
     </>
   );
 };
-
-interface SeriesProps {
-  series: {
-    results: {
-      id: number;
-      background_image: string;
-      name: string;
-    }[];
-  };
-  page?: string;
-}
 
 const SeriesContainer = ({ series, page }: SeriesProps) => {
   const imgs = series.results.map((add) => ({

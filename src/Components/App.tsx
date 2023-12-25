@@ -4,8 +4,8 @@ import { Shop } from "./Shop";
 import { Cart } from "./Cart";
 import { ItemPage } from "./ItemPage";
 import { ErrorPage } from "./ErrorPage";
-import { DataLoader } from "./DataLoader";
-import { ItemLoader } from "./ItemLoader";
+import { DataLoader } from "../Functions/DataLoader";
+import { ItemLoader } from "../Functions/ItemLoader";
 import { useShopDataContext, useItemContext } from "./ContextProvider";
 
 export const App = () => {

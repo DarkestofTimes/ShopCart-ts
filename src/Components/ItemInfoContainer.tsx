@@ -1,9 +1,10 @@
 import { platformsSVG } from "./platformsSVG.tsx";
 import { Link } from "react-router-dom";
-import { formatDate } from "./formatDate.ts";
+import { formatDate } from "../Functions/formatDate.ts";
+import { usePricingContext } from "./ContextProvider";
 
 export interface ItemProp {
-  item: {
+  details: {
     id: number;
     background_image: string;
     name: string;
@@ -42,61 +43,81 @@ export interface ItemProp {
     tba?: boolean;
   };
   page?: string;
+  pricing?: pricing;
 }
 
-export const ItemInfoContainer = ({ item, page }: ItemProp) => {
+interface pricingProp {
+  pricing: {
+    id: number;
+    price: number;
+    onSale: boolean;
+    salePrice: number;
+    salePercent: string;
+  };
+}
+
+interface pricing {
+  id: number;
+  price: number;
+  onSale: boolean;
+  salePrice: number;
+  salePercent: string;
+}
+
+export const ItemInfoContainer = ({ details, page }: ItemProp) => {
   return (
     <section className="col-span-3 grid grid-rows-[min-content] grid-cols-3  w-full">
-      <MetaContainer item={item} page={page} />
+      <MetaContainer details={details} page={page} />
       <div className="row-span-2  col-start-3 grid h-full pl-3">
-        <DevelopersContainer item={item} />
-        <GenreContainer item={item} />
+        <DevelopersContainer details={details} />
+        <GenreContainer details={details} />
       </div>
-      <DescContainer item={item} />
+      <DescContainer details={details} />
     </section>
   );
 };
 
-const MetaContainer = ({ item, page }: ItemProp) => {
+const MetaContainer = ({ details, page }: ItemProp) => {
+  const { pricing } = usePricingContext();
   return (
     <section className="col-span-2 row-span-2  grid  grid-cols-3 grid-rows-3 items-center gap-3 max-h-[35vh]">
-      <ReleasedContainer item={item} />
-      <ESRBContainer item={item} />
+      <ReleasedContainer details={details} />
+      <ESRBContainer details={details} />
       <div className="grid row-span-3 grid-rows-2 justify-start grid-cols-1  h-full pl-3">
         <div className=" w-full pt-2">
           {page === "shop" ? (
-            <AddToBtnContainer item={item} />
+            <AddToBtnContainer pricing={pricing} />
           ) : (
-            <RemoveFromBtnContainer item={item} />
+            <RemoveFromBtnContainer details={details} pricing={pricing} />
           )}
         </div>
-        <PlatformsContainer item={item} />
+        <PlatformsContainer details={details} />
       </div>
-      <MetacritContainer item={item} />
-      <RatingContainer item={item} />
-      <RatingBar item={item} />
+      <MetacritContainer details={details} />
+      <RatingContainer details={details} />
+      <RatingBar details={details} />
     </section>
   );
 };
 
-const ESRBContainer = ({ item }: ItemProp) => {
-  if (!item.esrb_rating) {
+const ESRBContainer = ({ details }: ItemProp) => {
+  if (!details.esrb_rating) {
     return;
   }
   const colorCode =
-    item.esrb_rating.id == 4
+    details.esrb_rating.id == 4
       ? "text-[#8e000b]"
-      : item.esrb_rating.id == 3
+      : details.esrb_rating.id == 3
       ? "text-blue-800"
-      : item.esrb_rating.id == 2
+      : details.esrb_rating.id == 2
       ? "text-[#a66d00]"
-      : item.esrb_rating.id == 1
+      : details.esrb_rating.id == 1
       ? "text-[#00a562]"
       : "text-black";
 
   return (
     <section className="flex justify-center">
-      {item.esrb_rating ? (
+      {details.esrb_rating ? (
         <h2 className={`text-3xl font-bold `}>
           ESRB:{" "}
           <a
@@ -104,7 +125,7 @@ const ESRBContainer = ({ item }: ItemProp) => {
             target="_blank"
             rel="noreferrer"
             className={`${colorCode} rounded border-purple-800 border-2 p-1`}>
-            {item.esrb_rating.name}
+            {details.esrb_rating.name}
           </a>
         </h2>
       ) : (
@@ -114,15 +135,15 @@ const ESRBContainer = ({ item }: ItemProp) => {
   );
 };
 
-const DevelopersContainer = ({ item }: ItemProp) => {
-  if (!item.developers) {
+const DevelopersContainer = ({ details }: ItemProp) => {
+  if (!details.developers) {
     return;
   }
   return (
     <section className=" h-min">
       <h3 className="font-bold pb-2">By:</h3>
       <div className="flex gap-2 flex-wrap">
-        {item.developers.map((dev) => (
+        {details.developers.map((dev) => (
           <Link
             to={`/shop/1&developers=${dev.slug}`}
             key={dev.id}
@@ -135,39 +156,40 @@ const DevelopersContainer = ({ item }: ItemProp) => {
   );
 };
 
-const RatingContainer = ({ item }: ItemProp) => {
-  if (!item.rating) {
+const RatingContainer = ({ details }: ItemProp) => {
+  if (!details.rating) {
     return;
   }
   const colorCode =
-    item.rating < 4
+    details.rating < 4
       ? "text-[#a66d00]"
-      : item.rating < 3
+      : details.rating < 3
       ? "text-[#8e000b]"
-      : item.rating < 1
+      : details.rating < 1
       ? "text-black"
       : "text-[#00a562]";
   return (
     <section className="grid grid-rows-2 row-start-2 justify-items-center">
       <h3 className="text-3xl  p-1 whitespace-nowrap ">
-        Score: <span className={`font-bold ${colorCode}`}>{item.rating}</span>
+        Score:{" "}
+        <span className={`font-bold ${colorCode}`}>{details.rating}</span>
       </h3>
       <h4 className="text-2xl  p-1 whitespace-nowrap">
-        Votes: <span className="font-bold">{item.ratings_count}</span>
+        Votes: <span className="font-bold">{details.ratings_count}</span>
       </h4>
     </section>
   );
 };
 
-const RatingBar = ({ item }: ItemProp) => {
-  if (!item.ratings) {
+const RatingBar = ({ details }: ItemProp) => {
+  if (!details.ratings) {
     return;
   }
   return (
     <section className="grid grid-rows-2 col-span-2 h-full w-full items-end">
       <h3 className="h-min pb-3 font-bold">Score break down:</h3>
       <div className="flex flex-row-reverse rounded border-purple-800 border-2 overflow-hidden h-min w-full">
-        {item.ratings.map((rating) => (
+        {details.ratings.map((rating) => (
           <span
             key={rating.id}
             className="h-12 flex items-center justify-center
@@ -197,63 +219,78 @@ const RatingBar = ({ item }: ItemProp) => {
   );
 };
 
-const MetacritContainer = ({ item }: ItemProp) => {
-  if (!item.metacritic) {
+const MetacritContainer = ({ details }: ItemProp) => {
+  if (!details.metacritic) {
     return;
   }
   const colorCode =
-    item.metacritic < 75
+    details.metacritic < 75
       ? "text-[#a66d00]"
-      : item.metacritic < 50
+      : details.metacritic < 50
       ? "text-[#8e000b]"
-      : item.metacritic < 20
+      : details.metacritic < 20
       ? "text-black"
       : "text-[#00a562]";
   return (
     <section className=" place-content-center flex justify-start col-start-1 row-start-2">
       <Link
-        to={`/shop/1&metacritic=${item.metacritic},100`}
+        to={`/shop/1&metacritic=${details.metacritic},100`}
         className="text-2xl w-full flex items-center justify-center font-bold rounded border-purple-800 border-2 p-2 whitespace-nowrap bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110">
         Metacritic:{" "}
         <span
           className={`text-5xl ${colorCode} [text-shadow:_2px_0_0_var(--tw-shadow-color)] transition-colors duration-200 -translate-y-1`}>
-          {item.metacritic}
+          {details.metacritic}
         </span>
       </Link>
     </section>
   );
 };
 
-const AddToBtnContainer = ({ item }: ItemProp) => {
+const AddToBtnContainer = ({ pricing }: pricingProp) => {
+  if (!pricing) {
+    return;
+  }
   return (
     <section className="h-full w-full">
       <button className="text-4xl grid h-full grid-cols-2 font-bold rounded border-purple-800 border-2 p-4  bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 place-items-center">
-        <section className="text-[5rem] font-bold w-full ">50$</section>
+        {pricing.onSale ? (
+          <div className="grid grid-cols-2 grid-rows-2 place-items-center h-full w-full">
+            <span className="col-start-1 text-2xl font-normal">
+              -{pricing.salePercent}
+            </span>
+            <span className="text-base pr-2">
+              <s>{pricing.price}$</s>
+            </span>
+            <span className="row-span-2 w-full pl-2">{pricing.salePrice}$</span>
+          </div>
+        ) : (
+          <span className="text-4xl font-bold w-full ">{pricing.price}$</span>
+        )}
         Add to Cart
       </button>
     </section>
   );
 };
 
-const RemoveFromBtnContainer = ({ item }: ItemProp) => {
+const RemoveFromBtnContainer = ({ details }: ItemProp) => {
   return (
     <section className="">
       <button className="text-4xl font-bold rounded border-purple-800 border-2 p-4 h-full w-1/2 bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110">
-        Add to Cart
+        Remove From Cart
       </button>
     </section>
   );
 };
 
-const GenreContainer = ({ item }: ItemProp) => {
-  if (!item.genres) {
+const GenreContainer = ({ details }: ItemProp) => {
+  if (!details.genres) {
     return;
   }
   return (
     <section className=" justify-start ">
       <h3 className="font-bold pb-2">Genres: </h3>
       <div className="flex gap-2 flex-wrap">
-        {item.genres.map((genre) => (
+        {details.genres.map((genre) => (
           <Link
             to={`/shop/1&genres=${genre.slug}`}
             key={genre.id}
@@ -266,28 +303,28 @@ const GenreContainer = ({ item }: ItemProp) => {
   );
 };
 
-const ReleasedContainer = ({ item }: ItemProp) => {
+const ReleasedContainer = ({ details }: ItemProp) => {
   const currentDate = new Date();
   const formatted = formatDate(currentDate);
 
   return (
     <section className="h-full w-full">
       <h3 className="font-bold pb-2"> Release Date: </h3>
-      {item.tba ? (
+      {details.tba ? (
         "TBA"
       ) : (
         <Link
-          to={`/shop/1&dates=${item.released},${formatted}`}
+          to={`/shop/1&dates=${details.released},${formatted}`}
           className="text-xl flex w-full font-bold rounded border-purple-800 border-2 p-1 whitespace-nowrap bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 justify-center">
-          {item.released}
+          {details.released}
         </Link>
       )}
     </section>
   );
 };
 
-const PlatformsContainer = ({ item }: ItemProp) => {
-  if (!item.platforms) {
+const PlatformsContainer = ({ details }: ItemProp) => {
+  if (!details.platforms) {
     return;
   }
 
@@ -295,7 +332,7 @@ const PlatformsContainer = ({ item }: ItemProp) => {
     <section className="grid grid-rows-[min-content] h-full justify-start">
       <h3 className="font-bold pb-2">Available on: </h3>
       <div className="flex flex-wrap gap-1 justify-start h-min">
-        {item.platforms.map((plat) => (
+        {details.platforms.map((plat) => (
           <Link
             to={`/shop/1&platforms=${plat.platform.id}`}
             key={plat.platform.id}
@@ -308,7 +345,7 @@ const PlatformsContainer = ({ item }: ItemProp) => {
   );
 };
 
-const DescContainer = ({ item }: ItemProp) => {
+const DescContainer = ({ details }: ItemProp) => {
   const replaceSymbols = (text: string) => {
     return text
       .replace(/&amp;/g, "&")
@@ -329,18 +366,18 @@ const DescContainer = ({ item }: ItemProp) => {
       .replace(/&#39;/g, "'")
       .replace(/<br\s*\/?>/g, "\n");
   };
-  if (!item.description) {
+  if (!details.description) {
     return;
   }
 
   const regex = /<p>(.*?)<\/p>/gs;
-  const matches = item.description.match(regex);
+  const matches = details.description.match(regex);
   const paragraphs = matches
     ? matches.map((match) => replaceSymbols(match.replace(/<\/?p>/g, "")))
     : [];
   return (
     <section className="col-span-3 ">
-      <h1 className="font-bold text-5xl p-4">{item.name}</h1>
+      <h1 className="font-bold text-5xl p-4">{details.name}</h1>
       {paragraphs.map((par, index) => (
         <p key={index} className="p-6 text-2xl whitespace-pre-line">
           {par}
