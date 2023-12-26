@@ -3,25 +3,31 @@ import { fetchItem } from "../FetchItem.tsx";
 import { splitParams } from "../splitParams.ts";
 import { fakePricing } from "../fakePricing.ts";
 import { Params } from "react-router-dom";
-import { ShopProps } from "../../Components/Context/ShopDataContext.tsx";
+import { Item } from "../../Components/Context/ShopDataContext.tsx";
 
 interface Request {
   params: Params;
 }
 
+interface dataProps {
+  shopData: {
+    current: Item;
+  };
+}
+
 export const DataLoader =
-  (shopDataContext: ShopProps) =>
+  ({ shopData }: dataProps) =>
   async ({ params }: Request) => {
     const { page } = params;
     if (!page) {
       return;
     }
-    const { shopData, setShopData } = shopDataContext;
+
     const localStored = JSON.parse(localStorage.getItem("shopData")) || null;
     const data = localStored
       ? localStored[page]
-      : shopData[page]
-      ? shopData[page]
+      : shopData.current
+      ? shopData.current[page]
       : null; //
 
     if (!data) {
@@ -35,13 +41,13 @@ export const DataLoader =
 
       const result = await fetchItem(url);
       const data = fakePricing(result);
-      setShopData({
-        ...shopData,
+      shopData.current = {
+        ...shopData.current,
         [page]: data,
-      });
-      localStorage.setItem("shopData", JSON.stringify(shopData)); //
+      };
+      localStorage.setItem("shopData", JSON.stringify(shopData.current));
       return { data };
-    } //
+    }
 
     return { data };
   };

@@ -1,5 +1,5 @@
 import { useContext, ReactNode } from "react";
-import { LoadingContext, LoadingContextProvider } from "./LoadingContext";
+
 import { ShopDataContext, ShopDataContextProvider } from "./ShopDataContext";
 import { PricingContext, PricingContextProvider } from "./PricingContext";
 import { ItemContext, ItemContextProvider } from "./ItemContext";
@@ -40,17 +40,14 @@ export interface ShopItem {
 
 export const ContextProvider: React.FC<ContextProps> = ({ children }) => {
   return (
-    <LoadingContextProvider>
-      <ShopDataContextProvider>
-        <PricingContextProvider>
-          <ItemContextProvider>{children}</ItemContextProvider>
-        </PricingContextProvider>
-      </ShopDataContextProvider>
-    </LoadingContextProvider>
+    <ShopDataContextProvider>
+      <PricingContextProvider>
+        <ItemContextProvider>{children}</ItemContextProvider>
+      </PricingContextProvider>
+    </ShopDataContextProvider>
   );
 };
 
 export const useShopDataContext = () => useContext(ShopDataContext);
 export const usePricingContext = () => useContext(PricingContext);
 export const useItemContext = () => useContext(ItemContext);
-export const useLoadingContext = () => useContext(LoadingContext);

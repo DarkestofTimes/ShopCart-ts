@@ -21,8 +21,8 @@ const AppLayout = () => (
 );
 
 export const App = () => {
-  const shopDataContext = useShopDataContext();
-  const ItemContext = useItemContext();
+  const shopData = useShopDataContext();
+  const Items = useItemContext();
   const router = createBrowserRouter([
     {
       path: "/",
@@ -36,7 +36,7 @@ export const App = () => {
         {
           path: "shop/:page/*?",
           element: <Shop />,
-          loader: DataLoader(shopDataContext),
+          loader: DataLoader({ shopData }),
         },
 
         {
@@ -46,7 +46,7 @@ export const App = () => {
         {
           path: "items/:page/:itemId",
           element: <ItemPage />,
-          loader: ItemLoader(ItemContext),
+          loader: ItemLoader({ Items }),
         },
       ],
     },

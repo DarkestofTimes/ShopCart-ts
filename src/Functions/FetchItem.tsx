@@ -6,6 +6,7 @@ export const fetchItem = async (url: string) => {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
+
     const retrievedData = await response.json();
     console.log(retrievedData);
     return retrievedData;

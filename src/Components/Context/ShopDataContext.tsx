@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useRef, ReactNode } from "react";
 
 interface ContextProps {
   children: ReactNode;
@@ -8,26 +8,23 @@ export interface Item {
   [key: string]: object | undefined;
 }
 
-export interface ShopProps {
-  shopData: Item;
-  setShopData: React.Dispatch<React.SetStateAction<Item>>;
+export interface ShopContext {
+  current: Item;
 }
 
-const shopContextValue: ShopProps = {
-  shopData: {},
-  setShopData: () => {},
+const shopContextValue: ShopContext = {
+  current: {},
 };
 
-export const ShopDataContext = createContext<ShopProps>(shopContextValue);
+export const ShopDataContext = createContext<ShopContext>(shopContextValue);
 
 export const ShopDataContextProvider: React.FC<ContextProps> = ({
   children,
 }) => {
-  const [shopData, setShopData] = useState<Item>({});
+  const shopData = useRef<Item>({});
 
-  const contextItems = {
-    shopData,
-    setShopData,
+  const contextItems: ShopContext = {
+    current: shopData.current,
   };
 
   return (

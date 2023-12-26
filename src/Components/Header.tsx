@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import { ProgressBar } from "./ProgressBar";
 
 export const Header = () => {
   return (
-    <header className="relative top-0 col-span-4 row-span-1">
+    <header className="fixed top-0 w-full z-10 bg-[#000000ee] ">
       <nav>
         <ul className="grid grid-cols-4">
           <li>
@@ -21,6 +22,7 @@ export const Header = () => {
           </li>
         </ul>
       </nav>
+      <ProgressBar />
     </header>
   );
 };
