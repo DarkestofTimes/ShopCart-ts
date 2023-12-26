@@ -36,7 +36,7 @@ export const SortSelector = ({ routeValue }: SortProps) => {
   };
   return (
     <div
-      className="col-span-full flex justify-self-end mr-8 w-min flex-nowrap border-2 border-purple-600 rounded p-2 whitespace-nowrap gap-2 cursor-pointer hover:scale-110 focus:scale-110 transition-all duration-200 hover:border-[#f0f8ff] focus:border-[#f0f8ff] hover:text-purple-600 focus:text-purple-600 relative z-10"
+      className="col-span-full flex justify-self-end mr-8 w-min flex-nowrap outline outline-purple-600 rounded p-2 whitespace-nowrap gap-2 cursor-pointer transition-all duration-200 hover:outline-[#f0f8ff] focus:outline-[#f0f8ff] hover:text-purple-600 focus:text-purple-600 relative z-10 mb-2"
       onClick={handleExpand}>
       <span className="">Sort By:</span>
       <span className="font-bold">{selected}</span>
@@ -70,7 +70,7 @@ const Select = ({ routeValue, path, setSelected, setExpand }: SelectProps) => {
 
   return (
     <div
-      className="absolute w-[102%] h-min top-0 left-0 border-2 border-purple-600 rounded p-2 flex flex-col bg-[#0f0f0f] hover:border-[#f0f8ff] focus:border-[#f0f8ff]"
+      className={`absolute w-[102%] h-min outline top-0 left-0 bg-[#0f0f0f] rounded flex flex-col  overflow-hidden transition-all duration-200 outline-purple-600  hover:outline-[#f0f8ff] focus:outline-[#f0f8ff]`}
       ref={divRef}>
       {values.map((value) => (
         <Option
@@ -108,7 +108,7 @@ const Option = ({
   return (
     <Link
       to={`/${routeValue}/1&ordering=${ordering[value]}` + path}
-      className="relative hover:text-[#f0f8ff] focus:text-[#f0f8ff] p-1"
+      className="relative hover:text-[#f0f8ff] focus:text-[#f0f8ff] pr-2 pl-2 p-1"
       onClick={handleSelection}>
       {value}
     </Link>

@@ -7,7 +7,7 @@ export const Shop = () => {
   const { data } = useLoaderData() as { data: DataItem };
   const routeValue = "shop";
   return (
-    <Layout Items={data.results} data={data}>
+    <Layout>
       <Grid data={data} items={data.results} routeValue={routeValue} />
     </Layout>
   );

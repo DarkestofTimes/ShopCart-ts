@@ -1,31 +1,24 @@
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { Sidebar } from "./Sidebar";
+import { Sidebar } from "./Sidebar/Sidebar";
 import { ReactNode } from "react";
-import { DataItem, ShopItem } from "./Context/ContextProvider";
 
 interface layoutProps {
   children: ReactNode;
-  Items: ShopItem[];
-  data: DataItem;
 }
 
-interface noSideLayoutProps {
-  children: ReactNode;
-}
-
-export const Layout = ({ children, data }: layoutProps) => {
+export const Layout = ({ children }: layoutProps) => {
   return (
     <main className="grid grid-cols-4">
       <Header />
-      <Sidebar data={data} />
+      <Sidebar />
       {children}
       <Footer />
     </main>
   );
 };
 
-export const NoSideLayout = ({ children }: noSideLayoutProps) => {
+export const NoSideLayout = ({ children }: layoutProps) => {
   return (
     <main>
       <Header />

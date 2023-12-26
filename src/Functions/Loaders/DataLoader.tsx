@@ -28,13 +28,10 @@ export const DataLoader =
       ? localStored[page]
       : shopData.current
       ? shopData.current[page]
-      : null; //
+      : null;
 
     if (!data) {
-      //
-
       const politeParams = splitParams(page!);
-
       const url = `https://api.rawg.io/api/games?key=${key}${Object.values(
         politeParams
       ).join("")}`;

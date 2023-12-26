@@ -15,48 +15,44 @@ interface categoriesProps {
 
 export const SidebarLoader =
   ({ categories }: categoriesProps) =>
-  async ({ params }) => {
+  async ({ params }: Request) => {
     const localStored = JSON.parse(localStorage.getItem("categories"));
 
+    const catKeys = !params.page ? "firstKey" : params.page;
+
     const item = localStored
-      ? localStored
+      ? localStored[catKeys]
       : categories.current
-      ? categories.current
+      ? categories.current[catKeys]
       : null;
-    const details = item ? item.details : null;
-    const screens = item ? item.screens : null;
-    const additions = item ? item.additions : null;
-    const trailers = item ? item.trailers : null;
-    const series = item ? item.series : null;
+    const genres = item ? item.genres : null;
+    const platforms = item ? item.platforms : null;
+    const tags = item ? item.tags : null;
+
     if (!item) {
       const urls = {
-        details: `https://api.rawg.io/api/games/${itemId}?key=${key}`,
-        screenshots: `https://api.rawg.io/api/games/${itemId}/screenshots?key=${key}`,
-        series: `https://api.rawg.io/api/games/${itemId}/game-series?key=${key}`,
-        additions: `https://api.rawg.io/api/games/${itemId}/additions?key=${key}`,
-        trailers: `https://api.rawg.io/api/games/${itemId}/movies?key=${key}`,
+        genres: `https://api.rawg.io/api/genres?key=${key}&page=1&page_size=40`,
+        platforms: `https://api.rawg.io/api/platforms?key=${key}&page=1`,
+        tags: `https://api.rawg.io/api/tags?key=${key}&page=1&page_size=40`,
       };
 
-      const [details, screens, additions, trailers, series] = await Promise.all(
-        [
-          fetchItem(urls.details),
-          fetchItem(urls.screenshots),
-          fetchItem(urls.additions),
-          fetchItem(urls.trailers),
-          fetchItem(urls.series),
-        ]
-      );
+      const [genres, platforms, tags] = await Promise.all([
+        fetchItem(urls.genres),
+        fetchItem(urls.platforms),
+        fetchItem(urls.tags),
+      ]);
 
       categories.current = {
-        details,
-        screens,
-        additions,
-        trailers,
-        series,
+        ...categories.current,
+        [catKeys]: {
+          genres,
+          platforms,
+          tags,
+        },
       };
-      localStorage.setItem("ItemsObj", JSON.stringify(categories.current));
+      localStorage.setItem("categories", JSON.stringify(categories.current));
 
-      return { details, screens, additions, trailers, series };
+      return { genres, platforms, tags };
     }
-    return { details, screens, additions, trailers, series };
+    return { genres, platforms, tags };
   };
