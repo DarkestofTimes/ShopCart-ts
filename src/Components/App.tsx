@@ -11,7 +11,12 @@ import { ItemPage } from "./ItemPage";
 import { ErrorPage } from "./ErrorPage";
 import { DataLoader } from "../Functions/Loaders/DataLoader";
 import { ItemLoader } from "../Functions/Loaders/ItemLoader";
-import { useShopDataContext, useItemContext } from "./Context/ContextProvider";
+import { SidebarLoader } from "../Functions/Loaders/SidebarLoader";
+import {
+  useShopDataContext,
+  useItemContext,
+  useCategoriesContext,
+} from "./Context/ContextProvider";
 
 const AppLayout = () => (
   <>
@@ -23,10 +28,14 @@ const AppLayout = () => (
 export const App = () => {
   const shopData = useShopDataContext();
   const Items = useItemContext();
+  const categories = useCategoriesContext();
+
   const router = createBrowserRouter([
     {
       path: "/",
       element: <AppLayout />,
+      loader: SidebarLoader({ categories }),
+      id: "root",
       children: [
         {
           index: true,

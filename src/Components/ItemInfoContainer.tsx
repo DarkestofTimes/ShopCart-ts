@@ -68,7 +68,7 @@ export const ItemInfoContainer = ({ details, page }: ItemProp) => {
   return (
     <section className="col-span-3 grid grid-rows-[min-content] grid-cols-3  w-full">
       <MetaContainer details={details} page={page} />
-      <div className="row-span-2  col-start-3 grid h-full pl-3">
+      <div className="row-span-2 grid h-full pl-3 col-start-3">
         <DevelopersContainer details={details} />
         <GenreContainer details={details} />
       </div>
@@ -83,7 +83,7 @@ const MetaContainer = ({ details, page }: ItemProp) => {
     <section className="col-span-2 row-span-2  grid  grid-cols-3 grid-rows-3 items-center gap-3 max-h-[35vh]">
       <ReleasedContainer details={details} />
       <ESRBContainer details={details} />
-      <div className="grid row-span-3 grid-rows-2 justify-start grid-cols-1  h-full pl-3">
+      <div className="grid row-span-3 grid-rows-2 justify-start grid-cols-1  h-full pl-3 col-start-3 row-start-1">
         <div className=" w-full pt-2">
           {page === "shop" ? (
             <AddToBtnContainer pricing={pricing} />
@@ -116,7 +116,7 @@ const ESRBContainer = ({ details }: ItemProp) => {
       : "text-black";
 
   return (
-    <section className="flex justify-center">
+    <section className="flex justify-center  col-start-2 row-start-2">
       {details.esrb_rating ? (
         <h2 className={`text-3xl font-bold `}>
           ESRB:{" "}
@@ -169,7 +169,7 @@ const RatingContainer = ({ details }: ItemProp) => {
       ? "text-black"
       : "text-[#00a562]";
   return (
-    <section className="grid grid-rows-2 row-start-2 justify-items-center">
+    <section className="grid grid-rows-2 justify-items-center col-start-2 row-start-2">
       <h3 className="text-3xl  p-1 whitespace-nowrap ">
         Score:{" "}
         <span className={`font-bold ${colorCode}`}>{details.rating}</span>
@@ -232,7 +232,7 @@ const MetacritContainer = ({ details }: ItemProp) => {
       ? "text-black"
       : "text-[#00a562]";
   return (
-    <section className=" place-content-center flex justify-start col-start-1 row-start-2">
+    <section className=" place-content-center flex justify-start col-start-1 row-start-2 ">
       <Link
         to={`/shop/1&metacritic=${details.metacritic},100`}
         className="text-2xl w-full flex items-center justify-center font-bold rounded border-purple-800 border-2 p-2 whitespace-nowrap bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110">
@@ -251,7 +251,7 @@ const AddToBtnContainer = ({ pricing }: pricingProp) => {
     return;
   }
   return (
-    <section className="h-full w-full">
+    <section className="h-full w-full ">
       <button className="text-4xl grid h-full grid-cols-2 font-bold rounded border-purple-800 border-2 p-4  bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 place-items-center">
         {pricing.onSale ? (
           <div className="grid grid-cols-2 grid-rows-2 place-items-center h-full w-full">
@@ -308,7 +308,7 @@ const ReleasedContainer = ({ details }: ItemProp) => {
   const formatted = formatDate(currentDate);
 
   return (
-    <section className="h-full w-full">
+    <section className="h-full w-full col-start-1 row-start-1">
       <h3 className="font-bold pb-2"> Release Date: </h3>
       {details.tba ? (
         "TBA"

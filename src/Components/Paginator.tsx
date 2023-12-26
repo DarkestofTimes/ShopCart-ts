@@ -32,7 +32,7 @@ export const Paginator = ({ data, routeValue }: PaginatorProps) => {
   const onlyFive = pageNumbersArray.slice(startIndex, startIndex + 5);
 
   return (
-    <div className="flex col-span-full justify-center gap-2 h-1/2 items-center">
+    <div className="flex col-span-full justify-center gap-2 h-1/2 items-center mt-4">
       {pageNumber > 3 && (
         <Link
           to={`/${routeValue}/1` + path}

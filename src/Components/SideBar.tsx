@@ -1,14 +1,16 @@
 import { DataItem } from "./Context/ContextProvider";
-import { Form } from "react-router-dom";
+import { Form, useRouteLoaderData } from "react-router-dom";
 
 interface sidebarProps {
   data: DataItem;
 }
 
-export const Sidebar = ({ data }: sidebarProps) => {
+export const Sidebar = (/* {}: data sidebarProps */) => {
+  const {} = useRouteLoaderData("root") as { data: DataItem };
+
   return (
     <section className="min-h-[93vh] border-solid border-2 border-black col-span-1 p-4 mt-10">
-      <Searchbox data={data} />
+      {/* <Searchbox data={data} /> */}
     </section>
   );
 };
