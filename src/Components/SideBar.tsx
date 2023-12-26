@@ -7,7 +7,7 @@ interface sidebarProps {
 
 export const Sidebar = ({ data }: sidebarProps) => {
   return (
-    <section className="min-h-[93vh] border-solid border-2 border-black col-span-1 p-4">
+    <section className="min-h-[93vh] border-solid border-2 border-black col-span-1 p-4 mt-10">
       <Searchbox data={data} />
     </section>
   );

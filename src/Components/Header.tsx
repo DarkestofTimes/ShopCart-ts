@@ -3,7 +3,7 @@ import { ProgressBar } from "./ProgressBar";
 
 export const Header = () => {
   return (
-    <header className="fixed top-0 w-full z-10 bg-[#000000ee] ">
+    <header className="fixed h-8 top-0 w-full z-10 bg-[#0f0f0f] ">
       <nav>
         <ul className="grid grid-cols-4">
           <li>

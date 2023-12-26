@@ -18,7 +18,7 @@ export const ProgressBar = () => {
 
   return (
     <div>
-      <div className="h-5 absolute w-full ">
+      <div className="h-2 absolute w-full ">
         {state === "loading" && (
           <span
             className={`flex bg-purple-600 transition-all duration-500 h-full ${width}`}></span>
