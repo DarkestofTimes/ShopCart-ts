@@ -1,6 +1,6 @@
-import { fetchItem } from "../FetchItem.tsx";
-import { Item } from "../../Components/Context/ItemContext.tsx";
-import { key } from "../../key.ts";
+import { fetchItem } from "../Functions/FetchItem.tsx";
+import { Item } from "../Components/Context/ItemContext.tsx";
+import { key } from "../key.ts";
 import { Params } from "react-router-dom";
 
 interface Request {
@@ -17,7 +17,6 @@ export const SidebarLoader =
   ({ categories }: categoriesProps) =>
   async ({ params }: Request) => {
     const localStored = JSON.parse(localStorage.getItem("categories"));
-
     const catKeys = !params.page ? "firstKey" : params.page;
 
     const item = localStored

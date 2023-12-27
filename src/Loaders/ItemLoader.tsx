@@ -1,6 +1,6 @@
-import { fetchItem } from "../FetchItem.tsx";
-import { Item } from "../../Components/Context/ItemContext.tsx";
-import { key } from "../../key.ts";
+import { fetchItem } from "../Functions/FetchItem.tsx";
+import { Item } from "../Components/Context/ItemContext.tsx";
+import { key } from "../key.ts";
 import { Params } from "react-router-dom";
 
 interface Request {

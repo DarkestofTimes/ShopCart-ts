@@ -8,7 +8,7 @@ export const fetchItem = async (url: string) => {
     }
 
     const retrievedData = await response.json();
-    console.log(retrievedData);
+    /*    console.log(retrievedData); */
     return retrievedData;
   } catch (error) {
     console.error("Error:", error);

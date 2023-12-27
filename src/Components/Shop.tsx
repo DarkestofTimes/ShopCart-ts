@@ -6,6 +6,7 @@ import { Layout } from "./Layout";
 export const Shop = () => {
   const { data } = useLoaderData() as { data: DataItem };
   const routeValue = "shop";
+
   return (
     <Layout>
       <Grid data={data} items={data.results} routeValue={routeValue} />

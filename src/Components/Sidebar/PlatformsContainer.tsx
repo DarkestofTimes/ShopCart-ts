@@ -1,17 +1,9 @@
 import { platformsSVG } from "../platformsSVG.tsx";
 import { usePlatformsContext } from "./SidebarContext/SidebarContextProvider.tsx";
-import { useEffect } from "react";
 import { handleClick } from "./SidebarFunctions/handleClick.ts";
 
-export const PlatformsContainer = ({ pathConstructRef, platforms }) => {
+export const PlatformsContainer = ({ platforms }) => {
   const { selectedPlatforms, setSelectedPlatforms } = usePlatformsContext();
-  useEffect(() => {
-    pathConstructRef.current.platforms =
-      "&platforms=" + selectedPlatforms.join(",");
-    setSelectedPlatforms((prev) =>
-      selectedPlatforms.length === prev.length ? prev : [...selectedPlatforms]
-    );
-  }, [selectedPlatforms]);
 
   return (
     <section className="w-full h-min flex flex-wrap gap-2 p-2">

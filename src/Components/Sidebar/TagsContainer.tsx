@@ -1,15 +1,8 @@
 import { handleClick } from "./SidebarFunctions/handleClick.ts";
 import { useTagsContext } from "./SidebarContext/SidebarContextProvider.tsx";
-import { useEffect } from "react";
 
-export const TagsContainer = ({ pathConstructRef, tags }) => {
+export const TagsContainer = ({ tags }) => {
   const { selectedTags, setSelectedTags } = useTagsContext();
-  useEffect(() => {
-    pathConstructRef.current.tags = "&tags=" + selectedTags.join(",");
-    setSelectedTags((prev) =>
-      selectedTags.length === prev.length ? prev : [...selectedTags]
-    );
-  }, [selectedTags]);
 
   return (
     <section className="w-full h-min flex flex-wrap gap-2 p-2">

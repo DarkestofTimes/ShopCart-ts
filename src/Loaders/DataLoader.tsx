@@ -1,9 +1,9 @@
-import { key } from "../../key.ts";
-import { fetchItem } from "../FetchItem.tsx";
-import { splitParams } from "../splitParams.ts";
-import { fakePricing } from "../fakePricing.ts";
+import { key } from "../key.ts";
+import { fetchItem } from "../Functions/FetchItem.tsx";
+import { splitParams } from "../Functions/splitParams.ts";
+import { fakePricing } from "../Functions/fakePricing.ts";
 import { Params } from "react-router-dom";
-import { Item } from "../../Components/Context/ShopDataContext.tsx";
+import { Item } from "../Components/Context/ShopDataContext.tsx";
 
 interface Request {
   params: Params;

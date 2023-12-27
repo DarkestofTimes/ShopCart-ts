@@ -9,9 +9,9 @@ import { Shop } from "./Shop";
 import { Cart } from "./Cart";
 import { ItemPage } from "./ItemPage";
 import { ErrorPage } from "./ErrorPage";
-import { DataLoader } from "../Functions/Loaders/DataLoader";
-import { ItemLoader } from "../Functions/Loaders/ItemLoader";
-import { SidebarLoader } from "../Functions/Loaders/SidebarLoader";
+import { DataLoader } from "../Loaders/DataLoader";
+import { ItemLoader } from "../Loaders/ItemLoader";
+import { SidebarLoader } from "../Loaders/SidebarLoader";
 import {
   useShopDataContext,
   useItemContext,

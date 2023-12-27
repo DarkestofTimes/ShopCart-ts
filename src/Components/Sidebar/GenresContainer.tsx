@@ -1,15 +1,8 @@
 import { useGenresContext } from "./SidebarContext/SidebarContextProvider.tsx";
-import { useEffect } from "react";
 import { handleClick } from "./SidebarFunctions/handleClick.ts";
 
-export const GenresContainer = ({ pathConstructRef, genres }) => {
+export const GenresContainer = ({ genres }) => {
   const { selectedGenres, setSelectedGenres } = useGenresContext();
-  useEffect(() => {
-    pathConstructRef.current.genres = "&genres=" + selectedGenres.join(",");
-    setSelectedGenres((prev) =>
-      selectedGenres.length === prev.length ? prev : [...selectedGenres]
-    );
-  }, [selectedGenres]);
 
   return (
     <section className="w-full h-min flex flex-wrap gap-2 p-2">
