@@ -1,7 +1,8 @@
 import { useContext, ReactNode } from "react";
 import { GenresContext, GenresContextProvider } from "./GenresContext";
 import { PlatformsContext, PlatformsContextProvider } from "./PlatformsContext";
-import { TagsContext, TagsContextProvider } from "../TagsContext";
+import { TagsContext, TagsContextProvider } from "./TagsContext";
+import { ArgsContext, ArgsContextProvider } from "./ArgsContext";
 
 export const SidebarContextProvider: React.FC<ContextProps> = ({
   children,
@@ -9,7 +10,9 @@ export const SidebarContextProvider: React.FC<ContextProps> = ({
   return (
     <TagsContextProvider>
       <PlatformsContextProvider>
-        <GenresContextProvider>{children}</GenresContextProvider>
+        <GenresContextProvider>
+          <ArgsContextProvider>{children}</ArgsContextProvider>
+        </GenresContextProvider>
       </PlatformsContextProvider>
     </TagsContextProvider>
   );
@@ -18,3 +21,4 @@ export const SidebarContextProvider: React.FC<ContextProps> = ({
 export const useGenresContext = () => useContext(GenresContext);
 export const usePlatformsContext = () => useContext(PlatformsContext);
 export const useTagsContext = () => useContext(TagsContext);
+export const useArgsContext = () => useContext(ArgsContext);

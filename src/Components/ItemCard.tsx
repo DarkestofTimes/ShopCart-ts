@@ -82,6 +82,7 @@ const PlatformContainer = ({ item }: ItemProp) => {
     <div className="flex flex-wrap gap-1 justify-start h-min pt-1">
       {item.platforms.map((plat) => (
         <span
+          title={plat.platform.name}
           key={plat.platform.id}
           className="border-purple-800 border-2 p-1 rounded min-w-[2rem]">
           {platformsSVG[plat.platform.slug]}

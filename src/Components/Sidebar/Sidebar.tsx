@@ -4,14 +4,15 @@ import { CollapseContainer } from "./CollapseContainer";
 import { GenresContainer } from "./GenresContainer";
 import { TagsContainer } from "./TagsContainer";
 import { PlatformsContainer } from "./PlatformsContainer";
-import { Searchbox } from "./Searchbox";
+import { SearchArgsContainer } from "./ArgsContainer";
+import { SearchboxContainer } from "./SearchboxContainer";
 
 export const Sidebar = () => {
   const { genres, platforms, tags } = useRouteLoaderData("root");
 
   return (
     <section className="h-full border-solid border-2 border-purple-600 col-span-1 p-4 mt-10 grid grid-rows-[repeat(6,min-content)] gap-1 ">
-      <Searchbox />
+      <SearchboxContainer />
       <SelectedContainer />
       <SearchArgsContainer />
       <CollapseContainer value={"Platforms"}>
@@ -25,8 +26,4 @@ export const Sidebar = () => {
       </CollapseContainer>
     </section>
   );
-};
-
-const SearchArgsContainer = ({}) => {
-  return <section className="w-full h-min"></section>;
 };

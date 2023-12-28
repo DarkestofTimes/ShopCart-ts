@@ -5,12 +5,12 @@ import {
 } from "./SidebarContext/SidebarContextProvider.tsx";
 import { handleClick } from "./SidebarFunctions/handleClick.ts";
 
-export const SelectedContainer = ({}) => {
+export const SelectedContainer = () => {
   const { selectedPlatforms, setSelectedPlatforms } = usePlatformsContext();
   const { selectedGenres, setSelectedGenres } = useGenresContext();
   const { selectedTags, setSelectedTags } = useTagsContext();
   return (
-    <section className="w-full h-min flex flex-wrap gap-1 ">
+    <section className="w-full h-min flex flex-wrap gap-1 p-2">
       <h2 className="w-full">Active:</h2>
       {selectedPlatforms.map((plat) => (
         <SelectedElement

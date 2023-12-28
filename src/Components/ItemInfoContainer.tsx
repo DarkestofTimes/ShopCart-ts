@@ -1,6 +1,6 @@
 import { platformsSVG } from "./platformsSVG.tsx";
 import { Link } from "react-router-dom";
-import { formatDate } from "../Functions/formatDate.ts";
+import { formatDateAddYear } from "../Functions/formatDateAddYear.ts";
 import { usePricingContext } from "./Context/ContextProvider.tsx";
 
 export interface ItemProp {
@@ -31,6 +31,7 @@ export interface ItemProp {
       platform: {
         id: number;
         slug: string;
+        name: string;
       };
     }[];
     genres?: {
@@ -39,7 +40,7 @@ export interface ItemProp {
       slug: string;
     }[];
     description?: string;
-    released?: string;
+    released: string;
     tba?: boolean;
   };
   page?: string;
@@ -116,7 +117,7 @@ const ESRBContainer = ({ details }: ItemProp) => {
       : "text-black";
 
   return (
-    <section className="flex justify-center  col-start-2 row-start-2">
+    <section className="flex justify-center  col-start-2 row-start-1">
       {details.esrb_rating ? (
         <h2 className={`text-3xl font-bold `}>
           ESRB:{" "}
@@ -304,9 +305,9 @@ const GenreContainer = ({ details }: ItemProp) => {
 };
 
 const ReleasedContainer = ({ details }: ItemProp) => {
-  const currentDate = new Date();
-  const formatted = formatDate(currentDate);
-
+  const currentDate = new Date(details.released);
+  const formatted = formatDateAddYear(currentDate);
+  console.log(formatted);
   return (
     <section className="h-full w-full col-start-1 row-start-1">
       <h3 className="font-bold pb-2"> Release Date: </h3>
@@ -334,6 +335,7 @@ const PlatformsContainer = ({ details }: ItemProp) => {
       <div className="flex flex-wrap gap-1 justify-start h-min">
         {details.platforms.map((plat) => (
           <Link
+            title={plat.platform.name}
             to={`/shop/1&platforms=${plat.platform.id}`}
             key={plat.platform.id}
             className="border-purple-800 border-2 p-1 rounded min-w-[3rem] transition-all duration-200 hover:scale-125 focus:scale-125">

@@ -38,6 +38,7 @@ export interface ShopItem {
     platform: {
       slug: string;
       id: number;
+      name: string;
     };
   }[];
 }
