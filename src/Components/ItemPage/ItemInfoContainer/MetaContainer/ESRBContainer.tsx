@@ -1,4 +1,4 @@
-import { ItemProp } from "../ItemInfoContainer/ItemInfoContainer";
+import { ItemProp } from "../ItemInfoContainer";
 
 export const ESRBContainer = ({ details }: ItemProp) => {
   if (!details.esrb_rating) {

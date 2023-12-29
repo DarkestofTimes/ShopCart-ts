@@ -1,11 +1,14 @@
-import { ItemProp } from "../ItemInfoContainer/ItemInfoContainer.tsx";
-import { usePricingContext } from "../../Context/ContextProvider.tsx";
-import { ESRBContainer } from "./ESRBContainer";
-import { RatingContainer } from "./RatingContainer";
-import { RatingBar } from "./RatingBar";
-import { MetacritContainer } from "./MetacritContainer";
-import { ReleasedContainer } from "./ReleasedContainer";
-import { AddToBtnContainer, RemoveFromBtnContainer } from "./AddToBtnContainer";
+import { ItemProp } from "../ItemInfoContainer.tsx";
+import { usePricingContext } from "../../../Context/ContextProvider.tsx";
+import { ESRBContainer } from "./ESRBContainer.tsx";
+import { RatingContainer } from "./RatingContainer.tsx";
+import { RatingBar } from "./RatingBar.tsx";
+import { MetacritContainer } from "./MetacritContainer.tsx";
+import { ReleasedContainer } from "./ReleasedContainer.tsx";
+import {
+  AddToBtnContainer,
+  RemoveFromBtnContainer,
+} from "./AddToBtnContainer.tsx";
 import { PlatformsContainer } from "./PlatformsContainer.tsx";
 
 export const MetaContainer = ({ details, page }: ItemProp) => {

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ItemProp } from "../ItemInfoContainer/ItemInfoContainer";
+import { ItemProp } from "../ItemInfoContainer";
 
 export const MetacritContainer = ({ details }: ItemProp) => {
   if (!details.metacritic) {

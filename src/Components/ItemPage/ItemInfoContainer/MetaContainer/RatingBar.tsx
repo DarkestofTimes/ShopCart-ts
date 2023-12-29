@@ -1,4 +1,4 @@
-import { ItemProp } from "../ItemInfoContainer/ItemInfoContainer";
+import { ItemProp } from "../ItemInfoContainer";
 
 export const RatingBar = ({ details }: ItemProp) => {
   if (!details.ratings) {

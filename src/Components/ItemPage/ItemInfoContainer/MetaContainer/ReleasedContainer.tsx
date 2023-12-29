@@ -1,5 +1,5 @@
-import { ItemProp } from "../ItemInfoContainer/ItemInfoContainer.tsx";
-import { formatDateAddYear } from "../../../Functions/formatDateAddYear.ts";
+import { ItemProp } from "../ItemInfoContainer.tsx";
+import { formatDateAddYear } from "../../../../Functions/formatDateAddYear.ts";
 import { Link } from "react-router-dom";
 
 export const ReleasedContainer = ({ details }: ItemProp) => {

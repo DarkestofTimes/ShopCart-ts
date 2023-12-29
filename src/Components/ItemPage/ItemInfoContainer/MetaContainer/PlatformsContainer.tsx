@@ -1,6 +1,6 @@
-import { ItemProp } from "../ItemInfoContainer/ItemInfoContainer.tsx";
+import { ItemProp } from "../ItemInfoContainer.tsx";
 import { Link } from "react-router-dom";
-import { platformsSVG } from "../../platformsSVG.tsx";
+import { platformsSVG } from "../../../platformsSVG.tsx";
 
 export const PlatformsContainer = ({ details }: ItemProp) => {
   if (!details.platforms) {

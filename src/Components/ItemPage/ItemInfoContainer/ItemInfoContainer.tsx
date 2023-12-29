@@ -1,4 +1,4 @@
-import { MetaContainer } from "../MetaContainer/MetaContainer";
+import { MetaContainer } from "./MetaContainer/MetaContainer";
 import { DevelopersContainer } from "./DevelopersContainer";
 import { GenreContainer } from "./GenreContainer";
 import { DescContainer } from "./DescContainer";
