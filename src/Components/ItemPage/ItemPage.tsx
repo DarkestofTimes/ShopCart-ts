@@ -1,13 +1,16 @@
 import { useParams, useLoaderData, Params } from "react-router-dom";
-import { NoSideLayout } from "./Layout";
-import { ImgContainer } from "./ImgContainer";
-import { ItemInfoContainer } from "./ItemInfoContainer";
+import { NoSideLayout } from "../Layout";
+import { ImgContainer } from "./ImgSlider/ImgContainer";
+import { ItemInfoContainer } from "./ItemInfoContainer/ItemInfoContainer";
+import { DLCContainer } from "./DLCContainer";
+import { SeriesContainer } from "./SeriesContainer";
 
 interface LoaderData {
   details: {
     id: number;
     background_image: string;
     name: string;
+    released: string;
   };
   screens: {
     results: {
@@ -54,28 +57,6 @@ interface imgs {
   };
 }
 
-interface DLCProps {
-  additions: {
-    results: {
-      id: number;
-      background_image: string;
-      name: string;
-    }[];
-  };
-  page?: string;
-}
-
-interface SeriesProps {
-  series: {
-    results: {
-      id: number;
-      background_image: string;
-      name: string;
-    }[];
-  };
-  page?: string;
-}
-
 export const ItemPage = () => {
   const { page }: Params<string> = useParams();
   const { details, screens, additions, trailers, series } =
@@ -112,51 +93,5 @@ export const ItemPage = () => {
         <ItemInfoContainer details={details} page={page} />
       </section>
     </NoSideLayout>
-  );
-};
-
-const DLCContainer = ({ additions, page }: DLCProps) => {
-  const imgs = additions.results.map((add) => ({
-    id: add.id,
-    image: add.background_image,
-    name: add.name,
-    linkId: add.id,
-    routeValue: page,
-  }));
-  return (
-    <>
-      {imgs.length > 0 && (
-        <div className="relative flex h-full w-full">
-          <ImgContainer imgs={imgs}>
-            <h2 className="absolute top-0 left-0 z-10 bg-purple-800/75 text-white p-1 text-xl font-bold">
-              DLC and Editions
-            </h2>
-          </ImgContainer>
-        </div>
-      )}
-    </>
-  );
-};
-
-const SeriesContainer = ({ series, page }: SeriesProps) => {
-  const imgs = series.results.map((add) => ({
-    id: add.id,
-    image: add.background_image,
-    name: add.name,
-    linkId: add.id,
-    routeValue: page,
-  }));
-  return (
-    <>
-      {imgs.length > 0 && (
-        <div className="relative flex h-full w-full">
-          <ImgContainer imgs={imgs}>
-            <h2 className="absolute top-0 left-0 z-10 bg-purple-800/75 text-white p-1 text-xl font-bold">
-              Games in the Series
-            </h2>
-          </ImgContainer>
-        </div>
-      )}
-    </>
   );
 };
