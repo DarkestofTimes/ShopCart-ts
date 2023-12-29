@@ -1,10 +1,17 @@
 import "./doubleSlider.css";
+import { ArgsContext } from "./SidebarContext/ArgsContext";
 
-export const DoubleSliderYears = ({ selectedArgs, setSelectedArgs }) => {
+export const DoubleSliderYears = ({
+  selectedArgs,
+  setSelectedArgs,
+}: ArgsContext) => {
   const minVal = 1960;
   const maxVal = new Date().getFullYear();
   const minGap = 1;
-  const handleMin = (ev, index) => {
+  const handleMin = (
+    ev: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const newSelectedArgs = selectedArgs.dates;
     newSelectedArgs[index] = Number(ev.target.value);
     setSelectedArgs({
@@ -20,9 +27,12 @@ export const DoubleSliderYears = ({ selectedArgs, setSelectedArgs }) => {
     }
   };
 
-  const handleMax = (ev, index) => {
+  const handleMax = (
+    ev: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const newSelectedArgs = selectedArgs.dates;
-    newSelectedArgs[index] = ev.target.value;
+    newSelectedArgs[index] = Number(ev.target.value);
     setSelectedArgs({
       ...selectedArgs,
       dates: newSelectedArgs,

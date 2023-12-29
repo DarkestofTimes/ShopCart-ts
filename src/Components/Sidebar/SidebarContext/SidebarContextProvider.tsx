@@ -4,6 +4,10 @@ import { PlatformsContext, PlatformsContextProvider } from "./PlatformsContext";
 import { TagsContext, TagsContextProvider } from "./TagsContext";
 import { ArgsContext, ArgsContextProvider } from "./ArgsContext";
 
+interface ContextProps {
+  children: ReactNode;
+}
+
 export const SidebarContextProvider: React.FC<ContextProps> = ({
   children,
 }) => {

@@ -1,7 +1,31 @@
 import { handleClick } from "./SidebarFunctions/handleClick.ts";
 import { useTagsContext } from "./SidebarContext/SidebarContextProvider.tsx";
 
-export const TagsContainer = ({ tags }) => {
+interface tag {
+  id: number;
+  slug: string;
+  name: string;
+  games_count: number;
+}
+
+interface TagsProp {
+  tags: {
+    results: tag[];
+  };
+}
+
+export interface TagsContext {
+  selectedTags: tag[];
+  setSelectedTags: React.Dispatch<React.SetStateAction<tag[]>>;
+}
+
+interface TagProp {
+  tag: { id: number; slug: string; name: string; games_count: number };
+  selected: tag[];
+  setSelected: React.Dispatch<React.SetStateAction<tag[]>>;
+}
+
+export const TagsContainer = ({ tags }: TagsProp) => {
   const { selectedTags, setSelectedTags } = useTagsContext();
 
   return (
@@ -18,7 +42,7 @@ export const TagsContainer = ({ tags }) => {
   );
 };
 
-const Tag = ({ tag, selected, setSelected }) => {
+const Tag = ({ tag, selected, setSelected }: TagProp) => {
   const scale = selected.some((item) => item.id === tag.id)
     ? "scale-110 text-purple-600 border-[#f0f8ff] "
     : "border-purple-600";

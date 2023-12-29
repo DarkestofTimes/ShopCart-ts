@@ -1,7 +1,31 @@
 import { useGenresContext } from "./SidebarContext/SidebarContextProvider.tsx";
 import { handleClick } from "./SidebarFunctions/handleClick.ts";
 
-export const GenresContainer = ({ genres }) => {
+interface genre {
+  id: number;
+  slug: string;
+  name: string;
+  games_count: number;
+}
+
+interface GenresProp {
+  genres: {
+    results: genre[];
+  };
+}
+
+export interface GenresContext {
+  selectedGenres: genre[];
+  setSelectedGenres: React.Dispatch<React.SetStateAction<genre[]>>;
+}
+
+interface GenreProp {
+  genre: { id: number; slug: string; name: string; games_count: number };
+  selected: genre[];
+  setSelected: React.Dispatch<React.SetStateAction<genre[]>>;
+}
+
+export const GenresContainer = ({ genres }: GenresProp) => {
   const { selectedGenres, setSelectedGenres } = useGenresContext();
 
   return (
@@ -18,7 +42,7 @@ export const GenresContainer = ({ genres }) => {
   );
 };
 
-const Genre = ({ genre, selected, setSelected }) => {
+const Genre = ({ genre, selected, setSelected }: GenreProp) => {
   const scale = selected.some((item) => item.id === genre.id)
     ? "scale-110 text-purple-600 border-[#f0f8ff]"
     : "border-purple-600";

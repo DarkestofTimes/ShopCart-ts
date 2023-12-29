@@ -1,5 +1,6 @@
 import { useArgsContext } from "./SidebarContext/SidebarContextProvider.tsx";
 import { DoubleSliderYears } from "./DoubleSliderYears";
+import { ArgsContext } from "./SidebarContext/ArgsContext";
 import "./singleSlider.css";
 
 export const SearchArgsContainer = () => {
@@ -23,11 +24,11 @@ export const SearchArgsContainer = () => {
   );
 };
 
-const MetacriticSlider = ({ selectedArgs, setSelectedArgs }) => {
-  const handleChange = (ev) => {
+const MetacriticSlider = ({ selectedArgs, setSelectedArgs }: ArgsContext) => {
+  const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedArgs({
       ...selectedArgs,
-      metacritic: ev.target.value,
+      metacritic: Number(ev.target.value),
     });
   };
 
@@ -64,8 +65,8 @@ const MetacriticSlider = ({ selectedArgs, setSelectedArgs }) => {
   );
 };
 
-const PreciseSearch = ({ selectedArgs, setSelectedArgs }) => {
-  const handleChange = (ev) => {
+const PreciseSearch = ({ selectedArgs, setSelectedArgs }: ArgsContext) => {
+  const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedArgs({
       ...selectedArgs,
       search_precise: ev.target.checked,

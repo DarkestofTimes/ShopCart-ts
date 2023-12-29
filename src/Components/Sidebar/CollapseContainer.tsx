@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 
-export const CollapseContainer = ({ children, value }) => {
+interface CollapseProps {
+  children: ReactNode;
+  value: string;
+}
+
+export const CollapseContainer = ({ children, value }: CollapseProps) => {
   const [collapsed, setCollapsed] = useState(true);
   return (
     <div

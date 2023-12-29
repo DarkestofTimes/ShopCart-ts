@@ -1,9 +1,30 @@
-import { createContext, useState } from "react";
+import { createContext, useState, ReactNode } from "react";
 
-export const TagsContext = createContext(/* <PricingContext> */ {});
-/* React.FC<ContextProps> */
-export const TagsContextProvider = ({ children }) => {
-  const [selectedTags, setSelectedTags] = useState([]);
+interface ContextProps {
+  children: ReactNode;
+}
+
+interface tag {
+  id: number;
+  slug: string;
+  name: string;
+  games_count: number;
+}
+
+export interface TagsContext {
+  selectedTags: tag[];
+  setSelectedTags: React.Dispatch<React.SetStateAction<tag[]>>;
+}
+
+const TagsContextValue: TagsContext = {
+  selectedTags: [],
+  setSelectedTags: () => {},
+};
+
+export const TagsContext = createContext<TagsContext>(TagsContextValue);
+
+export const TagsContextProvider = ({ children }: ContextProps) => {
+  const [selectedTags, setSelectedTags] = useState<tag[]>([]);
 
   const contextItems = {
     selectedTags,

@@ -1,9 +1,32 @@
-import { createContext, useState } from "react";
+import { createContext, useState, ReactNode } from "react";
 
-export const PlatformsContext = createContext(/* <PricingContext> */ {});
-/* React.FC<ContextProps> */
-export const PlatformsContextProvider = ({ children }) => {
-  const [selectedPlatforms, setSelectedPlatforms] = useState([]);
+interface ContextProps {
+  children: ReactNode;
+}
+
+interface platform {
+  id: number;
+  slug: string;
+  name: string;
+  games_count: number;
+}
+
+export interface PlatformsContext {
+  selectedPlatforms: platform[];
+  setSelectedPlatforms: React.Dispatch<React.SetStateAction<platform[]>>;
+}
+
+const PlatformsContextValue: PlatformsContext = {
+  selectedPlatforms: [],
+  setSelectedPlatforms: () => {},
+};
+
+export const PlatformsContext = createContext<PlatformsContext>(
+  PlatformsContextValue
+);
+
+export const PlatformsContextProvider = ({ children }: ContextProps) => {
+  const [selectedPlatforms, setSelectedPlatforms] = useState<platform[]>([]);
 
   const contextItems = {
     selectedPlatforms,

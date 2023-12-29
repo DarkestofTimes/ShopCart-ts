@@ -6,11 +6,15 @@ import {
   useArgsContext,
 } from "./SidebarContext/SidebarContextProvider.tsx";
 import { Link, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
+
+interface SearchProp {
+  searchValue: string | undefined;
+}
 
 export const SearchboxContainer = () => {
-  const [searchValue, setSearchValue] = useState();
-  const handleChange = (ev) => {
+  const [searchValue, setSearchValue] = useState<string | undefined>();
+  const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(ev.target.value);
   };
 
@@ -30,9 +34,9 @@ export const SearchboxContainer = () => {
   );
 };
 
-const SearchButton = ({ searchValue }) => {
+const SearchButton = ({ searchValue }: SearchProp) => {
   const { page } = useParams();
-  const politeParams = splitParams(page);
+  const politeParams = splitParams(page!);
   const { selectedPlatforms } = usePlatformsContext();
   const { selectedGenres } = useGenresContext();
   const { selectedTags } = useTagsContext();
@@ -60,7 +64,7 @@ const SearchButton = ({ searchValue }) => {
 
     const path = Object.entries(pathObject)
       .filter(
-        ([key, value]) => value !== undefined && value !== null && value !== ""
+        ([value]) => value !== undefined && value !== null && value !== ""
       )
       .map(([key, value]) => `&${key}=${value}`)
       .join("");

@@ -5,6 +5,19 @@ import {
 } from "./SidebarContext/SidebarContextProvider.tsx";
 import { handleClick } from "./SidebarFunctions/handleClick.ts";
 
+interface item {
+  id: number;
+  slug: string;
+  name: string;
+  games_count: number;
+}
+
+interface SelectedProp<item> {
+  item: item;
+  selected: item[];
+  setSelected: React.Dispatch<React.SetStateAction<item[]>>;
+}
+
 export const SelectedContainer = () => {
   const { selectedPlatforms, setSelectedPlatforms } = usePlatformsContext();
   const { selectedGenres, setSelectedGenres } = useGenresContext();
@@ -24,7 +37,9 @@ export const SelectedContainer = () => {
           key={plat.id}
           item={plat}
           selected={selectedPlatforms}
-          setSelected={setSelectedPlatforms}
+          setSelected={
+            setSelectedPlatforms as React.Dispatch<React.SetStateAction<item[]>>
+          }
         />
       ))}
       {selectedGenres.map((gen) => (
@@ -47,7 +62,11 @@ export const SelectedContainer = () => {
   );
 };
 
-const SelectedElement = ({ item, selected, setSelected }) => {
+const SelectedElement = ({
+  item,
+  selected,
+  setSelected,
+}: SelectedProp<item>) => {
   return (
     <span className="rounded border-2 border-purple-600 h-min w-min whitespace-nowrap p-1">
       {item.name}{" "}

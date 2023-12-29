@@ -2,7 +2,31 @@ import { platformsSVG } from "../platformsSVG.tsx";
 import { usePlatformsContext } from "./SidebarContext/SidebarContextProvider.tsx";
 import { handleClick } from "./SidebarFunctions/handleClick.ts";
 
-export const PlatformsContainer = ({ platforms }) => {
+interface platform {
+  id: number;
+  slug: string;
+  name: string;
+  games_count: number;
+}
+
+interface PlatformsProp {
+  platforms: {
+    results: platform[];
+  };
+}
+
+export interface PlatformsContext {
+  selectedPlatforms: platform[];
+  setSelectedPlatforms: React.Dispatch<React.SetStateAction<platform[]>>;
+}
+
+interface PlatformProp {
+  platform: { id: number; slug: string; name: string; games_count: number };
+  selected: platform[];
+  setSelected: React.Dispatch<React.SetStateAction<platform[]>>;
+}
+
+export const PlatformsContainer = ({ platforms }: PlatformsProp) => {
   const { selectedPlatforms, setSelectedPlatforms } = usePlatformsContext();
 
   return (
@@ -19,7 +43,7 @@ export const PlatformsContainer = ({ platforms }) => {
   );
 };
 
-const Platform = ({ platform, selected, setSelected }) => {
+const Platform = ({ platform, selected, setSelected }: PlatformProp) => {
   const scale = selected.some((item) => item.id === platform.id)
     ? "scale-110 text-purple-600 border-[#f0f8ff]"
     : "border-purple-600";
