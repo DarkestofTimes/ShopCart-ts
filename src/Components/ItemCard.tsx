@@ -28,7 +28,7 @@ export const ItemCard = ({ item, routeValue }: ItemCardProps) => {
   return (
     <Link
       to={`/items/${routeValue}/${item.id}`}
-      className=" h-min w-min hover:scale-110 focus:scale-110 transition-all duration-200 ">
+      className=" h-min w-min hover:scale-105 focus:scale-105 transition-all duration-200 ">
       <div
         className="border-solid border-2 border-purple-600 rounded w-[max(220px,15vw)]  aspect-square hover:border-[#f0f8ff] focus:border-[#f0f8ff]"
         onClick={handleClick}>

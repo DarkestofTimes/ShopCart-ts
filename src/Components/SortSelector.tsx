@@ -28,12 +28,13 @@ export const SortSelector = ({ routeValue }: SortProps) => {
     (key) => key !== "pageIndex" && key !== "ordering"
   );
   const path = otherParams.map((key) => politeParams[key]).join("");
-  const [selected, setSelected] = useState("Relevance");
+  const [selected, setSelected] = useState("Popularity");
   const [expand, setExpand] = useState(false);
   const handleExpand = (ev: React.MouseEvent) => {
     ev.stopPropagation();
     setExpand(true);
   };
+
   return (
     <div
       className="col-span-full flex justify-self-end mr-8 w-min flex-nowrap outline outline-purple-600 rounded p-2 whitespace-nowrap gap-2 cursor-pointer transition-all duration-200 hover:outline-[#f0f8ff] focus:outline-[#f0f8ff] hover:text-purple-600 focus:text-purple-600 relative z-10 mb-2"

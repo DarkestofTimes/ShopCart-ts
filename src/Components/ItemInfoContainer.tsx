@@ -306,7 +306,7 @@ const GenreContainer = ({ details }: ItemProp) => {
 
 const ReleasedContainer = ({ details }: ItemProp) => {
   const currentDate = new Date(details.released);
-  const formatted = formatDateAddYear(currentDate);
+  const formatted = formatDateAddYear(currentDate, true);
   console.log(formatted);
   return (
     <section className="h-full w-full col-start-1 row-start-1">

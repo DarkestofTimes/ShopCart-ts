@@ -25,10 +25,3 @@ body::-webkit-scrollbar-thumb {
   border-radius: 6px;
   border: 3px solid black;
 }
-
-input[type="range"] {
-  margin: 18px 0;
-  width: 100%;
-  background: #0f0f0f;
-  accent-color: #9333ea;
-}

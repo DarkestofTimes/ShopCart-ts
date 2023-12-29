@@ -1,10 +1,12 @@
 import { useArgsContext } from "./SidebarContext/SidebarContextProvider.tsx";
+import { DoubleSliderYears } from "./DoubleSliderYears";
+import "./singleSlider.css";
 
 export const SearchArgsContainer = () => {
   const { selectedArgs, setSelectedArgs } = useArgsContext();
 
   return (
-    <section className="w-full h-min p-2">
+    <section className="w-full h-min p-2 border-2 border-purple-600 rounded">
       <PreciseSearch
         selectedArgs={selectedArgs}
         setSelectedArgs={setSelectedArgs}
@@ -13,7 +15,7 @@ export const SearchArgsContainer = () => {
         selectedArgs={selectedArgs}
         setSelectedArgs={setSelectedArgs}
       />
-      <YearSlider
+      <DoubleSliderYears
         selectedArgs={selectedArgs}
         setSelectedArgs={setSelectedArgs}
       />
@@ -30,58 +32,33 @@ const MetacriticSlider = ({ selectedArgs, setSelectedArgs }) => {
   };
 
   return (
-    <div className="w-full flex flex-wrap place-items-center">
-      <label htmlFor="metacritSlider" className="w-full">
+    <div className="w-full flex flex-wrap place-items-center p-5 pb-16 border-b-2 border-purple-600">
+      <label htmlFor="metacritSlider" className="w-full mb-4">
         Metacritic minimum:{" "}
       </label>
-      <div className="flex flex-nowrap w-full">
+      <div className=" rangeSlider">
+        <span
+          className="sliderTrack"
+          style={{
+            right: `${((100 - selectedArgs.metacritic) * 100) / (100 - 0)}%`,
+            width: `${selectedArgs.metacritic}%`,
+          }}></span>
         <input
-          type="range"
           id="metacritSlider"
+          type="range"
           min={0}
           max={100}
-          className="p-2  w-full"
-          onChange={handleChange}
           value={selectedArgs.metacritic}
-        />{" "}
-        <span className="p-2 text-xl border-2 border-purple-600 rounded m-2">
+          onChange={handleChange}
+          className="minInput"
+        />
+        <span
+          className="p-2 text-xl border-2 border-purple-600 rounded tooltip maxVal"
+          style={{
+            right: `${((100 - selectedArgs.metacritic) * 100) / (100 - 0)}%`,
+          }}>
           {selectedArgs.metacritic}
         </span>
-      </div>
-    </div>
-  );
-};
-
-const YearSlider = ({ selectedArgs, setSelectedArgs }) => {
-  const handleSliderChange = (event, index) => {
-    const newSelectedArgs = [...selectedArgs];
-    newSelectedArgs[index] = parseInt(event.target.value, 10);
-    setSelectedArgs({
-      ...selectedArgs,
-      dates: !newSelectedArgs,
-    });
-  };
-
-  return (
-    <div className="w-64 mx-auto my-8">
-      <label className="block mb-2">Release Years</label>
-      <div className="flex justify-between">
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={selectedArgs[0]}
-          onChange={(event) => handleSliderChange(event, 0)}
-          className="w-full h-4 rounded-none"
-        />
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={selectedArgs[1]}
-          onChange={(event) => handleSliderChange(event, 1)}
-          className="w-full h-4 "
-        />
       </div>
     </div>
   );
@@ -95,7 +72,7 @@ const PreciseSearch = ({ selectedArgs, setSelectedArgs }) => {
     });
   };
   return (
-    <div className="flex w-full items-center gap-4 pb-3 pt-3">
+    <div className="flex w-full items-center gap-4 pb-3 pt-3 pl-5 pr-5 border-t-2 border-b-2 border-purple-600">
       <label htmlFor="preciseCheckBox" className="text-xl">
         Enable precise search:
       </label>

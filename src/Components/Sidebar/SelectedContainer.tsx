@@ -10,8 +10,15 @@ export const SelectedContainer = () => {
   const { selectedGenres, setSelectedGenres } = useGenresContext();
   const { selectedTags, setSelectedTags } = useTagsContext();
   return (
-    <section className="w-full h-min flex flex-wrap gap-1 p-2">
-      <h2 className="w-full">Active:</h2>
+    <section className="w-full h-min flex flex-wrap gap-1 p-5 border-2 border-purple-600 rounded">
+      {selectedPlatforms.length > 0 ||
+      selectedGenres.length > 0 ||
+      selectedTags.length > 0 ? (
+        <h2 className="w-full">Active:</h2>
+      ) : (
+        ""
+      )}
+
       {selectedPlatforms.map((plat) => (
         <SelectedElement
           key={plat.id}
