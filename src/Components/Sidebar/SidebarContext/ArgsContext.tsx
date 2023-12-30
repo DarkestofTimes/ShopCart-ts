@@ -14,12 +14,13 @@ export interface ArgsContext {
   selectedArgs: Args;
   setSelectedArgs: React.Dispatch<React.SetStateAction<Args>>;
 }
+const currentYear = new Date().getFullYear();
 
 const ArgsContextValue: ArgsContext = {
   selectedArgs: {
     metacritic: 0,
     search_precise: false,
-    dates: [1960, 2024],
+    dates: [1960, currentYear],
   },
   setSelectedArgs: () => {},
 };
@@ -30,7 +31,7 @@ export const ArgsContextProvider = ({ children }: ContextProps) => {
   const [selectedArgs, setSelectedArgs] = useState<Args>({
     metacritic: 0,
     search_precise: false,
-    dates: [1960, 2024],
+    dates: [1960, currentYear],
   });
 
   const contextItems = {

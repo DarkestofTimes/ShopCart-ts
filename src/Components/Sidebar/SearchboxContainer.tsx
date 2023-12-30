@@ -19,7 +19,7 @@ export const SearchboxContainer = () => {
   };
 
   return (
-    <section className="h-10 flex border-solid border-2 border-black w-full">
+    <section className="h-14 flex border-solid border-2 border-black w-full text-xl">
       <input
         name="search"
         id="search"
@@ -42,7 +42,7 @@ const SearchButton = ({ searchValue }: SearchProp) => {
   const { selectedTags } = useTagsContext();
   const { selectedArgs } = useArgsContext();
   const currentDate = new Date();
-  const daysNadMonths =
+  const daysAndMonths =
     selectedArgs.dates[1] == currentDate.getFullYear()
       ? `-${currentDate.getMonth()}-${currentDate.getDate()}`
       : "-01-01";
@@ -59,12 +59,12 @@ const SearchButton = ({ searchValue }: SearchProp) => {
         "-01-01" +
         "," +
         `${selectedArgs.dates[1]}` +
-        `${daysNadMonths}`,
+        `${daysAndMonths}`,
     };
 
     const path = Object.entries(pathObject)
       .filter(
-        ([value]) => value !== undefined && value !== null && value !== ""
+        ([, value]) => value !== undefined && value !== null && value !== ""
       )
       .map(([key, value]) => `&${key}=${value}`)
       .join("");
@@ -79,7 +79,7 @@ const SearchButton = ({ searchValue }: SearchProp) => {
   return (
     <Link
       to={path}
-      className="w-12 border-2 border-purple-600 hover:border-[#f0f8ff] focus:border-[#f0f8ff] text-[#f0f8ff] hover:text-purple-600 focus:text-purple-600 transition-all duration-200 flex justify-center items-center rounded-r">
+      className="w-14 border-2 border-purple-600 hover:border-[#f0f8ff] focus:border-[#f0f8ff] text-[#f0f8ff] hover:text-purple-600 focus:text-purple-600 transition-all duration-200 flex justify-center items-center rounded-r">
       S
     </Link>
   );
