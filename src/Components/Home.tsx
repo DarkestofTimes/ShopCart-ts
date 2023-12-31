@@ -1,8 +1,8 @@
-import { NoSideLayout } from "./Layout";
+import { RightSideLayout } from "./Layout";
 
 export const Home = () => {
   return (
-    <NoSideLayout>
+    <RightSideLayout>
       <section className="min-h-[93vh] flex flex-col items-center gap-4 p-4">
         <img src="" alt="" />
         <h1 className="text-4xl font-bold">Lorem ipsum dolor sit amet.</h1>
@@ -13,6 +13,6 @@ export const Home = () => {
           nobis sed dolores placeat.
         </p>
       </section>
-    </NoSideLayout>
+    </RightSideLayout>
   );
 };

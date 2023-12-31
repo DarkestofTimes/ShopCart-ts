@@ -1,0 +1,9 @@
+export const calcSum = (array) => {
+  const sum = array.reduce((accumulator, item) => {
+    const price = item.pricing.onSale
+      ? item.pricing.salePrice
+      : item.pricing.price;
+    return accumulator + price;
+  }, 0);
+  return Number(sum.toFixed(2));
+};

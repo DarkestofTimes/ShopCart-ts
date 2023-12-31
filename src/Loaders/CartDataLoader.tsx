@@ -25,14 +25,16 @@ export const CartDataLoader =
   ({ CartContext }: dataProps) =>
   async ({ params }: Request) => {
     const { page } = params;
+    const { cart } = CartContext;
     if (!page) {
       return;
     }
+
     const sliceIndex = Number(page) === 1 ? 0 : (Number(page) - 1) * 20;
-    const CartData = CartContext
+    const CartData = cart
       ? {
-          count: CartContext.results.length,
-          results: CartContext.results.slice(sliceIndex, sliceIndex + 20),
+          count: cart.count,
+          results: cart.results.slice(sliceIndex, sliceIndex + 20),
         }
       : null;
 

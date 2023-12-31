@@ -17,7 +17,7 @@ export const AddToBtnContainer = ({
   pricing,
   details,
   CartContext,
-  setSwitchBtn,
+  setCartContext,
 }: BtnProps) => {
   if (!pricing) {
     return;
@@ -25,22 +25,23 @@ export const AddToBtnContainer = ({
 
   const handleClick = () => {
     if (!CartContext.results.some((item) => item.id === details.id)) {
-      (CartContext.results = [
-        ...CartContext.results,
-        {
-          id: details.id,
-          name: details.name,
-          background_image: details.background_image,
-          pricing: {
-            price: pricing.price,
-            onSale: pricing.onSale,
-            salePrice: pricing.salePrice,
-            salePercent: pricing.salePercent,
+      setCartContext({
+        results: [
+          ...CartContext.results,
+          {
+            id: details.id,
+            name: details.name,
+            background_image: details.background_image,
+            pricing: {
+              price: pricing.price,
+              onSale: pricing.onSale,
+              salePrice: pricing.salePrice,
+              salePercent: pricing.salePercent,
+            },
           },
-        },
-      ]),
-        console.log(CartContext);
-      setSwitchBtn!(false);
+        ],
+        count: CartContext.count + 1,
+      });
     }
   };
 
@@ -71,13 +72,14 @@ export const AddToBtnContainer = ({
 export const RemoveFromBtnContainer = ({
   details,
   CartContext,
-  setSwitchBtn,
+  setCartContext,
 }: BtnProps) => {
   const handleClick = () => {
-    CartContext.results = CartContext.results.filter(
-      (item) => item.id !== details.id
-    );
-    setSwitchBtn!(true);
+    setCartContext({
+      ...CartContext,
+      results: CartContext.results.filter((item) => item.id !== details.id),
+      count: CartContext.count - 1,
+    });
   };
   return (
     <section className="w-full h-full">

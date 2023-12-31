@@ -11,12 +11,10 @@ import {
 } from "./AddToBtnContainer.tsx";
 import { PlatformsContainer } from "./PlatformsContainer.tsx";
 import { useCartContext } from "../../../Context/ContextProvider";
-import { useState } from "react";
 
 export const MetaContainer = ({ details }: ItemProp) => {
   const { pricing } = usePricingContext();
-  const CartContext = useCartContext();
-  const [, setSwitchBtn] = useState<boolean | undefined>();
+  const { cart, setCart } = useCartContext();
 
   return (
     <section className="col-span-2 row-span-2  grid  grid-cols-3 grid-rows-3 items-center gap-3 max-h-[35vh]">
@@ -24,18 +22,18 @@ export const MetaContainer = ({ details }: ItemProp) => {
       <ESRBContainer details={details} />
       <div className="grid row-span-3 grid-rows-2 justify-start grid-cols-1  h-full pl-3 col-start-3 row-start-1">
         <div className=" w-full pt-2">
-          {CartContext.results.some((item) => item.id === details.id) ? (
+          {cart.results.some((item) => item.id === details.id) ? (
             <RemoveFromBtnContainer
               details={details}
-              CartContext={CartContext}
-              setSwitchBtn={setSwitchBtn}
+              CartContext={cart}
+              setCartContext={setCart}
             />
           ) : (
             <AddToBtnContainer
               details={details}
               pricing={pricing}
-              CartContext={CartContext}
-              setSwitchBtn={setSwitchBtn}
+              CartContext={cart}
+              setCartContext={setCart}
             />
           )}
         </div>

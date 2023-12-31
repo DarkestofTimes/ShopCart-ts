@@ -1,4 +1,4 @@
-import { createContext, useRef, ReactNode } from "react";
+import { createContext, useState, ReactNode } from "react";
 
 interface ContextProps {
   children: ReactNode;
@@ -29,14 +29,14 @@ const cartContextValue: CartContext = {
 export const CartContext = createContext<CartContext>(cartContextValue);
 
 export const CartContextProvider: React.FC<ContextProps> = ({ children }) => {
-  const cart = useRef<CartContext>({
+  const [cart, setCart] = useState<CartContext>({
     count: 0,
     results: [],
   });
 
   const contextItems: CartContext = {
-    count: cart.current.count,
-    results: cart.current.results,
+    cart,
+    setCart,
   };
 
   return (
