@@ -12,10 +12,12 @@ import { ErrorPage } from "./ErrorPage";
 import { DataLoader } from "../Loaders/DataLoader";
 import { ItemLoader } from "../Loaders/ItemLoader";
 import { SidebarLoader } from "../Loaders/SidebarLoader";
+import { CartDataLoader } from "../Loaders/CartDataLoader";
 import {
   useShopDataContext,
   useItemContext,
   useCategoriesContext,
+  useCartContext,
 } from "./Context/ContextProvider";
 
 const AppLayout = () => (
@@ -29,6 +31,7 @@ export const App = () => {
   const shopData = useShopDataContext();
   const Items = useItemContext();
   const categories = useCategoriesContext();
+  const CartContext = useCartContext();
 
   const router = createBrowserRouter([
     {
@@ -49,8 +52,9 @@ export const App = () => {
         },
 
         {
-          path: "cart/:filter?/:search?/:pageIndex",
+          path: "cart/:page/*?",
           element: <Cart />,
+          loader: CartDataLoader({ CartContext }),
         },
         {
           path: "items/:page/:itemId",

@@ -7,6 +7,7 @@ import {
   CategoriesContext,
   CategoriesContextProvider,
 } from "./CategoriesContext";
+import { CartContext, CartContextProvider } from "./CartContext";
 
 interface ContextProps {
   children: ReactNode;
@@ -28,6 +29,7 @@ export interface ShopItem {
   ratings_count: number;
   name: string;
   metacritic: number;
+  isInCart?: boolean;
   pricing: {
     price: number;
     onSale: boolean;
@@ -46,11 +48,13 @@ export interface ShopItem {
 export const ContextProvider: React.FC<ContextProps> = ({ children }) => {
   return (
     <ShopDataContextProvider>
-      <PricingContextProvider>
-        <ItemContextProvider>
-          <CategoriesContextProvider>{children}</CategoriesContextProvider>
-        </ItemContextProvider>
-      </PricingContextProvider>
+      <CartContextProvider>
+        <PricingContextProvider>
+          <ItemContextProvider>
+            <CategoriesContextProvider>{children}</CategoriesContextProvider>
+          </ItemContextProvider>
+        </PricingContextProvider>
+      </CartContextProvider>
     </ShopDataContextProvider>
   );
 };
@@ -59,3 +63,4 @@ export const useShopDataContext = () => useContext(ShopDataContext);
 export const usePricingContext = () => useContext(PricingContext);
 export const useItemContext = () => useContext(ItemContext);
 export const useCategoriesContext = () => useContext(CategoriesContext);
+export const useCartContext = () => useContext(CartContext);

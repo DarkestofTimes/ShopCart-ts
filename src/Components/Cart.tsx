@@ -1,13 +1,16 @@
 import { Grid } from "./Grid";
-import { Layout } from "./Layout";
-import { useShopDataContext } from "./Context/ContextProvider";
+import { DataItem } from "./Context/ContextProvider";
+import { useLoaderData } from "react-router-dom";
+import { NoSideLayout } from "./Layout";
 
 export const Cart = () => {
-  const { shopData, setShopData } = useShopDataContext();
+  const { CartData } = useLoaderData() as { CartData: DataItem };
   const routeValue = "cart";
+  const items = CartData ? CartData.results : null;
+
   return (
-    <Layout>
-      <Grid data={shopData} setData={setShopData} routeValue={routeValue} />
-    </Layout>
+    <NoSideLayout>
+      {items && <Grid data={CartData} items={items} routeValue={routeValue} />}
+    </NoSideLayout>
   );
 };
