@@ -11,7 +11,7 @@ interface layoutProps {
 
 export const Layout = ({ children }: layoutProps) => {
   return (
-    <main className="grid grid-cols-4">
+    <main className="grid grid-cols-4 mt-10">
       <Header />
       <SidebarContextProvider>
         <Sidebar />
@@ -24,7 +24,7 @@ export const Layout = ({ children }: layoutProps) => {
 
 export const RightSideLayout = ({ children }: layoutProps) => {
   return (
-    <main className="grid grid-cols-4">
+    <main className="grid grid-cols-4 mt-10">
       <Header />
       <RightSidebar />
       {children}
@@ -35,7 +35,7 @@ export const RightSideLayout = ({ children }: layoutProps) => {
 
 export const NoSideLayout = ({ children }: layoutProps) => {
   return (
-    <main>
+    <main className="mt-10">
       <Header />
       {children}
       <Footer />

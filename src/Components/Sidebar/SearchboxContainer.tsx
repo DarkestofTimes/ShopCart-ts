@@ -44,8 +44,9 @@ const SearchButton = ({ searchValue }: SearchProp) => {
   const currentDate = new Date();
   const daysAndMonths =
     selectedArgs.dates[1] == currentDate.getFullYear()
-      ? `-${currentDate.getMonth()}-${currentDate.getDate()}`
+      ? `-${currentDate.getMonth() + 1}-${currentDate.getDate()}`
       : "-01-01";
+
   const constructPath = () => {
     const pathObject = {
       platforms: selectedPlatforms.map((item) => item.id).join(","),

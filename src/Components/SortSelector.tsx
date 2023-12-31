@@ -37,7 +37,7 @@ export const SortSelector = ({ routeValue }: SortProps) => {
 
   return (
     <div
-      className="col-span-full flex justify-self-end mr-8 w-min flex-nowrap outline outline-purple-600 rounded p-2 whitespace-nowrap gap-2 cursor-pointer transition-all duration-200 hover:outline-[#f0f8ff] focus:outline-[#f0f8ff] hover:text-purple-600 focus:text-purple-600 relative z-10 mb-2"
+      className="col-span-full flex justify-self-end mr-8 w-min flex-nowrap outline outline-purple-600 rounded p-2 whitespace-nowrap gap-2 cursor-pointer transition-all duration-200 hover:outline-[#f0f8ff] focus:outline-[#f0f8ff] hover:text-purple-600 focus:text-purple-600 relative z-10 mb-2 h-min"
       onClick={handleExpand}>
       <span className="">Sort By:</span>
       <span className="font-bold">{selected}</span>

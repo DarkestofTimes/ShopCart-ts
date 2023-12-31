@@ -7,6 +7,7 @@ export const DoubleSliderYears = ({
 }: ArgsContext) => {
   const minVal = 1960;
   const maxVal = new Date().getFullYear();
+
   const minGap = 1;
   const handleMin = (
     ev: React.ChangeEvent<HTMLInputElement>,

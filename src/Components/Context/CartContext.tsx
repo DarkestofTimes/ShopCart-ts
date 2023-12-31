@@ -51,23 +51,7 @@ const cartContextValue: CartContext = {
 export const CartContext = createContext<CartContext>(cartContextValue);
 
 export const CartContextProvider: React.FC<ContextProps> = ({ children }) => {
-  const [cart, setCart] = useState<Cart>({
-    count: 0,
-    results: [
-      {
-        id: 0,
-        name: "",
-        background_image: "",
-        pricing: {
-          price: 0,
-          onSale: false,
-          salePrice: 0,
-          salePercent: "",
-        },
-      },
-    ],
-    sum: 0,
-  });
+  const [cart, setCart] = useState<Cart>({ count: 0, results: [], sum: 0 });
 
   const contextItems: CartContext = {
     cart,

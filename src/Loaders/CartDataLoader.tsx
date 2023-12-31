@@ -23,6 +23,7 @@ export const CartDataLoader =
       ? {
           count: cart.count,
           results: cart.results.slice(sliceIndex, sliceIndex + 20),
+          sum: cart.sum,
         }
       : null;
 

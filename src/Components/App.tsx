@@ -39,11 +39,11 @@ export const App = () => {
       element: <AppLayout />,
       loader: SidebarLoader({ categories }),
       id: "root",
+      errorElement: <ErrorPage />,
       children: [
         {
           index: true,
           element: <Home />,
-          errorElement: <ErrorPage />,
         },
         {
           path: "shop/:page/*?",
@@ -57,7 +57,7 @@ export const App = () => {
           loader: CartDataLoader({ CartContext }),
         },
         {
-          path: "items/:page/:itemId",
+          path: "items/:routeValue/:itemId",
           element: <ItemPage />,
           loader: ItemLoader({ Items }),
         },
