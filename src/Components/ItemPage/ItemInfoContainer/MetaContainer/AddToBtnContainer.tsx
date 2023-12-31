@@ -1,5 +1,5 @@
 import { ItemProp } from "../ItemInfoContainer";
-import { CartContext } from "../../../Context/CartContext";
+import { Cart } from "../../../Context/CartContext";
 
 interface BtnProps extends ItemProp {
   pricing?: {
@@ -9,25 +9,26 @@ interface BtnProps extends ItemProp {
     salePrice: number;
     salePercent: string;
   };
-  CartContext: CartContext;
-  setSwitchBtn: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  Cart: Cart;
+  setCart: React.Dispatch<React.SetStateAction<Cart>>;
 }
 
 export const AddToBtnContainer = ({
   pricing,
   details,
-  CartContext,
-  setCartContext,
+  Cart,
+  setCart,
 }: BtnProps) => {
   if (!pricing) {
     return;
   }
 
   const handleClick = () => {
-    if (!CartContext.results.some((item) => item.id === details.id)) {
-      setCartContext({
+    if (!Cart.results.some((item) => item.id === details.id)) {
+      setCart({
+        ...Cart,
         results: [
-          ...CartContext.results,
+          ...Cart.results,
           {
             id: details.id,
             name: details.name,
@@ -40,7 +41,7 @@ export const AddToBtnContainer = ({
             },
           },
         ],
-        count: CartContext.count + 1,
+        count: Cart.count + 1,
       });
     }
   };
@@ -71,14 +72,14 @@ export const AddToBtnContainer = ({
 
 export const RemoveFromBtnContainer = ({
   details,
-  CartContext,
-  setCartContext,
+  Cart,
+  setCart,
 }: BtnProps) => {
   const handleClick = () => {
-    setCartContext({
-      ...CartContext,
-      results: CartContext.results.filter((item) => item.id !== details.id),
-      count: CartContext.count - 1,
+    setCart({
+      ...Cart,
+      results: Cart.results.filter((item) => item.id !== details.id),
+      count: Cart.count - 1,
     });
   };
   return (

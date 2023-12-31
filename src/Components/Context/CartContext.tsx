@@ -16,22 +16,57 @@ export interface Item {
   };
 }
 
-export interface CartContext {
+export interface Cart {
   count: number;
   results: Item[];
+  sum: number;
+}
+
+export interface CartContext {
+  cart: Cart;
+  setCart: React.Dispatch<React.SetStateAction<Cart>>;
 }
 
 const cartContextValue: CartContext = {
-  count: 0,
-  results: [],
+  cart: {
+    count: 0,
+    results: [
+      {
+        id: 0,
+        name: "",
+        background_image: "",
+        pricing: {
+          price: 0,
+          onSale: false,
+          salePrice: 0,
+          salePercent: "",
+        },
+      },
+    ],
+    sum: 0,
+  },
+  setCart: () => {},
 };
 
 export const CartContext = createContext<CartContext>(cartContextValue);
 
 export const CartContextProvider: React.FC<ContextProps> = ({ children }) => {
-  const [cart, setCart] = useState<CartContext>({
+  const [cart, setCart] = useState<Cart>({
     count: 0,
-    results: [],
+    results: [
+      {
+        id: 0,
+        name: "",
+        background_image: "",
+        pricing: {
+          price: 0,
+          onSale: false,
+          salePrice: 0,
+          salePercent: "",
+        },
+      },
+    ],
+    sum: 0,
   });
 
   const contextItems: CartContext = {

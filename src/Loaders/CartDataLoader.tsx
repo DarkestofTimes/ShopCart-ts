@@ -1,24 +1,12 @@
 import { Params } from "react-router-dom";
+import { CartContext } from "../Components/Context/CartContext";
 
 interface Request {
   params: Params;
 }
 
 interface dataProps {
-  CartContext: {
-    count: number;
-    results: {
-      id: number;
-      name: string;
-      background_image: string;
-      pricing: {
-        price: number;
-        onSale: boolean;
-        salePrice: number;
-        salePercent: string;
-      };
-    }[];
-  };
+  CartContext: CartContext;
 }
 
 export const CartDataLoader =

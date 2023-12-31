@@ -1,4 +1,6 @@
-export const calcSum = (array) => {
+import { Item } from "../Components/Context/CartContext";
+
+export const calcSum = (array: Item[]) => {
   const sum = array.reduce((accumulator, item) => {
     const price = item.pricing.onSale
       ? item.pricing.salePrice

@@ -25,15 +25,15 @@ export const MetaContainer = ({ details }: ItemProp) => {
           {cart.results.some((item) => item.id === details.id) ? (
             <RemoveFromBtnContainer
               details={details}
-              CartContext={cart}
-              setCartContext={setCart}
+              Cart={cart}
+              setCart={setCart}
             />
           ) : (
             <AddToBtnContainer
               details={details}
               pricing={pricing}
-              CartContext={cart}
-              setCartContext={setCart}
+              Cart={cart}
+              setCart={setCart}
             />
           )}
         </div>
