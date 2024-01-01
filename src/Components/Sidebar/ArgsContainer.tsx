@@ -73,7 +73,7 @@ const PreciseSearch = ({ selectedArgs, setSelectedArgs }: ArgsContext) => {
     });
   };
   return (
-    <div className="flex w-full items-center gap-4 pb-3 pt-3 pl-5 pr-5 border-t-2 border-b-2 border-purple-600">
+    <div className="flex w-full items-center gap-4 pb-3 pt-3 pl-5 pr-5 border-t-2 border-b-2 border-purple-600 accent-purple-600">
       <label htmlFor="preciseCheckBox" className="text-xl">
         Enable precise search:
       </label>

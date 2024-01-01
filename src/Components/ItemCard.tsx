@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ShopItem, usePricingContext } from "./Context/ContextProvider.tsx";
 import { platformsSVG } from "./platformsSVG.tsx";
+import { useCartContext } from "./Context/ContextProvider";
 
 interface ItemCardProps {
   item: ShopItem | undefined;
@@ -42,7 +43,11 @@ export const ItemCard = ({ item, routeValue }: ItemCardProps) => {
           className="w-full h-full object-cover "
         />
         <div className="grid grid-cols-3  text-2xl font-bold items-center ">
-          <MetacritContainer item={item} />
+          {routeValue === "shop" ? (
+            <MetacritContainer item={item} />
+          ) : (
+            <RemoveFromCart ID={item.id} />
+          )}
           <PriceContainer item={item} />
           <RatingContainer item={item} />
         </div>
@@ -50,6 +55,31 @@ export const ItemCard = ({ item, routeValue }: ItemCardProps) => {
       <PlatformContainer item={item} />
       <h3 className="font-bold text-2xl">{item.name}</h3>
     </Link>
+  );
+};
+
+interface RemoveBtnProp {
+  ID: number;
+}
+
+const RemoveFromCart = ({ ID }: RemoveBtnProp) => {
+  const { cart, setCart } = useCartContext();
+
+  const handleRemoveClick = (ev: React.MouseEvent<HTMLButtonElement>) => {
+    ev.stopPropagation();
+    ev.preventDefault();
+    setCart({
+      ...cart,
+      results: cart.results.filter((item) => item.id !== ID),
+      count: cart.count - 1,
+    });
+  };
+  return (
+    <button
+      className="bg-purple-600 h-full w-full hover:bg-[#f0f8ff] focus:bg-[#f0f8ff] hover:text-purple-600 focus:text-purple-600 transition-colors duration-200 text-base"
+      onClick={handleRemoveClick}>
+      Remove
+    </button>
   );
 };
 
@@ -92,8 +122,7 @@ const PriceContainer = ({ item }: ItemProp) => {
           </p>
         </div>
       ) : (
-        <p
-          className={`w-full text-center text-3xl col-span-2 text-end pr-2 ${saleColor}`}>
+        <p className={`w-full  text-3xl col-span-2 text-end pr-2 ${saleColor}`}>
           {item.pricing.price}$
         </p>
       )}

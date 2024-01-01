@@ -82,7 +82,7 @@ export const ItemPage = () => {
 
   return (
     <NoSideLayout>
-      <section className="min-h-[93vh] grid grid-cols-3 grid-rows-[80vh] p-8 gap-4 ">
+      <section className="min-h-[93vh] grid grid-cols-3 grid-rows-[75vh] p-8 gap-4 ">
         <div className="col-span-2 h-full flex">
           <ImgContainer imgs={imgs} />
         </div>

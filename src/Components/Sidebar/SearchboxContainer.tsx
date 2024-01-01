@@ -44,7 +44,12 @@ const SearchButton = ({ searchValue }: SearchProp) => {
   const currentDate = new Date();
   const daysAndMonths =
     selectedArgs.dates[1] == currentDate.getFullYear()
-      ? `-${currentDate.getMonth() + 1}-${currentDate.getDate()}`
+      ? `-${(currentDate.getMonth() + 1)
+          .toString()
+          .padStart(2, "0")}-${currentDate
+          .getDate()
+          .toString()
+          .padStart(2, "0")}`
       : "-01-01";
 
   const constructPath = () => {
@@ -77,11 +82,36 @@ const SearchButton = ({ searchValue }: SearchProp) => {
     `/shop/1${politeParams.ordering ? politeParams.ordering : ""}` +
     constructPath();
 
+  const lensSVG = (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      stroke="#f0f8ff"
+      data-darkreader-inline-stroke="">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+        {" "}
+        <path
+          d="M11 6C13.7614 6 16 8.23858 16 11M16.6588 16.6549L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+          stroke="#f0f8ff"
+          stroke-width="2"
+          strokeLinecap="round"
+          stroke-linejoin="round"
+          data-darkreader-inline-stroke=""></path>{" "}
+      </g>
+    </svg>
+  );
+
   return (
     <Link
       to={path}
       className="w-14 border-2 border-purple-600 hover:border-[#f0f8ff] focus:border-[#f0f8ff] text-[#f0f8ff] hover:text-purple-600 focus:text-purple-600 transition-all duration-200 flex justify-center items-center rounded-r">
-      S
+      {lensSVG}
     </Link>
   );
 };

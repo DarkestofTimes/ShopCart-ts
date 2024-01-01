@@ -52,11 +52,11 @@ export const AddToBtnContainer = ({
         className="text-4xl grid h-full grid-cols-2 font-bold rounded border-purple-800 border-2 p-4  bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 place-items-center"
         onClick={handleClick}>
         {pricing.onSale ? (
-          <div className="grid grid-cols-2 grid-rows-2 place-items-center h-full w-full">
+          <div className="grid grid-cols-2 grid-rows-2  place-items-center h-min w-full">
             <span className="text-base pr-2">
               <s>{pricing.price}$</s>
             </span>
-            <span className="col-start-2 text-2xl font-normal">
+            <span className="col-start-2 text-2xl font-normal ">
               -{pricing.salePercent}
             </span>
             <span className="row-span-2 w-full pl-2">{pricing.salePrice}$</span>

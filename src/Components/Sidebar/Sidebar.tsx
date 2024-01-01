@@ -41,7 +41,7 @@ export const Sidebar = () => {
   ) as SidebarLoaderResult;
 
   return (
-    <section className="h-full  col-span-1 grid grid-rows-[repeat(6,min-content)] gap-1 p-2 ">
+    <section className="h-min mt-16 col-span-1 grid grid-rows-[repeat(6,min-content)] gap-1 p-2 ">
       <PremadeLinks />
       <SelectedContainer />
       <SearchboxContainer />
