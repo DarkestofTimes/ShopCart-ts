@@ -64,6 +64,22 @@ interface RemoveBtnProp {
 
 const RemoveFromCart = ({ ID }: RemoveBtnProp) => {
   const { cart, setCart } = useCartContext();
+  const RemoveFromSVG = (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-10">
+      <path
+        d="M21 5L19 12H7.37671M20 16H8L6 3H3M13.5 3V9M13.5 3L11.5 5M13.5 3L15.5 5M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+        stroke="#f0f8ff"
+        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        data-darkreader-inline-stroke=""
+        className="group-hover:stroke-purple-600 "></path>{" "}
+    </svg>
+  );
 
   const handleRemoveClick = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.stopPropagation();
@@ -76,9 +92,9 @@ const RemoveFromCart = ({ ID }: RemoveBtnProp) => {
   };
   return (
     <button
-      className="bg-purple-600 h-full w-full hover:bg-[#f0f8ff] focus:bg-[#f0f8ff] hover:text-purple-600 focus:text-purple-600 transition-colors duration-200 text-base"
+      className="bg-purple-600 h-full w-full hover:bg-[#f0f8ff] focus:bg-[#f0f8ff] hover:text-purple-600 focus:text-purple-600 transition-colors duration-200 text-base justify-center flex group"
       onClick={handleRemoveClick}>
-      Remove
+      {RemoveFromSVG}
     </button>
   );
 };

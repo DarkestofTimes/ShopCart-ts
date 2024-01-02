@@ -23,6 +23,23 @@ export const AddToBtnContainer = ({
     return;
   }
 
+  const AddToSVG = (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-24">
+      <path
+        d="M21 5L19 12H7.37671M20 16H8L6 3H3M11.5 7L13.5 9M13.5 9L15.5 7M13.5 9V3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+        stroke="#f0f8ff"
+        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        data-darkreader-inline-stroke=""
+        className="group-hover:stroke-purple-600"></path>{" "}
+    </svg>
+  );
+
   const handleClick = () => {
     if (!Cart.results.some((item) => item.id === details.id)) {
       setCart({
@@ -49,7 +66,7 @@ export const AddToBtnContainer = ({
   return (
     <section className="h-full w-full ">
       <button
-        className="text-4xl grid h-full grid-cols-2 font-bold rounded border-purple-800 border-2 p-4  bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 place-items-center"
+        className="text-4xl grid h-full grid-cols-2 font-bold rounded border-purple-800 border-2 p-4  bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 place-items-center group"
         onClick={handleClick}>
         {pricing.onSale ? (
           <div className="grid grid-cols-2 grid-rows-2  place-items-center h-min w-full">
@@ -64,7 +81,7 @@ export const AddToBtnContainer = ({
         ) : (
           <span className="text-4xl font-bold w-full ">{pricing.price}$</span>
         )}
-        Add to Cart
+        {AddToSVG}
       </button>
     </section>
   );
@@ -75,6 +92,23 @@ export const RemoveFromBtnContainer = ({
   Cart,
   setCart,
 }: BtnProps) => {
+  const RemoveFromSVG = (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-24">
+      <path
+        d="M21 5L19 12H7.37671M20 16H8L6 3H3M13.5 3V9M13.5 3L11.5 5M13.5 3L15.5 5M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+        stroke="#f0f8ff"
+        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        data-darkreader-inline-stroke=""
+        className="group-hover:stroke-purple-600"></path>{" "}
+    </svg>
+  );
+
   const handleClick = () => {
     setCart({
       ...Cart,
@@ -85,9 +119,9 @@ export const RemoveFromBtnContainer = ({
   return (
     <section className="w-full h-full">
       <button
-        className="text-4xl font-bold rounded border-purple-800 border-2 p-4 h-full w-full bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 "
+        className="text-4xl font-bold rounded border-purple-800 border-2 p-4 h-full w-full bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 group justify-center flex"
         onClick={handleClick}>
-        Remove From Cart
+        {RemoveFromSVG}
       </button>
     </section>
   );

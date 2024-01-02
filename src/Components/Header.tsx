@@ -57,7 +57,7 @@ const CartBtn = () => {
   }, [cart.count]);
 
   return (
-    <li className="flex h-10 rounded mr-auto transition-all duration-200 border-2 border-purple-600 hover:border-[#f0f8ff] focus:border-[#f0f8ff] text-center font-bold text-xl hover:bg-[#f0f8ff] hover:text-purple-600 focus:bg-[#f0f8ff] focus:text-purple-600 bg-purple-600 group">
+    <li className="flex h-10 rounded mr-auto transition-all duration-200 border-2 border-purple-600 hover:border-[#f0f8ff] focus:border-[#f0f8ff] text-center font-bold text-xl hover:bg-[#f0f8ff] hover:text-purple-600 focus:bg-[#f0f8ff] focus:text-purple-600 bg-purple-600 group ">
       <Link to="/cart/1" className="p-1 flex w-min items-center">
         <div className="p-1 pl-2 pr-2 text-center font-bold bg-[#f0f8ff] text-purple-600  rounded  ">
           {cart.count}

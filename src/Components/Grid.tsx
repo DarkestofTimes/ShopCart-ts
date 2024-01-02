@@ -11,8 +11,12 @@ interface GridProps {
 
 export const Grid = ({ data, items, routeValue }: GridProps) => {
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,max(220px,17vw))] grid-rows-auto gap-2 p-4  col-span-3 h-min min-h-[89vh]">
-      {routeValue === "shop" && <SortSelector routeValue={routeValue} />}
+    <div className="grid grid-cols-[repeat(auto-fill,max(220px,17vw))] grid-rows-auto gap-2 p-4 col-span-3 h-min">
+      {routeValue === "shop" ? (
+        <SortSelector routeValue={routeValue} />
+      ) : (
+        <div className="col-span-full flex h-10 relative "></div>
+      )}
       <ItemList items={items} routeValue={routeValue} />
       <Paginator data={data} routeValue={routeValue} />
     </div>
