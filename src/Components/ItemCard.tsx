@@ -33,7 +33,7 @@ export const ItemCard = ({ item, routeValue }: ItemCardProps) => {
       to={`/items/${routeValue}/${item.id}`}
       className=" h-min w-min hover:scale-105 focus:scale-105 transition-all duration-200 ">
       <div
-        className="border-solid border-2 border-purple-600 rounded w-[max(220px,15vw)]  aspect-square hover:border-[#f0f8ff] focus:border-[#f0f8ff] relative"
+        className="border-solid border-2 border-purple-600 rounded sm:w-[max(220px,15vw)] w-[max(290px,15vw)] aspect-square hover:border-[#f0f8ff] focus:border-[#f0f8ff] relative"
         onClick={handleClick}>
         {item.isInCart && <CartIndicator />}
         <img

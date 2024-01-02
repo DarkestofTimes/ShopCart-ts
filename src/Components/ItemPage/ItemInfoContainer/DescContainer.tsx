@@ -34,7 +34,7 @@ export const DescContainer = ({ details }: ItemProp) => {
     <section className="col-span-3 ">
       <h1 className="font-bold text-5xl p-4">{details.name}</h1>
       {paragraphs.map((par, index) => (
-        <p key={index} className="p-6 text-2xl whitespace-pre-line">
+        <p key={index} className="sm:p-6 p-2 text-2xl whitespace-pre-line">
           {par}
         </p>
       ))}

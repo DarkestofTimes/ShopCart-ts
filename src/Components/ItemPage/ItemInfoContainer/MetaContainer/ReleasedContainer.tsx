@@ -7,7 +7,7 @@ export const ReleasedContainer = ({ details }: ItemProp) => {
   const formatted = formatDateAddYear(currentDate, true);
 
   return (
-    <section className="h-full w-full col-start-1 row-start-1">
+    <section className="h-full sm:w-full w-full sm:col-start-1 sm:row-start-1">
       <h3 className="font-bold pb-2"> Release Date: </h3>
       {details.tba ? (
         "TBA"

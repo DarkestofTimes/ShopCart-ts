@@ -4,7 +4,7 @@ export const RightSidebar = () => {
   const { cart } = useCartContext();
 
   return (
-    <section className="col-start-4 row-span-full mt-16 p-2 flex flex-col gap-4">
+    <section className="sm:col-start-4 row-span-full sm:mt-16 mt-8 p-2 flex flex-col gap-4">
       <div className="border-2 border-purple-600 rounded p-2 flex items-center gap-4 font-bold text-2xl">
         <span className="bg-[#f0f8ff] text-purple-600 rounded flex items-center w-min p-1 text-2xl font-bold">
           {cart.count}{" "}

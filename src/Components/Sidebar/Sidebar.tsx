@@ -41,11 +41,11 @@ export const Sidebar = () => {
   ) as SidebarLoaderResult;
 
   return (
-    <section className="h-min mt-16 col-span-1 grid grid-rows-[repeat(6,min-content)] gap-1 p-2 ">
-      <PremadeLinks />
-      <SelectedContainer />
+    <section className="h-min sm:mt-16 mt-4 col-span-1 grid grid-rows-[repeat(6,min-content)] gap-1 p-2 ">
       <SearchboxContainer />
+      <SelectedContainer />
       <SearchArgsContainer />
+      <PremadeLinks />
       <CollapseContainer value={"Platforms"}>
         <PlatformsContainer platforms={platforms} />
       </CollapseContainer>

@@ -16,9 +16,9 @@ export const ESRBContainer = ({ details }: ItemProp) => {
       : "text-black";
 
   return (
-    <section className="flex justify-center  col-start-2 row-start-1">
+    <section className="flex h-full sm:col-start-2 sm:row-start-1  text-center w-full justify-center">
       {details.esrb_rating ? (
-        <h2 className={`text-3xl font-bold `}>
+        <h2 className={`lg:text-3xl text-xl  font-bold grid `}>
           ESRB:{" "}
           <a
             href="https://www.esrb.org/ratings-guide/"

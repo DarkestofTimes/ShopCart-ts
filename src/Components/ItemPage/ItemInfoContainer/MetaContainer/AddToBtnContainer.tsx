@@ -66,7 +66,7 @@ export const AddToBtnContainer = ({
   return (
     <section className="h-full w-full ">
       <button
-        className="text-4xl grid h-full grid-cols-2 font-bold rounded border-purple-800 border-2 p-4  bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 place-items-center group"
+        className="text-4xl grid h-full w-full grid-cols-2 font-bold rounded border-purple-800 border-2 p-4 bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 place-items-center group"
         onClick={handleClick}>
         {pricing.onSale ? (
           <div className="grid grid-cols-2 grid-rows-2  place-items-center h-min w-full">
@@ -119,7 +119,7 @@ export const RemoveFromBtnContainer = ({
   return (
     <section className="w-full h-full">
       <button
-        className="text-4xl font-bold rounded border-purple-800 border-2 p-4 h-full w-full bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 group justify-center flex"
+        className="text-4xl font-bold rounded border-purple-800 border-2 p-4 h-30 w-full bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 group justify-center flex"
         onClick={handleClick}>
         {RemoveFromSVG}
       </button>

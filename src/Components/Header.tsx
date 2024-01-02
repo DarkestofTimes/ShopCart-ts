@@ -6,10 +6,10 @@ import { calcSum } from "../Functions/calcSum";
 
 export const Header = () => {
   return (
-    <header className="fixed top-0 w-full z-10 bg-[#0f0f0f] h-min p-2">
+    <header className="fixed top-0 w-full z-20 bg-[#0f0f0f] h-min p-2 ">
       <nav>
-        <ul className="grid grid-cols-4 gap-2 ">
-          <li className="w-full flex ">
+        <ul className="sm:grid flex sm:grid-cols-4 grid-cols-3 gap-2">
+          <li className="sm:flex hidden w-full  ">
             <img src="" alt="" />
           </li>
           <HomeBtn />
@@ -57,7 +57,7 @@ const CartBtn = () => {
   }, [cart.count]);
 
   return (
-    <li className="flex h-10 rounded mr-auto transition-all duration-200 border-2 border-purple-600 hover:border-[#f0f8ff] focus:border-[#f0f8ff] text-center font-bold text-xl hover:bg-[#f0f8ff] hover:text-purple-600 focus:bg-[#f0f8ff] focus:text-purple-600 bg-purple-600 group ">
+    <li className="flex w-full sm:w-min justify-center h-10 rounded mr-auto transition-all duration-200 border-2 border-purple-600 hover:border-[#f0f8ff] focus:border-[#f0f8ff] text-center font-bold text-xl hover:bg-[#f0f8ff] hover:text-purple-600 focus:bg-[#f0f8ff] focus:text-purple-600 bg-purple-600 group ">
       <Link to="/cart/1" className="p-1 flex w-min items-center">
         <div className="p-1 pl-2 pr-2 text-center font-bold bg-[#f0f8ff] text-purple-600  rounded  ">
           {cart.count}
@@ -67,7 +67,7 @@ const CartBtn = () => {
           viewBox="0 0 16.00 16.00"
           xmlns="http://www.w3.org/2000/svg"
           data-darkreader-inline-fill=""
-          className="group-hover:fill-purple-600 w-10">
+          className="group-hover:fill-purple-600 sm:w-10 w-7">
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
           <g
             id="SVGRepo_tracerCarrier"

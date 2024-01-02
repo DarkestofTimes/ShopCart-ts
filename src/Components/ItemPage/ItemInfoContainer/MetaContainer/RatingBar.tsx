@@ -5,7 +5,7 @@ export const RatingBar = ({ details }: ItemProp) => {
     return;
   }
   return (
-    <section className="grid grid-rows-2 col-span-2 h-full w-full items-end">
+    <section className="grid grid-rows-2 sm:col-span-2 col-span-full h-full w-full items-end">
       <h3 className="h-min pb-3 font-bold">Score break down:</h3>
       <div className="flex flex-row-reverse rounded border-purple-800 border-2 overflow-hidden h-min w-full">
         {details.ratings.map((rating) => (

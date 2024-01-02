@@ -57,9 +57,9 @@ interface pricing {
 
 export const ItemInfoContainer = ({ details, page }: ItemProp) => {
   return (
-    <section className="col-span-3 grid grid-rows-[min-content] grid-cols-3  w-full">
+    <section className="sm:col-span-3 col-span-full grid grid-rows-[min-content] sm:grid-cols-3 grid-cols-1 w-full">
       <MetaContainer details={details} page={page} />
-      <div className="row-span-2 grid h-full pl-3 col-start-3">
+      <div className="sm:row-span-2 grid h-full sm:pl-3 sm:col-start-3 col-span-full">
         <DevelopersContainer details={details} />
         <GenreContainer details={details} />
       </div>

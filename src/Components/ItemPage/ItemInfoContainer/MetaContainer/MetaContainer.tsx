@@ -17,10 +17,13 @@ export const MetaContainer = ({ details }: ItemProp) => {
   const { cart, setCart } = useCartContext();
 
   return (
-    <section className="col-span-2 row-span-2  grid  grid-cols-3 grid-rows-3 items-center gap-3 max-h-[35vh]">
-      <ReleasedContainer details={details} />
-      <ESRBContainer details={details} />
-      <div className="grid row-span-3 grid-rows-2 justify-start grid-cols-1  h-full pl-3 col-start-3 row-start-1">
+    <section className="sm:col-span-2 col-span-full row-span-2  grid  sm:grid-cols-3 grid-cols-1 sm:grid-rows-[min-content] grid-rows-[min-content] items-center gap-1 h-min">
+      <div className="flex w-full sm:col-span-2">
+        <ReleasedContainer details={details} />
+        <ESRBContainer details={details} />
+      </div>
+
+      <div className="grid sm:row-span-3 sm:grid-rows-2 justify-start grid-cols-1  h-full sm:pl-3 sm:col-start-3 sm:row-start-1">
         <div className=" w-full pt-2">
           {cart.results.some((item) => item.id === details.id) ? (
             <RemoveFromBtnContainer
@@ -39,8 +42,11 @@ export const MetaContainer = ({ details }: ItemProp) => {
         </div>
         <PlatformsContainer details={details} />
       </div>
-      <MetacritContainer details={details} />
-      <RatingContainer details={details} />
+      <div className="sm:col-span-2 flex w-full">
+        <MetacritContainer details={details} />
+        <RatingContainer details={details} />
+      </div>
+
       <RatingBar details={details} />
     </section>
   );

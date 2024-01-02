@@ -6,7 +6,7 @@ export const Footer = () => {
       xmlns="http://www.w3.org/2000/svg"
       fill="#f0f8ff"
       data-darkreader-inline-fill="">
-      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g
         id="SVGRepo_tracerCarrier"
         strokeLinecap="round"
@@ -44,7 +44,7 @@ export const Footer = () => {
     </svg>
   );
   return (
-    <footer className="relative bottom-0 text-center col-span-4 flex gap-12 items-center justify-center p-2">
+    <footer className="relative bottom-0 text-center col-span-4 flex sm:gap-12 gap-3 items-center justify-center p-2">
       <a
         href="https://github.com/DarkestofTimes"
         target="_blank"

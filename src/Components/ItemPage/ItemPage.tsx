@@ -82,11 +82,11 @@ export const ItemPage = () => {
 
   return (
     <NoSideLayout>
-      <section className="min-h-[93vh] grid grid-cols-3 grid-rows-[75vh] p-8 gap-4 ">
-        <div className="col-span-2 h-full flex">
+      <section className="min-h-[93vh] grid grid-cols-3 grid-rows-[75vh] lg:p-8 p-2 pt-6 gap-4 ">
+        <div className="sm:col-span-2 col-span-full h-full flex">
           <ImgContainer imgs={imgs} />
         </div>
-        <div className="grid grid-rows-2 gap-2">
+        <div className="grid grid-rows-2 col-span-full sm:col-span-1 gap-2 max-h-[40vh] sm:max-h-full">
           <SeriesContainer series={series} page={page} />
           <DLCContainer additions={additions} page={page} />
         </div>

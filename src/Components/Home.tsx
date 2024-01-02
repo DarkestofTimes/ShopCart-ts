@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const Home = () => {
   return (
     <NoSideLayout>
-      <section className="min-h-[85vh] items-center gap-4 p-4 grid grid-cols-2">
+      <section className="lg:min-h-[85vh] w-full items-center gap-4 p-4 sm:grid grid-cols-2">
         <h1 className="text-6xl font-bold col-span-2 text-center">
           Tiny Games Shop
         </h1>
@@ -21,9 +21,9 @@ export const Home = () => {
             </span>
             (and every day after)
           </p>
-          <div className=" font-bold text-5xl rounded border-2 border-purple-600 p-4 items-center flex justify-center">
+          <div className=" font-bold sm:text-5xl text-3xl rounded border-2 border-purple-600 p-4 items-center flex justify-center">
             Up to
-            <span className="font-bold text-8xl text-[#f0f8ff] bg-purple-600 rounded p-2">
+            <span className="font-bold lg:text-8xl  text-[#f0f8ff] bg-purple-600 rounded p-2 mr-2 ml-2">
               70%
             </span>
             off!
