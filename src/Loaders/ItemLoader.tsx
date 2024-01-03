@@ -1,10 +1,52 @@
 import { fetchItem } from "../Functions/FetchItem.tsx";
-import { Item } from "../Components/Context/ItemContext.tsx";
 import { key } from "../key.ts";
 import { Params } from "react-router-dom";
 
 interface Request {
   params: Params;
+}
+
+interface Item {
+  [key: string]: {
+    details: {
+      id: number;
+      background_image: string;
+      name: string;
+      released: string;
+    };
+    screens: {
+      results: {
+        id: number;
+        image: string;
+        data?: {
+          max: string;
+        };
+      }[];
+    };
+    additions: {
+      results: {
+        id: number;
+        background_image: string;
+        name: string;
+      }[];
+    };
+    trailers: {
+      results: {
+        id: number;
+        image?: string;
+        data: {
+          max: string;
+        };
+      }[];
+    };
+    series: {
+      results: {
+        id: number;
+        background_image: string;
+        name: string;
+      }[];
+    };
+  };
 }
 
 interface itemsProps {
@@ -21,13 +63,7 @@ export const ItemLoader =
       return;
     }
 
-    const localStored = JSON.parse(localStorage.getItem("ItemsObj"));
-
-    const item = localStored
-      ? localStored[itemId]
-      : Items.current
-      ? Items.current[itemId]
-      : null;
+    const item = Items.current ? Items.current[itemId] : null;
     const details = item ? item.details : null;
     const screens = item ? item.screens : null;
     const additions = item ? item.additions : null;
@@ -62,7 +98,6 @@ export const ItemLoader =
           series,
         },
       };
-      localStorage.setItem("ItemsObj", JSON.stringify(Items.current));
 
       return { details, screens, additions, trailers, series };
     }

@@ -1,5 +1,4 @@
 import { fetchItem } from "../Functions/FetchItem.tsx";
-import { Item } from "../Components/Context/ItemContext.tsx";
 import { key } from "../key.ts";
 import { Params } from "react-router-dom";
 
@@ -7,6 +6,34 @@ interface Request {
   params: Params;
 }
 
+interface Item {
+  [key: string]: {
+    genres: {
+      results: {
+        id: number;
+        slug: string;
+        name: string;
+        games_count: number;
+      }[];
+    };
+    platforms: {
+      results: {
+        id: number;
+        slug: string;
+        name: string;
+        games_count: number;
+      }[];
+    };
+    tags: {
+      results: {
+        id: number;
+        slug: string;
+        name: string;
+        games_count: number;
+      }[];
+    };
+  };
+}
 interface categoriesProps {
   categories: {
     current: Item;
@@ -16,14 +43,9 @@ interface categoriesProps {
 export const SidebarLoader =
   ({ categories }: categoriesProps) =>
   async ({ params }: Request) => {
-    const localStored = JSON.parse(localStorage.getItem("categories"));
     const catKeys = !params.page ? "firstKey" : params.page;
 
-    const item = localStored
-      ? localStored[catKeys]
-      : categories.current
-      ? categories.current[catKeys]
-      : null;
+    const item = categories.current ? categories.current[catKeys] : null;
     const genres = item ? item.genres : null;
     const platforms = item ? item.platforms : null;
     const tags = item ? item.tags : null;
@@ -49,7 +71,6 @@ export const SidebarLoader =
           tags,
         },
       };
-      localStorage.setItem("categories", JSON.stringify(categories.current));
 
       return { genres, platforms, tags };
     }

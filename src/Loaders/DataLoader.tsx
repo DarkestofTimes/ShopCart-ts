@@ -23,12 +23,7 @@ export const DataLoader =
       return;
     }
 
-    const localStored = JSON.parse(localStorage.getItem("shopData")) || null;
-    const data = localStored
-      ? localStored[page]
-      : shopData.current
-      ? shopData.current[page]
-      : null;
+    const data = shopData.current ? shopData.current[page] : null;
 
     if (!data) {
       const politeParams = splitParams(page!);
@@ -42,7 +37,7 @@ export const DataLoader =
         ...shopData.current,
         [page]: data,
       };
-      localStorage.setItem("shopData", JSON.stringify(shopData.current));
+
       return { data };
     }
 
