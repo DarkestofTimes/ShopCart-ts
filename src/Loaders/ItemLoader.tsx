@@ -1,5 +1,4 @@
 import { fetchItem } from "../Functions/FetchItem.tsx";
-import { key } from "../key.ts";
 import { Params } from "react-router-dom";
 
 interface Request {
@@ -72,11 +71,11 @@ export const ItemLoader =
 
     if (!item) {
       const urls = {
-        details: `https://api.rawg.io/api/games/${itemId}?key=${key}`,
-        screenshots: `https://api.rawg.io/api/games/${itemId}/screenshots?key=${key}`,
-        series: `https://api.rawg.io/api/games/${itemId}/game-series?key=${key}`,
-        additions: `https://api.rawg.io/api/games/${itemId}/additions?key=${key}`,
-        trailers: `https://api.rawg.io/api/games/${itemId}/movies?key=${key}`,
+        details: `https://api.rawg.io/api/games/${itemId}?`,
+        screenshots: `https://api.rawg.io/api/games/${itemId}/screenshots?`,
+        series: `https://api.rawg.io/api/games/${itemId}/game-series?`,
+        additions: `https://api.rawg.io/api/games/${itemId}/additions?`,
+        trailers: `https://api.rawg.io/api/games/${itemId}/movies?`,
       };
 
       const [details, screens, additions, trailers, series] = await Promise.all(

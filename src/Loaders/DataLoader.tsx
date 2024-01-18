@@ -1,4 +1,3 @@
-import { key } from "../key.ts";
 import { fetchItem } from "../Functions/FetchItem.tsx";
 import { splitParams } from "../Functions/splitParams.ts";
 import { fakePricing } from "../Functions/fakePricing.ts";
@@ -27,7 +26,7 @@ export const DataLoader =
 
     if (!data) {
       const politeParams = splitParams(page!);
-      const url = `https://api.rawg.io/api/games?key=${key}${Object.values(
+      const url = `https://api.rawg.io/api/games?${Object.values(
         politeParams
       ).join("")}`;
 

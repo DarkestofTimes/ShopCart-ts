@@ -1,5 +1,4 @@
 import { fetchItem } from "../Functions/FetchItem.tsx";
-import { key } from "../key.ts";
 import { Params } from "react-router-dom";
 
 interface Request {
@@ -52,9 +51,9 @@ export const SidebarLoader =
 
     if (!item) {
       const urls = {
-        genres: `https://api.rawg.io/api/genres?key=${key}&page=1&page_size=40`,
-        platforms: `https://api.rawg.io/api/platforms?key=${key}&page=1`,
-        tags: `https://api.rawg.io/api/tags?key=${key}&page=1&page_size=40`,
+        genres: `https://api.rawg.io/api/genres?&page=1&page_size=40`,
+        platforms: `https://api.rawg.io/api/platforms?&page=1`,
+        tags: `https://api.rawg.io/api/tags?&page=1&page_size=40`,
       };
 
       const [genres, platforms, tags] = await Promise.all([

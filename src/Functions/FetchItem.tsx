@@ -1,4 +1,6 @@
-export const fetchItem = async (url: string) => {
+export const fetchItem = async (urlString: string) => {
+  const url = new URL("http://localhost:5000/rawg");
+  url.searchParams.append("urlString", urlString);
   try {
     const response = await fetch(url, {
       method: "GET",
