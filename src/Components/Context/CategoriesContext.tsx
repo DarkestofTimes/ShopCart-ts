@@ -5,7 +5,32 @@ interface ContextProps {
 }
 
 export interface Item {
-  [key: string]: object | undefined;
+  [key: string]: {
+    genres: {
+      results: {
+        id: number;
+        slug: string;
+        name: string;
+        games_count: number;
+      }[];
+    };
+    platforms: {
+      results: {
+        id: number;
+        slug: string;
+        name: string;
+        games_count: number;
+      }[];
+    };
+    tags: {
+      results: {
+        id: number;
+        slug: string;
+        name: string;
+        games_count: number;
+      }[];
+    };
+  };
 }
 
 export interface categoriesContext {

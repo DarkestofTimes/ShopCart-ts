@@ -69,6 +69,7 @@ export const ItemLoader =
     const additions = item ? item.additions : null;
     const trailers = item ? item.trailers : null;
     const series = item ? item.series : null;
+
     if (!item) {
       const urls = {
         details: `https://api.rawg.io/api/games/${itemId}?key=${key}`,

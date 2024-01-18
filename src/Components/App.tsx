@@ -32,7 +32,6 @@ export const App = () => {
   const Items = useItemContext();
   const categories = useCategoriesContext();
   const CartContext = useCartContext();
-
   const router = createBrowserRouter([
     {
       path: "/",

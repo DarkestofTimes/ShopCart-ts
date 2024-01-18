@@ -5,7 +5,46 @@ interface ContextProps {
 }
 
 export interface Item {
-  [key: string]: object | undefined;
+  [key: string]: {
+    details: {
+      id: number;
+      background_image: string;
+      name: string;
+      released: string;
+    };
+    screens: {
+      results: {
+        id: number;
+        image: string;
+        data?: {
+          max: string;
+        };
+      }[];
+    };
+    additions: {
+      results: {
+        id: number;
+        background_image: string;
+        name: string;
+      }[];
+    };
+    trailers: {
+      results: {
+        id: number;
+        image?: string;
+        data: {
+          max: string;
+        };
+      }[];
+    };
+    series: {
+      results: {
+        id: number;
+        background_image: string;
+        name: string;
+      }[];
+    };
+  };
 }
 
 export interface ItemsContext {

@@ -17,7 +17,7 @@ export const RightSidebar = () => {
         </span>
         Total
       </div>
-      <button className=" rounded bg-purple-600 text-[#f0f8ff] p-4 text-3xl font-bold hover:bg-[#f0f8ff] hover:text-purple-600 focus:bg-[#f0f8ff] focus:text-purple-600 transition-colors duration-200 text-center grid grid-rows-1">
+      <button className=" rounded bg-green-800 text-[#f0f8ff] p-4 text-3xl font-bold hover:bg-[#f0f8ff] hover:text-green-800 focus:bg-[#f0f8ff] focus:text-green-800 transition-colors duration-200 text-center grid grid-rows-1">
         Check Out <span className="text-xs h-min">(Does nothing)</span>
       </button>
     </section>
