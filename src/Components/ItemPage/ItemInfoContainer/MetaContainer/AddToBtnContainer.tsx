@@ -36,7 +36,7 @@ export const AddToBtnContainer = ({
         strokeLinecap="round"
         strokeLinejoin="round"
         data-darkreader-inline-stroke=""
-        className="group-hover:stroke-purple-600"></path>{" "}
+        className="group-hover:stroke-green-800"></path>{" "}
     </svg>
   );
 
@@ -66,7 +66,7 @@ export const AddToBtnContainer = ({
   return (
     <section className="h-full w-full ">
       <button
-        className="lg:text-4xl text-2xl grid w-full  gap-1 grid-cols-2 font-bold rounded border-purple-800 border-2 lg:p-4 bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 place-items-center group"
+        className="lg:text-4xl text-2xl grid w-full  gap-1 grid-cols-2 font-bold rounded border-green-800 border-2 lg:p-4 bg-green-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-green-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-green-800 focus:scale-110 place-items-center group"
         onClick={handleClick}>
         {pricing.onSale ? (
           <div className="grid lg:grid-cols-2 lg:grid-rows-2 grid-rows-3  place-items-center h-min w-full">
@@ -105,7 +105,7 @@ export const RemoveFromBtnContainer = ({
         strokeLinecap="round"
         strokeLinejoin="round"
         data-darkreader-inline-stroke=""
-        className="group-hover:stroke-purple-600"></path>{" "}
+        className="group-hover:stroke-green-800"></path>{" "}
     </svg>
   );
 
@@ -119,7 +119,7 @@ export const RemoveFromBtnContainer = ({
   return (
     <section className="w-full h-full">
       <button
-        className="text-4xl font-bold rounded  border-purple-800 border-2 lg:p-4 w-full bg-purple-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-purple-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-purple-800 focus:scale-110 group "
+        className="text-4xl font-bold rounded  border-green-800 border-2 lg:p-4 w-full bg-green-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-green-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-green-800 focus:scale-110 group "
         onClick={handleClick}>
         {RemoveFromSVG}
       </button>
