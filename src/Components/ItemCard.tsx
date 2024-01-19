@@ -49,6 +49,7 @@ export const ItemCard = ({ item, routeValue }: ItemCardProps) => {
           title={item.name}
           onLoad={handleImageLoad}
           className="w-full h-full object-cover "
+          loading="lazy"
         />
         <div className="grid grid-cols-3  text-2xl font-bold items-center ">
           {routeValue === "shop" ? (
