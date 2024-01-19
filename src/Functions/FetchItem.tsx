@@ -1,5 +1,5 @@
 export const fetchItem = async (urlString: string) => {
-  const url = new URL("http://localhost:5000/rawg");
+  const url = new URL("https://node-api-relay.onrender.com/rawg");
   url.searchParams.append("urlString", urlString);
   try {
     const response = await fetch(url, {
