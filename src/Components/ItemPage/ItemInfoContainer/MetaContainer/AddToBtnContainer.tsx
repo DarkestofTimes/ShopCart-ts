@@ -66,7 +66,7 @@ export const AddToBtnContainer = ({
   return (
     <section className="h-full w-full ">
       <button
-        className="lg:text-4xl text-2xl grid w-full  gap-1 grid-cols-2 font-bold rounded border-green-800 border-2 lg:p-4 bg-green-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-green-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-green-800 focus:scale-110 place-items-center group"
+        className="lg:text-4xl text-2xl grid w-full gap-1 grid-cols-2 md:grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 font-bold rounded border-green-800 border-2 bg-green-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-green-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-green-800 focus:scale-110 place-items-center group"
         onClick={handleClick}>
         {pricing.onSale ? (
           <div className="grid lg:grid-cols-2 lg:grid-rows-2 grid-rows-3  place-items-center h-min w-full">
