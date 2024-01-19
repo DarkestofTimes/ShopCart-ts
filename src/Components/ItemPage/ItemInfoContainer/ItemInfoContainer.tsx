@@ -59,7 +59,7 @@ export const ItemInfoContainer = ({ details, page }: ItemProp) => {
   return (
     <section className="sm:col-span-3 col-span-full grid grid-rows-[min-content] sm:grid-cols-3 grid-cols-1 w-full">
       <MetaContainer details={details} page={page} />
-      <div className="sm:row-span-2 grid h-full sm:pl-3 sm:col-start-3 col-span-full">
+      <div className="sm:row-span-2 grid h-full sm:pl-3 sm:col-start-3 col-span-full grid-rows-[min-content]">
         <DevelopersContainer details={details} />
         <GenreContainer details={details} />
       </div>

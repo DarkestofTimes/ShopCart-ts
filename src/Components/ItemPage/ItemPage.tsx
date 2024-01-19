@@ -83,10 +83,10 @@ export const ItemPage = () => {
   return (
     <NoSideLayout>
       <section className="min-h-[93vh] grid grid-cols-3 grid-rows-[75vh] lg:p-8 p-2 pt-6 gap-4 ">
-        <div className="sm:col-span-2 col-span-full h-full flex">
+        <div className="lg:col-span-2  col-span-full h-full flex">
           <ImgContainer imgs={imgs} />
         </div>
-        <div className="grid grid-rows-2 col-span-full sm:col-span-1 gap-2 max-h-[40vh] sm:max-h-full">
+        <div className="grid grid-rows-2 col-span-full lg:col-span-1 gap-2 sm:max-h-[60vh] md:max-h-[60vh] lg:max-h-full max-h-[50vh]">
           <SeriesContainer series={series} page={page} />
           <DLCContainer additions={additions} page={page} />
         </div>
