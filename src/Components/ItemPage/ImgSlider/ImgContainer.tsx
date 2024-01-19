@@ -1,4 +1,4 @@
-import { useState, ReactNode } from "react";
+import { useState, ReactNode, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ImgSlider } from "./ImgSlider";
 
@@ -30,7 +30,7 @@ interface ImgProps {
   currentImg: number;
 }
 
-interface IframeProps {
+interface VideoProps {
   vid: {
     id: number;
     image?: string;
@@ -68,7 +68,7 @@ export const ImgContainer = ({ imgs, children }: ImgContainerProps) => {
           screen.linkId ? (
             <DLCLink key={index} screen={screen} currentImg={currentImg} />
           ) : screen.data ? (
-            <Iframe key={index} vid={screen} currentImg={currentImg} />
+            <Video key={index} vid={screen} currentImg={currentImg} />
           ) : (
             <Img key={index} screen={screen} currentImg={currentImg} />
           )
@@ -98,16 +98,42 @@ const Img = ({ screen, currentImg }: ImgProps) => {
   );
 };
 
-const Iframe = ({ vid, currentImg }: IframeProps) => {
+const Video = ({ vid, currentImg }: VideoProps) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const videoElement = videoRef.current;
+
+    if (!videoElement) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            videoElement.play();
+          } else {
+            videoElement.pause();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(videoElement);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
   return (
     <div
       className="w-full h-full flex flex-shrink-0 flex-grow-0 transition-all duration-200"
       style={{ translate: `${-100 * currentImg}%` }}>
-      <iframe
+      <video
         key={vid.id}
         src={vid.data ? vid.data.max : ""}
-        allow="fullscreen"
-        className="w-full h-full flex flex-shrink-0 flex-grow-0"></iframe>
+        ref={videoRef}
+        controls
+        className="w-full h-full flex flex-shrink-0 flex-grow-0"></video>
     </div>
   );
 };
