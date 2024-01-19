@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { ShopItem, usePricingContext } from "./Context/ContextProvider.tsx";
 import { platformsSVG } from "./platformsSVG.tsx";
 import { useCartContext } from "./Context/ContextProvider";
+import { Spinnie } from "./Spinnie.tsx";
+import { useState } from "react";
 
 interface ItemCardProps {
   item: ShopItem | undefined;
@@ -14,9 +16,13 @@ interface ItemProp {
 
 export const ItemCard = ({ item, routeValue }: ItemCardProps) => {
   const { setPricing } = usePricingContext();
+  const [isLoading, setIsLoading] = useState(true);
   if (!item) {
     return;
   }
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
 
   const handleClick = () => {
     setPricing({
@@ -36,10 +42,12 @@ export const ItemCard = ({ item, routeValue }: ItemCardProps) => {
         className="border-solid border-2 border-purple-600 rounded sm:w-[max(220px,15vw)] w-[max(290px,15vw)] aspect-square hover:border-[#f0f8ff] focus:border-[#f0f8ff] relative"
         onClick={handleClick}>
         {item.isInCart && <CartIndicator />}
+        {isLoading && <Spinnie />}
         <img
           src={item.background_image}
           alt={item.name}
           title={item.name}
+          onLoad={handleImageLoad}
           className="w-full h-full object-cover "
         />
         <div className="grid grid-cols-3  text-2xl font-bold items-center ">

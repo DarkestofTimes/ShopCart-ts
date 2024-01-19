@@ -1,6 +1,7 @@
 import { useState, ReactNode, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ImgSlider } from "./ImgSlider";
+import { Spinnie } from "../../Spinnie.tsx";
 
 interface ImgContainerProps {
   imgs: {
@@ -86,15 +87,24 @@ export const ImgContainer = ({ imgs, children }: ImgContainerProps) => {
 };
 
 const Img = ({ screen, currentImg }: ImgProps) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
   return (
-    <img
-      src={screen.image}
-      alt={screen.name ? screen.name : ""}
-      title={screen.name ? screen.name : ""}
-      className="w-auto h-full object-cover transition-all duration-200"
-      style={{ translate: `${-100 * currentImg}%` }}
-      loading="lazy"
-    />
+    <>
+      {isLoading && <Spinnie />}
+      <img
+        src={screen.image}
+        alt={screen.name ? screen.name : ""}
+        title={screen.name ? screen.name : ""}
+        onLoad={handleImageLoad}
+        className="w-auto h-full object-cover transition-all duration-200"
+        style={{ translate: `${-100 * currentImg}%` }}
+        loading="lazy"
+      />
+    </>
   );
 };
 
