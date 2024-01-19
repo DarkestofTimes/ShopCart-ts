@@ -31,18 +31,18 @@ export const Paginator = ({ data, routeValue }: PaginatorProps) => {
   const onlyFive = pageNumbersArray.slice(startIndex, startIndex + 5);
 
   return (
-    <div className="flex col-span-full justify-center gap-2 h-1/2 items-center mt-4">
+    <div className="flex col-span-full justify-center gap-1 h-1/2 items-center mt-4">
       {pageNumber > 3 && (
         <Link
           to={`/${routeValue}/1` + path}
-          className="border-2 border-purple-600 rounded text-center p-2 font-semibold text-xl hover:scale-110 focus:scale-110 hover:border-[#f0f8ff] focus:border-[#f0f8ff]">
+          className="border-2 border-purple-600 rounded text-center p-2 font-semibold hover:scale-110 focus:scale-110 hover:border-[#f0f8ff] focus:border-[#f0f8ff]">
           ...
         </Link>
       )}
       {pageNumber > 1 && (
         <Link
           to={`/${routeValue}/${pageNumber - 1}` + path}
-          className="border-2 border-purple-600 rounded text-center p-2 font-semibold text-xl hover:scale-110 focus:scale-110 hover:border-[#f0f8ff] focus:border-[#f0f8ff]">
+          className="border-2 border-purple-600 rounded text-center p-2 font-semibold hover:scale-110 focus:scale-110 hover:border-[#f0f8ff] focus:border-[#f0f8ff]">
           &lt;
         </Link>
       )}
@@ -58,12 +58,12 @@ export const Paginator = ({ data, routeValue }: PaginatorProps) => {
       {pageNumber < pageNumbersArray.length - 1 && (
         <Link
           to={`/${routeValue}/${pageNumber + 1}` + path}
-          className="border-2 border-purple-600 rounded text-center p-2 font-semibold text-xl hover:scale-110 focus:scale-110 hover:border-[#f0f8ff] focus:border-[#f0f8ff]">
+          className="border-2 border-purple-600 rounded text-center p-2 font-semibold hover:scale-110 focus:scale-110 hover:border-[#f0f8ff] focus:border-[#f0f8ff]">
           &gt;
         </Link>
       )}
       {pageNumber < pageNumbersArray.length - 2 && (
-        <div className="border-2 border-purple-600 rounded text-center p-2 font-semibold text-xl ">
+        <div className="border-2 border-purple-600 rounded text-center p-2 font-semibold ">
           ...
         </div>
       )}
