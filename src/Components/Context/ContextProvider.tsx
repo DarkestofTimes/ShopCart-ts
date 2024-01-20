@@ -22,7 +22,11 @@ export interface DataItem {
 export interface ShopItem {
   id: number;
   background_image: string;
-  genres: object[];
+  genres: {
+    id: number;
+    name: string;
+    slug: string;
+  }[];
   rating: number;
   ratings_count: number;
   name: string;

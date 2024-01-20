@@ -75,22 +75,10 @@
 interface Item {
   id: number;
   released: string;
-  background_image: string;
-  genres: object[];
-  rating: number;
-  ratings_count: number;
-  name: string;
-  metacritic: number;
-  platforms: {
-    platform: {
-      slug: string;
-      id: number;
-      name: string;
-    };
-  }[];
 }
+type FakePricingInput<T extends Item> = T;
 
-export const fakePricing = (item: Item) => {
+export const fakePricing = <T extends Item>(item: FakePricingInput<T>) => {
   const idString = item.id.toString();
   const makePrice = (releaseDate: string | null) => {
     const lastTwoInts = Number(idString.slice(-2));
