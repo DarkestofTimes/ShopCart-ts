@@ -5,7 +5,7 @@ export const calcSum = (array: Item[]) => {
     const price = item.pricing.onSale
       ? item.pricing.salePrice
       : item.pricing.price;
-    return accumulator + price;
+    return accumulator + price!;
   }, 0);
   return Number(sum.toFixed(2));
 };
