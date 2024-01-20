@@ -1,27 +1,14 @@
 import { ItemProp } from "../ItemInfoContainer";
 import { Cart } from "../../../Context/CartContext";
+import { fakePricing } from "../../../../Functions/fakePricing.ts";
 
 interface BtnProps extends ItemProp {
-  pricing?: {
-    id: number;
-    price: number;
-    onSale: boolean;
-    salePrice: number;
-    salePercent: string;
-  };
   Cart: Cart;
   setCart: React.Dispatch<React.SetStateAction<Cart>>;
 }
 
-export const AddToBtnContainer = ({
-  pricing,
-  details,
-  Cart,
-  setCart,
-}: BtnProps) => {
-  if (!pricing) {
-    return;
-  }
+export const AddToBtnContainer = ({ details, Cart, setCart }: BtnProps) => {
+  const pricedDetails = fakePricing(details);
 
   const AddToSVG = (
     <svg
@@ -51,10 +38,10 @@ export const AddToBtnContainer = ({
             name: details.name,
             background_image: details.background_image,
             pricing: {
-              price: pricing.price,
-              onSale: pricing.onSale,
-              salePrice: pricing.salePrice,
-              salePercent: pricing.salePercent,
+              price: pricedDetails.pricing.price,
+              onSale: pricedDetails.pricing.onSale,
+              salePrice: pricedDetails.pricing.salePrice,
+              salePercent: pricedDetails.pricing.salePercent,
             },
           },
         ],
@@ -68,18 +55,22 @@ export const AddToBtnContainer = ({
       <button
         className="lg:text-4xl text-2xl grid w-full gap-1 grid-cols-2 md:grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 font-bold rounded border-green-800 border-2 bg-green-800 text-[#f0f8ff] transition-all duration-200 hover:bg-[#f0f8ff] hover:text-green-800 hover:scale-110 focus:bg-[#f0f8ff] focus:text-green-800 focus:scale-110 place-items-center group"
         onClick={handleClick}>
-        {pricing.onSale ? (
+        {pricedDetails.pricing.onSale ? (
           <div className="grid lg:grid-cols-2 lg:grid-rows-2 grid-rows-3  place-items-center h-min w-full">
             <span className="text-base pr-2">
-              <s>{pricing.price}$</s>
+              <s>{pricedDetails.pricing.price}$</s>
             </span>
             <span className="lg:col-start-2 text-2xl font-normal ">
-              -{pricing.salePercent}
+              -{pricedDetails.pricing.salePercent}
             </span>
-            <span className="row-span-2 w-full pl-2">{pricing.salePrice}$</span>
+            <span className="row-span-2 w-full pl-2">
+              {pricedDetails.pricing.salePrice}$
+            </span>
           </div>
         ) : (
-          <span className="text-4xl font-bold w-full ">{pricing.price}$</span>
+          <span className="text-4xl font-bold w-full ">
+            {pricedDetails.pricing.price}$
+          </span>
         )}
         {AddToSVG}
       </button>

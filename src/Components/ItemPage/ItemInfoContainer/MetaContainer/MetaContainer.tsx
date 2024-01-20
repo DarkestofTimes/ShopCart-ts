@@ -1,5 +1,4 @@
 import { ItemProp } from "../ItemInfoContainer.tsx";
-import { usePricingContext } from "../../../Context/ContextProvider.tsx";
 import { ESRBContainer } from "./ESRBContainer.tsx";
 import { RatingContainer } from "./RatingContainer.tsx";
 import { RatingBar } from "./RatingBar.tsx";
@@ -13,7 +12,6 @@ import { PlatformsContainer } from "./PlatformsContainer.tsx";
 import { useCartContext } from "../../../Context/ContextProvider";
 
 export const MetaContainer = ({ details }: ItemProp) => {
-  const { pricing } = usePricingContext();
   const { cart, setCart } = useCartContext();
 
   return (
@@ -41,7 +39,6 @@ export const MetaContainer = ({ details }: ItemProp) => {
           ) : (
             <AddToBtnContainer
               details={details}
-              pricing={pricing}
               Cart={cart}
               setCart={setCart}
             />

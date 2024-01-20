@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-import { ShopItem, usePricingContext } from "./Context/ContextProvider.tsx";
+import { ShopItem } from "./Context/ContextProvider.tsx";
 import { platformsSVG } from "./platformsSVG.tsx";
 import { useCartContext } from "./Context/ContextProvider";
 import { Spinnie } from "./Spinnie.tsx";
 import { useState } from "react";
+import { fakePricing } from "../Functions/fakePricing.ts";
 
 interface ItemCardProps {
-  item: ShopItem | undefined;
+  item: ShopItem;
   routeValue: string;
 }
 
@@ -15,32 +16,17 @@ interface ItemProp {
 }
 
 export const ItemCard = ({ item, routeValue }: ItemCardProps) => {
-  const { setPricing } = usePricingContext();
   const [isLoading, setIsLoading] = useState(true);
-  if (!item) {
-    return;
-  }
   const handleImageLoad = () => {
     setIsLoading(false);
   };
-
-  const handleClick = () => {
-    setPricing({
-      id: item.id,
-      price: item.pricing.price,
-      salePrice: item.pricing.salePrice,
-      onSale: item.pricing.onSale,
-      salePercent: item.pricing.salePercent,
-    });
-  };
+  const pricedItem = fakePricing(item);
 
   return (
     <Link
       to={`/items/${routeValue}/${item.id}`}
       className=" h-min w-min hover:scale-105 focus:scale-105 transition-all duration-200 ">
-      <div
-        className="border-solid border-2 border-purple-600 rounded sm:w-[max(220px,15vw)] w-[max(290px,15vw)] aspect-square hover:border-[#f0f8ff] focus:border-[#f0f8ff] relative"
-        onClick={handleClick}>
+      <div className="border-solid border-2 border-purple-600 rounded sm:w-[max(220px,15vw)] w-[max(290px,15vw)] aspect-square hover:border-[#f0f8ff] focus:border-[#f0f8ff] relative">
         {item.isInCart && <CartIndicator />}
         {isLoading && <Spinnie />}
         <img
@@ -57,7 +43,7 @@ export const ItemCard = ({ item, routeValue }: ItemCardProps) => {
           ) : (
             <RemoveFromCart ID={item.id} />
           )}
-          <PriceContainer item={item} />
+          <PriceContainer item={pricedItem} />
           <RatingContainer item={item} />
         </div>
       </div>

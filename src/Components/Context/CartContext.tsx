@@ -11,8 +11,8 @@ export interface Item {
   pricing: {
     price: number;
     onSale: boolean;
-    salePrice: number;
-    salePercent: string;
+    salePrice: number | null;
+    salePercent: string | null;
   };
 }
 

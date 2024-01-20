@@ -51,8 +51,8 @@ interface pricing {
   id: number;
   price: number;
   onSale: boolean;
-  salePrice: number;
-  salePercent: string;
+  salePrice: number | null;
+  salePercent: string | null;
 }
 
 export const ItemInfoContainer = ({ details, page }: ItemProp) => {

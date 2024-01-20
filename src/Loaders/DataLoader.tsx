@@ -1,6 +1,6 @@
 import { fetchItem } from "../Functions/FetchItem.tsx";
 import { splitParams } from "../Functions/splitParams.ts";
-import { fakePricing } from "../Functions/fakePricing.ts";
+/* import { fakePricing } from "../Functions/fakePricing.ts"; */
 import { Params } from "react-router-dom";
 import { Item } from "../Components/Context/ShopDataContext.tsx";
 
@@ -30,8 +30,9 @@ export const DataLoader =
         politeParams
       ).join("")}`;
 
-      const result = await fetchItem(url);
-      const data = fakePricing(result);
+      /*      const result = await fetchItem(url);
+      const data = fakePricing(result); */
+      const data = await fetchItem(url);
       shopData.current = {
         ...shopData.current,
         [page]: data,

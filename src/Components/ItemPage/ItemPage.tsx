@@ -10,7 +10,40 @@ interface LoaderData {
     id: number;
     background_image: string;
     name: string;
+    esrb_rating?: {
+      id: number;
+      name: string;
+      slug: string;
+    };
+    developers?: {
+      id: number;
+      name: string;
+      slug: string;
+    }[];
+    rating?: number;
+    ratings_count?: number;
+    ratings?: {
+      id: number;
+      percent: number;
+      title: string;
+      count: number;
+    }[];
+    metacritic?: number;
+    platforms?: {
+      platform: {
+        id: number;
+        slug: string;
+        name: string;
+      };
+    }[];
+    genres?: {
+      id: number;
+      name: string;
+      slug: string;
+    }[];
+    description?: string;
     released: string;
+    tba?: boolean;
   };
   screens: {
     results: {

@@ -1,7 +1,5 @@
 import { useContext, ReactNode } from "react";
-
 import { ShopDataContext, ShopDataContextProvider } from "./ShopDataContext";
-import { PricingContext, PricingContextProvider } from "./PricingContext";
 import { ItemContext, ItemContextProvider } from "./ItemContext";
 import {
   CategoriesContext,
@@ -29,12 +27,13 @@ export interface ShopItem {
   ratings_count: number;
   name: string;
   metacritic: number;
+  released: string;
   isInCart?: boolean;
   pricing: {
     price: number;
     onSale: boolean;
-    salePrice: number;
-    salePercent: string;
+    salePrice: number | null;
+    salePercent: string | null;
   };
   platforms: {
     platform: {
@@ -49,18 +48,15 @@ export const ContextProvider: React.FC<ContextProps> = ({ children }) => {
   return (
     <ShopDataContextProvider>
       <CartContextProvider>
-        <PricingContextProvider>
-          <ItemContextProvider>
-            <CategoriesContextProvider>{children}</CategoriesContextProvider>
-          </ItemContextProvider>
-        </PricingContextProvider>
+        <ItemContextProvider>
+          <CategoriesContextProvider>{children}</CategoriesContextProvider>
+        </ItemContextProvider>
       </CartContextProvider>
     </ShopDataContextProvider>
   );
 };
 
 export const useShopDataContext = () => useContext(ShopDataContext);
-export const usePricingContext = () => useContext(PricingContext);
 export const useItemContext = () => useContext(ItemContext);
 export const useCategoriesContext = () => useContext(CategoriesContext);
 export const useCartContext = () => useContext(CartContext);
