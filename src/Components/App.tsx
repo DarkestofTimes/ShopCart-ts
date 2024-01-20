@@ -19,15 +19,25 @@ import {
   useCategoriesContext,
   useCartContext,
 } from "./Context/ContextProvider";
+import { useEffect } from "react";
 
-const AppLayout = () => (
-  <>
-    <ScrollRestoration />
-    <Outlet />
-  </>
-);
+interface appProps {
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-export const App = () => {
+const AppLayout = ({ setLoading }: appProps) => {
+  useEffect(() => {
+    setLoading(false);
+  });
+  return (
+    <>
+      <ScrollRestoration />
+      <Outlet />
+    </>
+  );
+};
+
+export const App = ({ setLoading }: appProps) => {
   const shopData = useShopDataContext();
   const Items = useItemContext();
   const categories = useCategoriesContext();
@@ -35,7 +45,7 @@ export const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <AppLayout />,
+      element: <AppLayout setLoading={setLoading} />,
       loader: SidebarLoader({ categories }),
       id: "root",
       errorElement: <ErrorPage />,
