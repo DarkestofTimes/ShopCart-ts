@@ -75,6 +75,19 @@
 interface Item {
   id: number;
   released: string;
+  background_image: string;
+  genres: object[];
+  rating: number;
+  ratings_count: number;
+  name: string;
+  metacritic: number;
+  platforms: {
+    platform: {
+      slug: string;
+      id: number;
+      name: string;
+    };
+  }[];
 }
 
 export const fakePricing = (item: Item) => {
