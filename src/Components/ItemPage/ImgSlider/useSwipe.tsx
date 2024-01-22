@@ -66,10 +66,6 @@ export const useSwipe = ({ imgs }: imgs) => {
         mouseStart.current;
       const difference = Math.floor((mouseX * 100) / figureX);
       setDragOffset(difference);
-      /*   const imgRect = ev.currentTarget.getBoundingClientRect();
-      const leftSideDifference = Math.floor(
-        ((imgRect.left - figureRect.left) * 100) / figureX
-      ); */
 
       if (difference > 30) {
         slideRight();

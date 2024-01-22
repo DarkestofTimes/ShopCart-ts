@@ -42,11 +42,11 @@ export const ImgSlider = ({
   return (
     <section className="absolute h-full w-full flex flex-shrink-0 flex-grow-0 pointer-events-none">
       <button
-        className="left-0  h-full w-[5%] absolute  bold text-3xl text-[#f0f8ff] bg-gradient-to-r from-purple-800/50 pointer-events-auto hover:scale-125 transition-all duration-200 focus:scale-110"
+        className="left-0 w-[5%] h-[10%] absolute top-1/2 -translate-y-1/2  bold text-3xl text-[#f0f8ff]  pointer-events-auto hover:scale-125 transition-all duration-200 focus:scale-110"
         onClick={slideRight}>
         &lt;
       </button>
-      <div className="w-min h-2rem flex absolute bottom-6 left-1/2 -translate-x-1/2 gap-2 bg-purple-800/50 place-items-center justify-center p-1 rounded  ">
+      <div className="w-min h-2rem flex absolute bottom-10 left-1/2 -translate-x-1/2 gap-2 bg-purple-800/50 place-items-center justify-center p-1 rounded  ">
         {imgs.map((_: object, index: number) => (
           <SlideBtn
             key={index}
@@ -58,7 +58,7 @@ export const ImgSlider = ({
         ))}
       </div>
       <button
-        className="right-0  h-full w-[5%] absolute  bold text-3xl text-[#f0f8ff] bg-gradient-to-l from-purple-800/50  pointer-events-auto hover:scale-125 transition-all duration-200 focus:scale-110"
+        className="right-0 w-[5%] h-[10%] absolute top-1/2 -translate-y-1/2 bold text-3xl text-[#f0f8ff]  pointer-events-auto hover:scale-125 transition-all duration-200 focus:scale-110"
         onClick={slideLeft}>
         &gt;
       </button>
